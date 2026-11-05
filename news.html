@@ -1,31 +1,301 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yangiliklar</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yangiliklar — Qamashi IM</title>
+  <meta name="description" content="Qamashi ixtisoslashtirilgan maktabining so'nggi yangiliklari">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="images/logo.jpg" alt="Maktab Logosi" class="logo">        
-            <h1>Yangiliklar</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Bosh sahifa</a></li>
-                </ul>
-            </nav>
-        </div>  
-    </header>
-    
-    <section>
-        <h2>So‘nggi yangiliklar</h2>
-        <p>Bu yerda maktabimizdagi so‘nggi yangiliklar yoritiladi.</p>
-    </section>
 
-    <footer>
-        <p>&copy; 2025 Qamashi Ixtisoslashtirilgan Maktabi.</p>
-    </footer>
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="navbar-brand">
+    <img src="images/logo.jpg" alt="Logo" class="navbar-logo">
+    <div class="navbar-title">
+      <span>Qamashi IM</span>
+      <span>Ixtisoslashtirilgan Maktab</span>
+    </div>
+  </a>
+  <ul class="navbar-links" id="navLinks">
+    <li><a href="index.html">🏠 Bosh sahifa</a></li>
+    <li><a href="about.html">ℹ️ Haqimizda</a></li>
+    <li><a href="news.html" class="active">📰 Yangiliklar</a></li>
+    <li><a href="events.html">🎯 Tadbirlar</a></li>
+    <li><a href="contact.html">📞 Bog'lanish</a></li>
+  </ul>
+  <div class="navbar-auth" id="navAuth">
+    <button class="btn btn-outline btn-sm" onclick="openAuthModal('login')">Kirish</button>
+    <button class="btn btn-primary btn-sm" onclick="openAuthModal('register')">Ro'yxatdan o'tish</button>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <h1>📰 Yangiliklar</h1>
+    <p>Maktabimizning so'nggi yangiliklari, tadbirlari va yutuqlari</p>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<section class="section">
+  <div class="container">
+
+    <!-- WRITE BUTTON (shows only when logged in) -->
+    <div id="writeNewsSection" style="display:none;margin-bottom:2.5rem">
+      <div style="background:linear-gradient(135deg,#e8f0fe,#c7d9fd);border-radius:16px;padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;border:1.5px solid var(--primary)">
+        <div>
+          <div style="font-weight:700;color:var(--primary-dark);margin-bottom:4px">✏️ Yangilik yozishni istaysizmi?</div>
+          <div style="font-size:0.88rem;color:var(--text-muted)">Maktab hayotidan muhim voqealarni jamoangiz bilan ulashing</div>
+        </div>
+        <button class="btn btn-primary" onclick="openPostModal()">+ Yangilik qo'shish</button>
+      </div>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <button class="filter-chip active" data-cat="all" onclick="filterNews(this, 'all')">🔥 Barchasi</button>
+      <button class="filter-chip" data-cat="yangilik" onclick="filterNews(this, 'yangilik')">📣 Yangilik</button>
+      <button class="filter-chip" data-cat="tadbir" onclick="filterNews(this, 'tadbir')">🎉 Tadbirlar</button>
+      <button class="filter-chip" data-cat="sport" onclick="filterNews(this, 'sport')">⚽ Sport</button>
+      <button class="filter-chip" data-cat="fan" onclick="filterNews(this, 'fan')">🔬 Fan</button>
+      <button class="filter-chip" data-cat="madaniyat" onclick="filterNews(this, 'madaniyat')">🎭 Madaniyat</button>
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="newsSearch" placeholder="Yangilik qidiring..." oninput="searchNews(this.value)">
+      </div>
+    </div>
+
+    <!-- NEWS GRID -->
+    <div class="news-grid" id="newsGrid">
+      <div style="grid-column:1/-1;text-align:center;padding:3rem">
+        <div class="spinner"></div>
+      </div>
+    </div>
+
+    <!-- LOAD MORE -->
+    <div style="text-align:center;margin-top:3rem" id="loadMoreWrap" style="display:none">
+      <button class="btn btn-outline" id="loadMoreBtn" onclick="loadMore()">Ko'proq yuklash</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:0.5rem">
+          <img src="images/logo.jpg" alt="logo" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.2)">
+          <span style="color:white;font-weight:700;font-size:1rem">Qamashi IM</span>
+        </div>
+        <p>Qamashi tumani ixtisoslashtirilgan maktabi — bilim va tarbiyaning manzili.</p>
+        <div class="footer-social">
+          <a href="https://t.me/AhrorAzamatovich" target="_blank" class="social-btn">✈️</a>
+          <a href="https://instagram.com/AhrorAzamatovich" target="_blank" class="social-btn">📸</a>
+          <a href="https://facebook.com/AhrorAzamatovich" target="_blank" class="social-btn">👤</a>
+          <a href="https://youtube.com/@Ahror_Azamatovich" target="_blank" class="social-btn">▶️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Sahifalar</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">🏠 Bosh sahifa</a></li>
+          <li><a href="about.html">ℹ️ Haqimizda</a></li>
+          <li><a href="news.html">📰 Yangiliklar</a></li>
+          <li><a href="events.html">🎯 Tadbirlar</a></li>
+          <li><a href="contact.html">📞 Bog'lanish</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kategoriyalar</h4>
+        <ul class="footer-links">
+          <li><a href="#" onclick="filterByUrl('yangilik')">📣 Yangiliklar</a></li>
+          <li><a href="#" onclick="filterByUrl('tadbir')">🎉 Tadbirlar</a></li>
+          <li><a href="#" onclick="filterByUrl('sport')">⚽ Sport</a></li>
+          <li><a href="#" onclick="filterByUrl('fan')">🔬 Fan</a></li>
+          <li><a href="#" onclick="filterByUrl('madaniyat')">🎭 Madaniyat</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Bog'lanish</h4>
+        <ul class="footer-links">
+          <li><a href="#">📍 Qamashi tumani, Qashqadaryo</a></li>
+          <li><a href="mailto:info@qamashiim.uz">📧 info@qamashiim.uz</a></li>
+          <li><a href="tel:+998901234567">📞 +998 90 123 45 67</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Qamashi Ixtisoslashtirilgan Maktabi. Barcha huquqlar himoyalangan.</p>
+    </div>
+  </div>
+</footer>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="authModalTitle">Kirish</h2>
+      <button class="modal-close" onclick="closeModal('authModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-tabs">
+        <button class="form-tab active" id="loginTab" onclick="switchAuthTab('login')">Kirish</button>
+        <button class="form-tab" id="registerTab" onclick="switchAuthTab('register')">Ro'yxatdan o'tish</button>
+      </div>
+      <div class="tab-content active" id="loginContent">
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <input type="text" class="form-control" id="loginUsername" placeholder="username">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Parol</label>
+          <input type="password" class="form-control" id="loginPassword" placeholder="Parol">
+        </div>
+        <button class="btn btn-primary btn-block" onclick="handleLogin()">🔐 Kirish</button>
+      </div>
+      <div class="tab-content" id="registerContent">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="form-group">
+            <label class="form-label">Ism</label>
+            <input type="text" class="form-control" id="regFirstName" placeholder="Ism">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Familiya</label>
+            <input type="text" class="form-control" id="regLastName" placeholder="Familiya">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <input type="text" class="form-control" id="regUsername" placeholder="username">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Rol</label>
+          <select class="form-control" id="regRole">
+            <option value="student">O'quvchi</option>
+            <option value="teacher">O'qituvchi</option>
+            <option value="parent">Ota-ona</option>
+            <option value="staff">Xodim</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Parol</label>
+          <input type="password" class="form-control" id="regPassword" placeholder="Kamida 6 belgi">
+        </div>
+        <button class="btn btn-success btn-block" onclick="handleRegister()">✅ Ro'yxatdan o'tish</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="app.js"></script>
+<script>
+  let currentFilter = 'all';
+  let currentSearch = '';
+  const PAGE_SIZE = 9;
+  let currentPage = 1;
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check URL param
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get('cat');
+    if (cat) {
+      currentFilter = cat;
+      document.querySelectorAll('.filter-chip').forEach(c => {
+        c.classList.toggle('active', c.dataset.cat === cat);
+      });
+    }
+
+    // Show write section if logged in
+    const session = getSession();
+    if (session) {
+      document.getElementById('writeNewsSection').style.display = 'block';
+    }
+
+    renderNews();
+  });
+
+  function filterByUrl(cat) {
+    currentFilter = cat;
+    currentPage = 1;
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === cat));
+    renderNews();
+    window.scrollTo({top:300, behavior:'smooth'});
+    return false;
+  }
+
+  function filterNews(btn, cat) {
+    currentFilter = cat;
+    currentPage = 1;
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    renderNews();
+  }
+
+  function searchNews(q) {
+    currentSearch = q.toLowerCase();
+    currentPage = 1;
+    renderNews();
+  }
+
+  function getFilteredPosts() {
+    let posts = getPosts();
+    if (currentFilter !== 'all') {
+      posts = posts.filter(p => p.category === currentFilter);
+    }
+    if (currentSearch) {
+      posts = posts.filter(p =>
+        p.title.toLowerCase().includes(currentSearch) ||
+        p.body.toLowerCase().includes(currentSearch) ||
+        p.authorName.toLowerCase().includes(currentSearch)
+      );
+    }
+    return posts;
+  }
+
+  function renderNews() {
+    const filtered = getFilteredPosts();
+    const grid = document.getElementById('newsGrid');
+    const loadMoreWrap = document.getElementById('loadMoreWrap');
+
+    const paginated = filtered.slice(0, currentPage * PAGE_SIZE);
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div style="grid-column:1/-1" class="empty-state">
+        <div class="empty-icon">🔍</div>
+        <h3>Hech narsa topilmadi</h3>
+        <p>Boshqa kalit so'z bilan qidiring yoki kategoriyani o'zgartiring</p>
+      </div>`;
+      if (loadMoreWrap) loadMoreWrap.style.display = 'none';
+      return;
+    }
+
+    grid.innerHTML = paginated.map((p, i) => renderNewsCard(p, i)).join('');
+
+    if (loadMoreWrap) {
+      loadMoreWrap.style.display = filtered.length > paginated.length ? 'block' : 'none';
+    }
+  }
+
+  function loadMore() {
+    currentPage++;
+    renderNews();
+    setTimeout(() => {
+      const cards = document.querySelectorAll('.news-card');
+      const target = cards[(currentPage - 1) * PAGE_SIZE];
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+</script>
 </body>
 </html>
