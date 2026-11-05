@@ -67,13 +67,19 @@ function _checkPass(raw, stored) {
   return _hashPass(raw) === stored;
 }
 
-// Migrate: if any user has a legacy plaintext password, re-hash it
+// Migrate: if any user has a legacy plaintext password, re-hash it.
+// Also rename legacy 'admin' superadmin username to 'Superadmin' and re-hash password.
 function _migrateLegacyPasswords() {
   const users = getUsers();
   let changed = false;
-  users.forEach(u => {
-    // Detect plaintext: base64 strings never contain a space; length heuristic
-    // A real base64 encoded XOR string will be longer than its source
+  users.forEach(function(u) {
+    // Rename old superadmin username 'admin' → 'Superadmin' and update password
+    if (u.id === 'u_superadmin' && (u.username === 'admin' || u.username === 'superadmin')) {
+      u.username = 'Superadmin';
+      u.password = _hashPass('Admin123@');
+      changed = true;
+    }
+    // Convert any remaining plaintext passwords (length heuristic)
     if (u.password && u.password.length < 30 && !/^[A-Za-z0-9+/=]{12,}$/.test(u.password)) {
       u.password = _hashPass(u.password);
       changed = true;
@@ -152,9 +158,8 @@ function isSuperAdmin(s) {
       {
         id: 'u_superadmin',
         firstName: 'Bosh', lastName: 'Admin',
-        username: 'admin',
-        // Password is hashed-like — raw value never exposed in UI
-        password: _hashPass('admin123@'),
+        username: 'Superadmin',
+        password: _hashPass('Admin123@'),
         role: 'superadmin', schoolId: null,
         joinedAt: '2023-01-01T00:00:00.000Z',
         bio: "O'zbekiston Maktablari Platformasi bosh admini",
