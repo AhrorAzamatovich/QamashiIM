@@ -7,18 +7,18 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
+<canvas id="jarvisCanvas"></canvas>
 <nav class="navbar" id="mainNav">
   <a href="index.html" class="navbar-brand">
-    <img src="images/logo.jpg" alt="QamashiIM" class="navbar-logo">
-    <div class="navbar-title"><span>Qamashi IM</span><span>Ixtisoslashtirilgan Maktab</span></div>
+    <img src="images/logo.jpg" alt="QIM" class="navbar-logo">
+    <div class="navbar-title"><span>QAMASHI IM</span><span>Ixtisoslashtirilgan Maktab</span></div>
   </a>
   <ul class="nav-links" id="navLinks">
-    <li><a href="index.html">🏠 Bosh sahifa</a></li>
-    <li><a href="about.html">ℹ️ Haqimizda</a></li>
-    <li><a href="news.html">📰 Yangiliklar</a></li>
-    <li><a href="events.html" class="active">🎯 Tadbirlar</a></li>
-    <li><a href="contact.html">📞 Bog'lanish</a></li>
+    <li><a href="index.html">◈ Bosh sahifa</a></li>
+    <li><a href="about.html">◈ Haqimizda</a></li>
+    <li><a href="news.html">◈ Yangiliklar</a></li>
+    <li><a href="events.html" class="active">◈ Tadbirlar</a></li>
+    <li><a href="contact.html">◈ Bog'lanish</a></li>
   </ul>
   <div class="nav-actions" id="navAuth"></div>
   <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
@@ -26,68 +26,64 @@
 
 <div class="page-banner">
   <div class="container">
-    <h1>🎯 Tadbirlar</h1>
-    <p>Rejalashtirilgan va o'tkazilgan tadbirlar haqida</p>
+    <h1>◈ TADBIRLAR</h1>
+    <p>Rejalashtirilgan va amalga oshirilgan tadbirlar</p>
   </div>
 </div>
 
 <section class="section">
   <div class="container">
-
-    <!-- Upcoming -->
     <div style="margin-bottom:3.5rem">
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.5rem">
-        <div class="sec-tag" style="margin-bottom:0">📅 Kelgusi tadbirlar</div>
-        <div style="height:1px;flex:1;background:var(--border)"></div>
+        <div class="sec-tag" style="margin-bottom:0">◈ KELGUSI TADBIRLAR</div>
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent)"></div>
       </div>
       <div class="events-stack">
         <div class="event-row">
           <div class="ev-date"><div class="day">15</div><div class="mon">Nov</div></div>
           <div class="ev-body">
-            <h3>Matematika olimpiadasi</h3>
+            <h3>MATEMATIKA OLIMPIADASI</h3>
             <p>Maktab ichki matematika olimpiadasi 7–11-sinf o'quvchilari uchun. G'oliblar viloyat bosqichiga tavsiya etiladi.</p>
-            <div class="ev-chips"><span class="tag tag-fan">🔬 Fan</span><span style="font-size:.72rem;background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:99px;font-weight:700">🕐 09:00</span></div>
+            <div class="ev-chips"><span class="tag tag-fan">◈ Fan</span><span style="font-size:.68rem;background:rgba(255,51,85,.08);color:var(--red);border:1px solid rgba(255,51,85,.2);padding:2px 9px;border-radius:var(--r-xs);font-family:var(--font-hud)">09:00</span></div>
           </div>
         </div>
         <div class="event-row">
           <div class="ev-date"><div class="day">20</div><div class="mon">Nov</div></div>
           <div class="ev-body">
-            <h3>Ona tili va adabiyot kechasi</h3>
+            <h3>ONA TILI VA ADABIYOT KECHASI</h3>
             <p>O'zbek tili va adabiyotiga bag'ishlangan adabiy-badiiy kecha. Barcha sinf o'quvchilari ishtirok etadi.</p>
-            <div class="ev-chips"><span class="tag tag-madaniyat">🎭 Madaniyat</span><span style="font-size:.72rem;background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:99px;font-weight:700">🕐 15:00</span></div>
+            <div class="ev-chips"><span class="tag tag-madaniyat">◈ Madaniyat</span><span style="font-size:.68rem;background:rgba(255,51,85,.08);color:var(--red);border:1px solid rgba(255,51,85,.2);padding:2px 9px;border-radius:var(--r-xs);font-family:var(--font-hud)">15:00</span></div>
           </div>
         </div>
         <div class="event-row">
           <div class="ev-date"><div class="day">01</div><div class="mon">Dec</div></div>
           <div class="ev-body">
-            <h3>Maktablar oʼrtasida futbol turniri</h3>
-            <p>Sinf jamoalari o'rtasida futbol musobaqasi — har sinfdan 7 nafar o'yinchi qatnashadi.</p>
-            <div class="ev-chips"><span class="tag tag-sport">⚽ Sport</span><span style="font-size:.72rem;background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:99px;font-weight:700">🕐 10:00</span></div>
+            <h3>MAKTABLARARO FUTBOL TURNIRI</h3>
+            <p>Qamashi tumani maktablari o'rtasida futbol musobaqasi. Har sinfdan 7 nafar o'yinchi qatnashadi.</p>
+            <div class="ev-chips"><span class="tag tag-sport">◈ Sport</span><span style="font-size:.68rem;background:rgba(255,51,85,.08);color:var(--red);border:1px solid rgba(255,51,85,.2);padding:2px 9px;border-radius:var(--r-xs);font-family:var(--font-hud)">10:00</span></div>
           </div>
         </div>
         <div class="event-row">
           <div class="ev-date"><div class="day">08</div><div class="mon">Dec</div></div>
           <div class="ev-body">
-            <h3>Umumiy ota-onalar majlisi</h3>
-            <p>I-chorak natijalari va II-chorak rejalari bo'yicha umumiy ota-onalar majlisi.</p>
-            <div class="ev-chips"><span class="tag tag-yangilik">📣 Yangilik</span><span style="font-size:.72rem;background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:99px;font-weight:700">🕐 17:00</span></div>
+            <h3>UMUMIY OTA-ONALAR MAJLISI</h3>
+            <p>I-chorak natijalari va II-chorak rejalari bo'yicha umumiy ota-onalar majlisi. Barcha taklif etiladi.</p>
+            <div class="ev-chips"><span class="tag tag-yangilik">◈ Yangilik</span><span style="font-size:.68rem;background:rgba(255,51,85,.08);color:var(--red);border:1px solid rgba(255,51,85,.2);padding:2px 9px;border-radius:var(--r-xs);font-family:var(--font-hud)">17:00</span></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Past events from posts -->
     <div>
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.5rem">
-        <div class="sec-tag" style="margin-bottom:0">✅ O'tgan tadbirlar</div>
-        <div style="height:1px;flex:1;background:var(--border)"></div>
+        <div class="sec-tag" style="margin-bottom:0">◈ O'TGAN TADBIRLAR</div>
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent)"></div>
         <a href="news.html?cat=tadbir" class="btn btn-ghost btn-sm">Barchasini ko'rish →</a>
       </div>
       <div class="posts-grid" id="evGrid">
         <div style="grid-column:1/-1;text-align:center"><div class="spinner"></div></div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -96,8 +92,8 @@
     <div class="footer-grid">
       <div>
         <div style="display:flex;align-items:center;gap:11px;margin-bottom:.4rem">
-          <img src="images/logo.jpg" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.15)" alt="logo">
-          <span style="color:#fff;font-weight:700;font-size:.95rem">Qamashi IM</span>
+          <img src="images/logo.jpg" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:1px solid var(--border2)" alt="logo">
+          <span style="color:var(--cyan);font-weight:700;font-size:.9rem;font-family:var(--font-hud);letter-spacing:.06em">QAMASHI IM</span>
         </div>
         <p class="footer-brand">Qamashi tumani ixtisoslashtirilgan maktabi.</p>
         <div class="footer-socials">
@@ -106,23 +102,23 @@
         </div>
       </div>
       <div class="footer-col"><h4>Sahifalar</h4><ul class="footer-links">
-        <li><a href="index.html">🏠 Bosh sahifa</a></li><li><a href="news.html">📰 Yangiliklar</a></li>
-        <li><a href="events.html">🎯 Tadbirlar</a></li><li><a href="contact.html">📞 Bog'lanish</a></li>
+        <li><a href="index.html">◈ Bosh sahifa</a></li><li><a href="news.html">◈ Yangiliklar</a></li>
+        <li><a href="events.html">◈ Tadbirlar</a></li><li><a href="contact.html">◈ Bog'lanish</a></li>
       </ul></div>
     </div>
     <div class="footer-bottom"><p>© 2025 Qamashi Ixtisoslashtirilgan Maktabi.</p></div>
   </div>
 </footer>
-
 <button id="scrollTopBtn" onclick="scrollTop()">↑</button>
 <div id="toastRoot"></div>
 <script src="app.js"></script>
+<script src="jarvis.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const posts = getPosts().filter(p => p.category === 'tadbir');
   const g = document.getElementById('evGrid');
   if (!posts.length) {
-    g.innerHTML = `<div class="empty-state"><div class="empty-icon">🎉</div><h3>Hali tadbir yangiliklari yo'q</h3><p>Birinchi tadbir yangiligini siz yozing!</p><button class="btn btn-primary" onclick="openAuth('register')">Ro'yxatdan o'tish</button></div>`;
+    g.innerHTML = `<div class="empty-state"><div class="empty-icon">◈</div><h3>TADBIR YANGILIKLARI YO'Q</h3><p>Birinchi tadbir yangiligini siz yozing!</p><button class="btn btn-primary" onclick="openAuth('register')">Ro'yxatdan o'tish</button></div>`;
   } else {
     g.innerHTML = posts.slice(0, 6).map((p, i) => renderCard(p, i * 0.07)).join('');
   }

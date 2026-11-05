@@ -7,18 +7,18 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
+<canvas id="jarvisCanvas"></canvas>
 <nav class="navbar" id="mainNav">
   <a href="index.html" class="navbar-brand">
-    <img src="images/logo.jpg" alt="QamashiIM" class="navbar-logo">
-    <div class="navbar-title"><span>Qamashi IM</span><span>Ixtisoslashtirilgan Maktab</span></div>
+    <img src="images/logo.jpg" alt="QIM" class="navbar-logo">
+    <div class="navbar-title"><span>QAMASHI IM</span><span>Ixtisoslashtirilgan Maktab</span></div>
   </a>
   <ul class="nav-links" id="navLinks">
-    <li><a href="index.html">🏠 Bosh sahifa</a></li>
-    <li><a href="about.html">ℹ️ Haqimizda</a></li>
-    <li><a href="news.html">📰 Yangiliklar</a></li>
-    <li><a href="events.html">🎯 Tadbirlar</a></li>
-    <li><a href="contact.html" class="active">📞 Bog'lanish</a></li>
+    <li><a href="index.html">◈ Bosh sahifa</a></li>
+    <li><a href="about.html">◈ Haqimizda</a></li>
+    <li><a href="news.html">◈ Yangiliklar</a></li>
+    <li><a href="events.html">◈ Tadbirlar</a></li>
+    <li><a href="contact.html" class="active">◈ Bog'lanish</a></li>
   </ul>
   <div class="nav-actions" id="navAuth"></div>
   <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
@@ -26,7 +26,7 @@
 
 <div class="page-banner">
   <div class="container">
-    <h1>📞 Bog'lanish</h1>
+    <h1>◈ BOG'LANISH</h1>
     <p>Savolingiz bo'lsa, biz bilan bog'laning — tez javob beramiz</p>
   </div>
 </div>
@@ -34,102 +34,51 @@
 <section class="section">
   <div class="container">
     <div class="contact-layout">
-
-      <!-- Info side -->
       <div>
-        <div class="info-card" style="margin-bottom:1.5rem">
-          <h3 style="font-size:1rem;font-weight:700;margin-bottom:1.2rem">📍 Manzil va aloqa</h3>
-          <div class="info-row">
-            <div class="info-icon">📍</div>
-            <div><h4>Manzil</h4><p>Qashqadaryo viloyati, Qamashi tumani</p></div>
-          </div>
-          <div class="info-row">
-            <div class="info-icon">📞</div>
-            <div><h4>Telefon</h4><a href="tel:+998901234567">+998 90 123 45 67</a></div>
-          </div>
-          <div class="info-row">
-            <div class="info-icon">📧</div>
-            <div><h4>Email</h4><a href="mailto:info@qamashiim.uz">info@qamashiim.uz</a></div>
-          </div>
-          <div class="info-row">
-            <div class="info-icon">⏰</div>
-            <div><h4>Ish vaqti</h4><p>Dushanba–Juma: 08:00–17:00</p></div>
-          </div>
+        <div class="info-card" style="margin-bottom:1.2rem">
+          <div style="font-family:var(--font-hud);font-size:.72rem;font-weight:700;color:var(--cyan);letter-spacing:.1em;margin-bottom:1.2rem">◈ MANZIL VA ALOQA</div>
+          <div class="info-row"><div class="info-icon">📍</div><div><h4>MANZIL</h4><p>Qashqadaryo viloyati, Qamashi tumani</p></div></div>
+          <div class="info-row"><div class="info-icon">📞</div><div><h4>TELEFON</h4><a href="tel:+998901234567">+998 90 123 45 67</a></div></div>
+          <div class="info-row"><div class="info-icon">📧</div><div><h4>EMAIL</h4><a href="mailto:info@qamashiim.uz">info@qamashiim.uz</a></div></div>
+          <div class="info-row"><div class="info-icon">⏰</div><div><h4>ISH VAQTI</h4><p>Dushanba–Juma: 08:00–17:00</p></div></div>
         </div>
-
         <div class="info-card">
-          <h3 style="font-size:1rem;font-weight:700;margin-bottom:1rem">🌐 Ijtimoiy tarmoqlar</h3>
+          <div style="font-family:var(--font-hud);font-size:.72rem;font-weight:700;color:var(--cyan);letter-spacing:.1em;margin-bottom:1rem">◈ IJTIMOIY TARMOQLAR</div>
           <div class="social-row">
-            <a href="https://t.me/AhrorAzamatovich" target="_blank" class="social-link">
-              <span class="sl-icon">✈️</span>
-              <div class="sl-info"><div class="sl-name">Telegram</div><div class="sl-handle">@AhrorAzamatovich</div></div>
-              <span class="sl-arrow">→</span>
-            </a>
-            <a href="https://instagram.com/AhrorAzamatovich" target="_blank" class="social-link">
-              <span class="sl-icon">📸</span>
-              <div class="sl-info"><div class="sl-name">Instagram</div><div class="sl-handle">@AhrorAzamatovich</div></div>
-              <span class="sl-arrow">→</span>
-            </a>
-            <a href="https://facebook.com/AhrorAzamatovich" target="_blank" class="social-link">
-              <span class="sl-icon">👤</span>
-              <div class="sl-info"><div class="sl-name">Facebook</div><div class="sl-handle">AhrorAzamatovich</div></div>
-              <span class="sl-arrow">→</span>
-            </a>
-            <a href="https://youtube.com/@Ahror_Azamatovich" target="_blank" class="social-link">
-              <span class="sl-icon">▶️</span>
-              <div class="sl-info"><div class="sl-name">YouTube</div><div class="sl-handle">@Ahror_Azamatovich</div></div>
-              <span class="sl-arrow">→</span>
-            </a>
+            <a href="https://t.me/AhrorAzamatovich" target="_blank" class="social-link"><span class="sl-icon">✈️</span><div class="sl-info"><div class="sl-name">TELEGRAM</div><div class="sl-handle">@AhrorAzamatovich</div></div><span class="sl-arrow">→</span></a>
+            <a href="https://instagram.com/AhrorAzamatovich" target="_blank" class="social-link"><span class="sl-icon">📸</span><div class="sl-info"><div class="sl-name">INSTAGRAM</div><div class="sl-handle">@AhrorAzamatovich</div></div><span class="sl-arrow">→</span></a>
+            <a href="https://facebook.com/AhrorAzamatovich" target="_blank" class="social-link"><span class="sl-icon">👤</span><div class="sl-info"><div class="sl-name">FACEBOOK</div><div class="sl-handle">AhrorAzamatovich</div></div><span class="sl-arrow">→</span></a>
+            <a href="https://youtube.com/@Ahror_Azamatovich" target="_blank" class="social-link"><span class="sl-icon">▶️</span><div class="sl-info"><div class="sl-name">YOUTUBE</div><div class="sl-handle">@Ahror_Azamatovich</div></div><span class="sl-arrow">→</span></a>
           </div>
         </div>
       </div>
 
-      <!-- Form -->
       <div class="contact-form-card">
-        <h3 style="font-size:1.15rem;font-weight:700;margin-bottom:.4rem">✉️ Xabar yuborish</h3>
-        <p style="color:var(--text-muted);font-size:.88rem;margin-bottom:2rem">Savolingizni yozing, tez orada siz bilan bog'lanamiz.</p>
-
+        <h3>◈ XABAR YUBORISH</h3>
+        <p style="color:var(--txt3);font-size:.84rem;margin-bottom:2rem">Savolingizni yozing, tez orada siz bilan bog'lanamiz.</p>
         <div id="formWrap">
           <div class="form-row">
-            <div class="form-group">
-              <label class="form-label req">Ism</label>
-              <input class="form-control" id="cName" type="text" placeholder="Ismingiz">
-            </div>
-            <div class="form-group">
-              <label class="form-label">Familiya</label>
-              <input class="form-control" id="cLname" type="text" placeholder="Familiyangiz">
-            </div>
+            <div class="form-group"><label class="form-label req">ISM</label><input class="form-control" id="cName" type="text" placeholder="Ismingiz"></div>
+            <div class="form-group"><label class="form-label">FAMILIYA</label><input class="form-control" id="cLname" type="text" placeholder="Familiyangiz"></div>
           </div>
-          <div class="form-group">
-            <label class="form-label req">Telefon yoki Email</label>
-            <input class="form-control" id="cContact" type="text" placeholder="+998 90 xxx xx xx yoki email">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Mavzu</label>
+          <div class="form-group"><label class="form-label req">TELEFON YOKI EMAIL</label><input class="form-control" id="cContact" type="text" placeholder="+998 90 xxx xx xx"></div>
+          <div class="form-group"><label class="form-label">MAVZU</label>
             <select class="form-control" id="cSubject">
               <option value="">Mavzuni tanlang...</option>
-              <option>O'quvchi qabuli</option>
-              <option>Ota-ona murojaati</option>
-              <option>Taklif va shikoyat</option>
-              <option>Hamkorlik</option>
-              <option>Boshqa</option>
+              <option>O'quvchi qabuli</option><option>Ota-ona murojaati</option>
+              <option>Taklif va shikoyat</option><option>Hamkorlik</option><option>Boshqa</option>
             </select>
           </div>
-          <div class="form-group">
-            <label class="form-label req">Xabar</label>
-            <textarea class="form-control" id="cMsg" rows="5" placeholder="Xabaringizni yozing..." style="min-height:140px"></textarea>
-          </div>
-          <button class="btn btn-primary btn-block" onclick="sendMsg()">📨 Yuborish</button>
+          <div class="form-group"><label class="form-label req">XABAR</label><textarea class="form-control" id="cMsg" rows="5" placeholder="Xabaringizni yozing..." style="min-height:140px"></textarea></div>
+          <button class="btn btn-primary btn-block" onclick="sendMsg()">◈ XABAR YUBORISH</button>
         </div>
-
         <div id="successWrap" style="display:none;text-align:center;padding:2.5rem 1rem">
-          <div style="font-size:3.5rem;margin-bottom:1rem">✅</div>
-          <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:.4rem">Xabar yuborildi!</h3>
-          <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:1.5rem">Tez orada siz bilan bog'lanamiz. Rahmat!</p>
+          <div style="font-size:3rem;margin-bottom:1rem;color:var(--green);text-shadow:var(--glow-green)">◈</div>
+          <h3 style="font-family:var(--font-hud);color:var(--green);letter-spacing:.06em;margin-bottom:.5rem">XABAR YUBORILDI</h3>
+          <p style="color:var(--txt3);font-size:.88rem;margin-bottom:1.5rem">Tez orada siz bilan bog'lanamiz. Rahmat!</p>
           <button class="btn btn-ghost" onclick="resetForm()">↩ Yana yuborish</button>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -139,48 +88,42 @@
     <div class="footer-grid">
       <div>
         <div style="display:flex;align-items:center;gap:11px;margin-bottom:.4rem">
-          <img src="images/logo.jpg" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.15)" alt="logo">
-          <span style="color:#fff;font-weight:700;font-size:.95rem">Qamashi IM</span>
+          <img src="images/logo.jpg" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:1px solid var(--border2)" alt="logo">
+          <span style="color:var(--cyan);font-weight:700;font-size:.9rem;font-family:var(--font-hud);letter-spacing:.06em">QAMASHI IM</span>
         </div>
-        <p class="footer-brand">Qamashi tumani ixtisoslashtirilgan maktabi — bilim va tarbiyaning manzili.</p>
+        <p class="footer-brand">Qamashi tumani ixtisoslashtirilgan maktabi.</p>
         <div class="footer-socials">
           <a href="https://t.me/AhrorAzamatovich" target="_blank" class="fsoc">✈️</a>
           <a href="https://instagram.com/AhrorAzamatovich" target="_blank" class="fsoc">📸</a>
-          <a href="https://youtube.com/@Ahror_Azamatovich" target="_blank" class="fsoc">▶️</a>
         </div>
       </div>
       <div class="footer-col"><h4>Sahifalar</h4><ul class="footer-links">
-        <li><a href="index.html">🏠 Bosh sahifa</a></li><li><a href="news.html">📰 Yangiliklar</a></li>
-        <li><a href="events.html">🎯 Tadbirlar</a></li><li><a href="contact.html">📞 Bog'lanish</a></li>
+        <li><a href="index.html">◈ Bosh sahifa</a></li><li><a href="news.html">◈ Yangiliklar</a></li>
+        <li><a href="events.html">◈ Tadbirlar</a></li><li><a href="contact.html">◈ Bog'lanish</a></li>
       </ul></div>
       <div class="footer-col"><h4>Aloqa</h4><ul class="footer-links">
-        <li><a href="#">📍 Qamashi, Qashqadaryo</a></li>
-        <li><a href="mailto:info@qamashiim.uz">📧 info@qamashiim.uz</a></li>
-        <li><a href="tel:+998901234567">📞 +998 90 123 45 67</a></li>
-        <li><a href="#">⏰ Dush–Juma: 08:00–17:00</a></li>
+        <li><a href="#">◈ Qamashi, Qashqadaryo</a></li>
+        <li><a href="mailto:info@qamashiim.uz">◈ info@qamashiim.uz</a></li>
+        <li><a href="tel:+998901234567">◈ +998 90 123 45 67</a></li>
       </ul></div>
     </div>
     <div class="footer-bottom"><p>© 2025 Qamashi Ixtisoslashtirilgan Maktabi.</p></div>
   </div>
 </footer>
-
 <button id="scrollTopBtn" onclick="scrollTop()">↑</button>
 <div id="toastRoot"></div>
 <script src="app.js"></script>
+<script src="jarvis.js"></script>
 <script>
 function sendMsg(){
-  const name=(document.getElementById('cName')?.value||'').trim();
-  const msg=(document.getElementById('cMsg')?.value||'').trim();
-  const contact=(document.getElementById('cContact')?.value||'').trim();
-  if(!name){ toast('Ism kiritish shart!','error'); return; }
-  if(!contact){ toast('Telefon yoki email kiritish shart!','error'); return; }
-  if(!msg){ toast('Xabar kiritish shart!','error'); return; }
+  if(!(document.getElementById('cName').value.trim())){ toast('Ism kiritish shart!','error'); return; }
+  if(!(document.getElementById('cContact').value.trim())){ toast('Aloqa ma\'lumoti kiritish shart!','error'); return; }
+  if(!(document.getElementById('cMsg').value.trim())){ toast('Xabar kiritish shart!','error'); return; }
   document.getElementById('formWrap').style.display='none';
   document.getElementById('successWrap').style.display='block';
-  toast('Xabaringiz yuborildi! ✅','success');
+  toast('Xabaringiz yuborildi! ◈','success');
 }
 function resetForm(){
-  document.getElementById('formWrap').reset?.();
   ['cName','cLname','cContact','cMsg'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
   document.getElementById('formWrap').style.display='block';
   document.getElementById('successWrap').style.display='none';

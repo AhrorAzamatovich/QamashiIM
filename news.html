@@ -7,18 +7,18 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
+<canvas id="jarvisCanvas"></canvas>
 <nav class="navbar" id="mainNav">
   <a href="index.html" class="navbar-brand">
-    <img src="images/logo.jpg" alt="QamashiIM" class="navbar-logo">
-    <div class="navbar-title"><span>Qamashi IM</span><span>Ixtisoslashtirilgan Maktab</span></div>
+    <img src="images/logo.jpg" alt="QIM" class="navbar-logo">
+    <div class="navbar-title"><span>QAMASHI IM</span><span>Ixtisoslashtirilgan Maktab</span></div>
   </a>
   <ul class="nav-links" id="navLinks">
-    <li><a href="index.html">🏠 Bosh sahifa</a></li>
-    <li><a href="about.html">ℹ️ Haqimizda</a></li>
-    <li><a href="news.html" class="active">📰 Yangiliklar</a></li>
-    <li><a href="events.html">🎯 Tadbirlar</a></li>
-    <li><a href="contact.html">📞 Bog'lanish</a></li>
+    <li><a href="index.html">◈ Bosh sahifa</a></li>
+    <li><a href="about.html">◈ Haqimizda</a></li>
+    <li><a href="news.html" class="active">◈ Yangiliklar</a></li>
+    <li><a href="events.html">◈ Tadbirlar</a></li>
+    <li><a href="contact.html">◈ Bog'lanish</a></li>
   </ul>
   <div class="nav-actions" id="navAuth">
     <button class="btn btn-ghost btn-sm" onclick="openAuth('login')">Kirish</button>
@@ -29,45 +29,40 @@
 
 <div class="page-banner">
   <div class="container">
-    <h1>📰 Yangiliklar</h1>
+    <h1>◈ YANGILIKLAR</h1>
     <p>Maktabimizdan so'nggi yangiliklar, tadbirlar va yutuqlar</p>
   </div>
 </div>
 
 <section class="section">
   <div class="container">
-
-    <!-- Write banner (shown only if logged in) -->
     <div class="write-banner" id="writeBanner" style="display:none">
       <div>
-        <h4>✏️ Yangilik joylashtirishni istaysizmi?</h4>
-        <p>Maktab hayotidan voqealarni barcha bilan ulashing</p>
+        <h4>◈ YANGILIK YOZISH</h4>
+        <p>Maktab hayotidan voqealarni jamoangiz bilan ulashing</p>
       </div>
       <button class="btn btn-primary" onclick="openPostEditor()">+ Yangilik yozish</button>
     </div>
 
-    <!-- Filters -->
     <div class="filter-row">
-      <button class="filter-chip active" data-cat="all" onclick="setFilter(this,'all')">🔥 Hammasi</button>
-      <button class="filter-chip" data-cat="yangilik" onclick="setFilter(this,'yangilik')">📣 Yangilik</button>
-      <button class="filter-chip" data-cat="tadbir" onclick="setFilter(this,'tadbir')">🎉 Tadbir</button>
-      <button class="filter-chip" data-cat="sport" onclick="setFilter(this,'sport')">⚽ Sport</button>
-      <button class="filter-chip" data-cat="fan" onclick="setFilter(this,'fan')">🔬 Fan</button>
-      <button class="filter-chip" data-cat="madaniyat" onclick="setFilter(this,'madaniyat')">🎭 Madaniyat</button>
+      <button class="filter-chip active" data-cat="all" onclick="setFilter(this,'all')">◈ Hammasi</button>
+      <button class="filter-chip" data-cat="yangilik" onclick="setFilter(this,'yangilik')">◈ Yangilik</button>
+      <button class="filter-chip" data-cat="tadbir" onclick="setFilter(this,'tadbir')">◈ Tadbir</button>
+      <button class="filter-chip" data-cat="sport" onclick="setFilter(this,'sport')">◈ Sport</button>
+      <button class="filter-chip" data-cat="fan" onclick="setFilter(this,'fan')">◈ Fan</button>
+      <button class="filter-chip" data-cat="madaniyat" onclick="setFilter(this,'madaniyat')">◈ Madaniyat</button>
       <div class="search-wrap">
-        <i class="s-icon">🔍</i>
-        <input type="text" class="search-input" id="searchBox" placeholder="Yangilik qidiring..." oninput="onSearch(this.value)">
+        <i class="s-icon">◎</i>
+        <input type="text" class="search-input" id="searchBox" placeholder="QIDIRISH..." oninput="onSearch(this.value)">
       </div>
     </div>
 
-    <!-- Grid -->
     <div class="posts-grid" id="newsGrid">
-      <div style="grid-column:1/-1;text-align:center;padding:2rem"><div class="spinner"></div></div>
+      <div style="grid-column:1/-1;text-align:center;padding:3rem"><div class="spinner"></div></div>
     </div>
 
-    <!-- Load more -->
-    <div style="text-align:center;margin-top:2.5rem" id="loadMoreRow">
-      <button class="btn btn-ghost btn-lg" id="loadMoreBtn" onclick="loadMore()" style="display:none">Yana ko'rsatish</button>
+    <div style="text-align:center;margin-top:2.5rem">
+      <button class="btn btn-ghost btn-lg" id="loadMoreBtn" onclick="loadMore()" style="display:none">◈ Ko'proq ko'rsatish</button>
     </div>
   </div>
 </section>
@@ -77,94 +72,62 @@
     <div class="footer-grid">
       <div>
         <div style="display:flex;align-items:center;gap:11px;margin-bottom:.4rem">
-          <img src="images/logo.jpg" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.15)" alt="logo">
-          <span style="color:#fff;font-weight:700;font-size:.95rem">Qamashi IM</span>
+          <img src="images/logo.jpg" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:1px solid var(--border2);box-shadow:0 0 10px rgba(0,212,255,.2)" alt="logo">
+          <span style="color:var(--cyan);font-weight:700;font-size:.9rem;font-family:var(--font-hud);letter-spacing:.06em">QAMASHI IM</span>
         </div>
         <p class="footer-brand">Qamashi tumani ixtisoslashtirilgan maktabi — bilim va tarbiyaning manzili.</p>
         <div class="footer-socials">
           <a href="https://t.me/AhrorAzamatovich" target="_blank" class="fsoc">✈️</a>
           <a href="https://instagram.com/AhrorAzamatovich" target="_blank" class="fsoc">📸</a>
-          <a href="https://facebook.com/AhrorAzamatovich" target="_blank" class="fsoc">👤</a>
           <a href="https://youtube.com/@Ahror_Azamatovich" target="_blank" class="fsoc">▶️</a>
         </div>
       </div>
       <div class="footer-col"><h4>Sahifalar</h4><ul class="footer-links">
-        <li><a href="index.html">🏠 Bosh sahifa</a></li><li><a href="about.html">ℹ️ Haqimizda</a></li>
-        <li><a href="news.html">📰 Yangiliklar</a></li><li><a href="events.html">🎯 Tadbirlar</a></li>
-        <li><a href="contact.html">📞 Bog'lanish</a></li>
+        <li><a href="index.html">◈ Bosh sahifa</a></li><li><a href="news.html">◈ Yangiliklar</a></li>
+        <li><a href="events.html">◈ Tadbirlar</a></li><li><a href="contact.html">◈ Bog'lanish</a></li>
       </ul></div>
       <div class="footer-col"><h4>Kategoriyalar</h4><ul class="footer-links">
-        <li><a href="news.html?cat=yangilik">📣 Yangiliklar</a></li><li><a href="news.html?cat=tadbir">🎉 Tadbirlar</a></li>
-        <li><a href="news.html?cat=sport">⚽ Sport</a></li><li><a href="news.html?cat=fan">🔬 Fan</a></li>
-        <li><a href="news.html?cat=madaniyat">🎭 Madaniyat</a></li>
+        <li><a href="news.html?cat=yangilik">◈ Yangiliklar</a></li>
+        <li><a href="news.html?cat=tadbir">◈ Tadbirlar</a></li>
+        <li><a href="news.html?cat=sport">◈ Sport</a></li>
+        <li><a href="news.html?cat=fan">◈ Fan</a></li>
+        <li><a href="news.html?cat=madaniyat">◈ Madaniyat</a></li>
       </ul></div>
       <div class="footer-col"><h4>Aloqa</h4><ul class="footer-links">
-        <li><a href="#">📍 Qamashi, Qashqadaryo</a></li>
-        <li><a href="mailto:info@qamashiim.uz">📧 info@qamashiim.uz</a></li>
-        <li><a href="tel:+998901234567">📞 +998 90 123 45 67</a></li>
+        <li><a href="#">◈ Qamashi, Qashqadaryo</a></li>
+        <li><a href="mailto:info@qamashiim.uz">◈ info@qamashiim.uz</a></li>
+        <li><a href="tel:+998901234567">◈ +998 90 123 45 67</a></li>
       </ul></div>
     </div>
-    <div class="footer-bottom"><p>© 2025 Qamashi Ixtisoslashtirilgan Maktabi.</p></div>
+    <div class="footer-bottom">
+      <p>© 2025 Qamashi Ixtisoslashtirilgan Maktabi. Barcha huquqlar himoyalangan.</p>
+      <p>BILIM — ENG BUYUK BOYLIK ◈</p>
+    </div>
   </div>
 </footer>
 
 <button id="scrollTopBtn" onclick="scrollTop()">↑</button>
 <div id="toastRoot"></div>
 <script src="app.js"></script>
+<script src="jarvis.js"></script>
 <script>
-  let curCat = 'all', curQ = '', curPage = 1;
-  const PAGE = 9;
-
+  let curCat='all', curQ='', curPage=1;
+  const PAGE=9;
   document.addEventListener('DOMContentLoaded', () => {
-    const url = new URLSearchParams(location.search);
-    const cat = url.get('cat');
-    if (cat) {
-      curCat = cat;
-      document.querySelectorAll('.filter-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === cat));
-    }
+    const p=new URLSearchParams(location.search).get('cat');
+    if(p){ curCat=p; document.querySelectorAll('.filter-chip').forEach(c=>c.classList.toggle('active',c.dataset.cat===p)); }
     renderNews();
   });
-
-  function setFilter(btn, cat) {
-    curCat = cat; curPage = 1;
-    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-    btn.classList.add('active');
-    renderNews();
+  function setFilter(btn,cat){ curCat=cat; curPage=1; document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active')); btn.classList.add('active'); renderNews(); }
+  function onSearch(q){ curQ=q.toLowerCase().trim(); curPage=1; renderNews(); }
+  function filtered(){ let p=getPosts(); if(curCat!=='all') p=p.filter(x=>x.category===curCat); if(curQ) p=p.filter(x=>x.title.toLowerCase().includes(curQ)||x.body.toLowerCase().includes(curQ)||x.authorName.toLowerCase().includes(curQ)); return p; }
+  function renderNews(){
+    const all=filtered(); const grid=document.getElementById('newsGrid'); const btn=document.getElementById('loadMoreBtn'); const shown=all.slice(0,curPage*PAGE);
+    if(!all.length){ grid.innerHTML=`<div class="empty-state"><div class="empty-icon">◎</div><h3>HECH NARSA TOPILMADI</h3><p>Boshqa so'z yoki kategoriya tanlang</p></div>`; if(btn)btn.style.display='none'; return; }
+    grid.innerHTML=shown.map((p,i)=>renderCard(p,(i%PAGE)*0.05)).join('');
+    if(btn) btn.style.display=all.length>shown.length?'inline-flex':'none';
   }
-
-  function onSearch(q) { curQ = q.toLowerCase().trim(); curPage = 1; renderNews(); }
-
-  function filtered() {
-    let p = getPosts();
-    if (curCat !== 'all') p = p.filter(x => x.category === curCat);
-    if (curQ) p = p.filter(x => x.title.toLowerCase().includes(curQ) || x.body.toLowerCase().includes(curQ) || x.authorName.toLowerCase().includes(curQ));
-    return p;
-  }
-
-  function renderNews() {
-    const all = filtered();
-    const grid = document.getElementById('newsGrid');
-    const btn = document.getElementById('loadMoreBtn');
-    const shown = all.slice(0, curPage * PAGE);
-
-    if (!all.length) {
-      grid.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><h3>Hech narsa topilmadi</h3><p>Boshqa so'z yoki kategoriya tanlang</p></div>`;
-      if (btn) btn.style.display = 'none';
-      return;
-    }
-    grid.innerHTML = shown.map((p, i) => renderCard(p, (i % PAGE) * 0.06)).join('');
-    if (btn) btn.style.display = all.length > shown.length ? 'inline-flex' : 'none';
-  }
-
-  function loadMore() {
-    curPage++;
-    renderNews();
-    setTimeout(() => {
-      const cards = document.querySelectorAll('.post-card');
-      const idx = (curPage - 1) * PAGE;
-      if (cards[idx]) cards[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-  }
+  function loadMore(){ curPage++; renderNews(); setTimeout(()=>{ const cards=document.querySelectorAll('.post-card'); const idx=(curPage-1)*PAGE; if(cards[idx])cards[idx].scrollIntoView({behavior:'smooth',block:'start'}); },100); }
 </script>
 </body>
 </html>

@@ -3,31 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Qamashi tumani ixtisoslashtirilgan maktabi — sifatli ta'lim, iqtidorli o'quvchilar">
-  <meta name="theme-color" content="#2563eb">
+  <meta name="description" content="Qamashi tumani ixtisoslashtirilgan maktabi — zamonaviy ta'lim, iqtidorli o'quvchilar">
   <title>Qamashi Ixtisoslashtirilgan Maktabi</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- ─── NAVBAR ─────────────────────────────────────── -->
+<!-- JARVIS Canvas -->
+<canvas id="jarvisCanvas"></canvas>
+
+<!-- ── NAVBAR ── -->
 <nav class="navbar" id="mainNav">
   <a href="index.html" class="navbar-brand">
-    <img src="images/logo.jpg" alt="QamashiIM" class="navbar-logo">
+    <img src="images/logo.jpg" alt="QIM" class="navbar-logo">
     <div class="navbar-title">
-      <span>Qamashi IM</span>
+      <span>QAMASHI IM</span>
       <span>Ixtisoslashtirilgan Maktab</span>
     </div>
   </a>
-
   <ul class="nav-links" id="navLinks">
-    <li><a href="index.html" class="active">🏠 Bosh sahifa</a></li>
-    <li><a href="about.html">ℹ️ Haqimizda</a></li>
-    <li><a href="news.html">📰 Yangiliklar</a></li>
-    <li><a href="events.html">🎯 Tadbirlar</a></li>
-    <li><a href="contact.html">📞 Bog'lanish</a></li>
+    <li><a href="index.html" class="active">◈ Bosh sahifa</a></li>
+    <li><a href="about.html">◈ Haqimizda</a></li>
+    <li><a href="news.html">◈ Yangiliklar</a></li>
+    <li><a href="events.html">◈ Tadbirlar</a></li>
+    <li><a href="contact.html">◈ Bog'lanish</a></li>
   </ul>
-
   <div class="nav-actions" id="navAuth">
     <button class="btn btn-ghost btn-sm" onclick="openAuth('login')">Kirish</button>
     <button class="btn btn-primary btn-sm" onclick="openAuth('register')">Ro'yxatdan o'tish</button>
@@ -35,128 +35,172 @@
   <button class="hamburger" id="hamburger" aria-label="Menyu"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- ─── HERO ───────────────────────────────────────── -->
+<!-- ── HERO ── -->
 <section class="hero">
-  <div class="particles" aria-hidden="true">
-    <div class="particle" style="width:90px;height:90px;left:8%;top:18%;animation-duration:7s;animation-delay:0s"></div>
-    <div class="particle" style="width:45px;height:45px;left:18%;top:62%;animation-duration:5s;animation-delay:1s"></div>
-    <div class="particle" style="width:130px;height:130px;right:8%;top:12%;animation-duration:8s;animation-delay:2s"></div>
-    <div class="particle" style="width:60px;height:60px;right:22%;bottom:18%;animation-duration:6s;animation-delay:.5s"></div>
-    <div class="particle" style="width:35px;height:35px;left:45%;top:8%;animation-duration:5s;animation-delay:1.5s"></div>
-    <div class="particle" style="width:80px;height:80px;left:70%;top:55%;animation-duration:7s;animation-delay:3s"></div>
-  </div>
-
-  <div class="hero-grid">
+  <div class="hero-glow"></div>
+  <div class="hero-content">
     <div class="hero-text">
-      <div class="hero-eyebrow">
-        <span class="live-dot"></span>
-        2023-yildan faoliyat yuritmoqda
+      <div class="hud-label">
+        <span class="dot"></span>
+        TIZIM FAOL · 2023 — HOZIR
       </div>
       <h1 class="hero-title">
-        <span class="accent">Qamashi tumani</span><br>
-        Ixtisoslashtirilgan<br>Maktabi
+        <span class="line-cyan">QAMASHI TUMANI</span>
+        <span>Ixtisoslashtirilgan</span>
+        <span class="line-gold">Maktabi</span>
       </h1>
-      <p class="hero-desc">Zamonaviy ta'lim, iqtidorli o'quvchilar va malakali pedagoglar bilan porloq kelajak sari birgalikda qadam tashlang.</p>
+      <p class="hero-desc">
+        Zamonaviy ta'lim tizimi, malakali pedagoglar va innovatsion yondashuv orqali
+        har bir o'quvchining salohiyatini to'liq ro'yobga chiqaruvchi maktab.
+      </p>
       <div class="hero-btns">
-        <a href="about.html" class="btn btn-primary btn-xl">Maktab haqida</a>
-        <a href="news.html" class="btn btn-xl" style="background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border-color:rgba(255,255,255,.35);color:#fff">Yangiliklar</a>
+        <a href="about.html" class="btn btn-primary btn-xl">◈ Maktab haqida</a>
+        <a href="news.html" class="btn btn-ghost btn-xl">◈ Yangiliklar</a>
       </div>
       <div class="hero-stats">
         <div class="hs-item">
-          <div class="hs-num" id="cntStudents">264</div>
+          <div class="hs-num" id="cntS">0</div>
           <div class="hs-label">O'quvchi</div>
         </div>
         <div class="hs-item">
-          <div class="hs-num" id="cntTeachers">46</div>
+          <div class="hs-num" id="cntT">0</div>
           <div class="hs-label">O'qituvchi</div>
         </div>
         <div class="hs-item">
-          <div class="hs-num" id="cntClasses">11</div>
+          <div class="hs-num" id="cntC">0</div>
           <div class="hs-label">Sinf</div>
         </div>
         <div class="hs-item">
-          <div class="hs-num" id="cntPosts">0</div>
+          <div class="hs-num" id="cntP">0</div>
           <div class="hs-label">Yangilik</div>
         </div>
       </div>
     </div>
 
-    <div class="hero-card">
-      <div class="hc-head">
-        <img src="images/logo.jpg" alt="Logo" class="hc-logo">
-        <div>
-          <h3>Qamashi IM</h3>
-          <p>Ixtisoslashtirilgan Maktab</p>
+    <!-- HUD Panel -->
+    <div class="hero-panel">
+      <div class="hud-panel">
+        <div class="hud-scan"></div>
+        <div class="hud-head">
+          <img src="images/logo.jpg" alt="logo" class="hud-logo">
+          <div>
+            <h3>QAMASHI IM</h3>
+            <p>Ixtisoslashtirilgan Maktab · 2023</p>
+          </div>
         </div>
-      </div>
-      <div class="hc-items">
-        <div class="hc-item"><div class="hci-icon">📚</div><span>Chuqurlashtirilgan fanlar</span></div>
-        <div class="hc-item"><div class="hci-icon">🏆</div><span>Olimpiada g'oliblari</span></div>
-        <div class="hc-item"><div class="hci-icon">🔬</div><span>Zamonaviy laboratoriya</span></div>
-        <div class="hc-item"><div class="hci-icon">🤝</div><span>Jamoaviy muhit</span></div>
+        <div class="hud-panel-title">TIZIM MA'LUMOTLARI</div>
+        <div class="hud-items">
+          <div class="hud-item">
+            <div class="hud-item-icon">📚</div>
+            <span class="hud-item-text">Chuqurlashtirilgan fanlar</span>
+            <div class="hud-item-indicator"></div>
+          </div>
+          <div class="hud-item">
+            <div class="hud-item-icon">🏆</div>
+            <span class="hud-item-text">Olimpiada g'oliblari</span>
+            <div class="hud-item-indicator"></div>
+          </div>
+          <div class="hud-item">
+            <div class="hud-item-icon">🔬</div>
+            <span class="hud-item-text">Zamonaviy laboratoriya</span>
+            <div class="hud-item-indicator"></div>
+          </div>
+          <div class="hud-item">
+            <div class="hud-item-icon">💻</div>
+            <span class="hud-item-text">Raqamli ta'lim muhiti</span>
+            <div class="hud-item-indicator"></div>
+          </div>
+          <div class="hud-item">
+            <div class="hud-item-icon">🌐</div>
+            <span class="hud-item-text">Xalqaro standartlar</span>
+            <div class="hud-item-indicator"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── STATS BAR ──────────────────────────────────── -->
+<!-- ── STATS BAR ── -->
 <div class="stats-bar">
   <div class="container">
-    <div class="sb-item"><div class="sb-icon">👨‍🎓</div><div class="sb-num">264</div><div class="sb-label">Jami o'quvchilar</div></div>
-    <div class="sb-item"><div class="sb-icon">👨‍🏫</div><div class="sb-num">46</div><div class="sb-label">Malakali hodimlar</div></div>
-    <div class="sb-item"><div class="sb-icon">🏫</div><div class="sb-num">11</div><div class="sb-label">Ta'lim sinflari</div></div>
-    <div class="sb-item"><div class="sb-icon">🏅</div><div class="sb-num">50+</div><div class="sb-label">Olimpiada sovrinlari</div></div>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-icon">👨‍🎓</div>
+        <div class="stat-num">264</div>
+        <div class="stat-label">Jami o'quvchilar</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">👨‍🏫</div>
+        <div class="stat-num">46</div>
+        <div class="stat-label">Malakali hodimlar</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">🏫</div>
+        <div class="stat-num">11</div>
+        <div class="stat-label">Ta'lim sinflari</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">🏅</div>
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Olimpiada sovrinlari</div>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- ─── LATEST NEWS ────────────────────────────────── -->
+<!-- ── LATEST NEWS ── -->
 <section class="section">
   <div class="container">
     <div class="sec-header">
-      <div class="sec-tag">📰 So'nggi yangiliklar</div>
-      <h2 class="sec-title">Maktab hayotidan xabardor bo'ling</h2>
-      <p class="sec-desc">Yangiliklar, tadbirlar, yutuqlar va ko'p narsalar — hammasidan boxabar bo'ling.</p>
+      <div class="sec-tag">◈ SO'NGGI YANGILIKLAR</div>
+      <h2 class="sec-title">Maktab hayotidan <span class="highlight">xabardor bo'ling</span></h2>
+      <p class="sec-desc">Yangiliklar, tadbirlar, yutuqlar — barcha muhim ma'lumotlar shu yerda.</p>
     </div>
-
     <div class="posts-grid" id="homeGrid">
-      <div style="grid-column:1/-1;text-align:center;padding:2rem"><div class="spinner"></div></div>
+      <div style="grid-column:1/-1;text-align:center;padding:3rem"><div class="spinner"></div></div>
     </div>
-
     <div style="text-align:center;margin-top:2.5rem">
       <a href="news.html" class="btn btn-ghost btn-lg">Barcha yangiliklar →</a>
     </div>
   </div>
 </section>
 
-<!-- ─── ABOUT PREVIEW ──────────────────────────────── -->
-<section class="section" style="background:var(--surface2)">
+<!-- ── ABOUT PREVIEW ── -->
+<section class="section" style="background:rgba(0,5,15,0.5);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
   <div class="container">
     <div class="about-split">
       <div>
-        <div class="sec-tag" style="margin-bottom:.8rem">ℹ️ Biz haqimizda</div>
-        <h2 class="sec-title" style="text-align:left;margin-bottom:1.2rem">Kelajak avlod uchun <span style="color:var(--brand)">sifatli ta'lim</span></h2>
-        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:1rem">Qamashi tumani ixtisoslashtirilgan maktabi 2023-yilda tashkil topgan. 11 sinfda 264 nafar iqtidorli o'quvchiga 46 nafar malakali pedagog ta'lim beradi.</p>
-        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:2rem">Chuqurlashtirilgan o'quv dasturlari, zamonaviy laboratoriya va kutubxona hamda ko'plab qo'shimcha mashg'ulotlar orqali har bir o'quvchining salohiyati to'liq ro'yobga chiqariladi.</p>
+        <div class="sec-tag" style="margin-bottom:1rem">◈ BIZ HAQIMIZDA</div>
+        <h2 class="sec-title" style="text-align:left;margin-bottom:1.2rem">
+          Kelajak avlod uchun<br><span class="highlight">sifatli ta'lim</span>
+        </h2>
+        <p style="color:var(--txt2);line-height:1.8;margin-bottom:1rem;font-size:0.95rem">
+          Qamashi tumani ixtisoslashtirilgan maktabi 2023-yilda tashkil topgan. 11 sinfda 264 nafar iqtidorli o'quvchiga 46 nafar malakali pedagog ta'lim beradi.
+        </p>
+        <p style="color:var(--txt3);line-height:1.8;margin-bottom:2rem;font-size:0.9rem">
+          Chuqurlashtirilgan o'quv dasturlari, zamonaviy laboratoriya va to'garaklar orqali har bir o'quvchining salohiyati to'liq ro'yobga chiqariladi.
+        </p>
         <div class="feat-list">
           <div class="feat-item">
             <div class="feat-icon">🔬</div>
-            <div><h4>Ilmiy-amaliy ta'lim</h4><p>Nazariya va amaliyot muvozanatli birlashtirgan zamonaviy yondashuv</p></div>
+            <div><h4>Ilmiy-amaliy ta'lim</h4><p>Nazariya va amaliyot birlashtirilgan innovatsion yondashuv</p></div>
           </div>
           <div class="feat-item">
             <div class="feat-icon">🌟</div>
-            <div><h4>Iqtidorli o'quvchilar</h4><p>Olimpiada va musobaqalarda muttasil g'alabalar qo'lga kiritilmoqda</p></div>
+            <div><h4>Olimpiada g'oliblari</h4><p>Viloyat va respublika musobaqalarida muttasil yutuqlar</p></div>
           </div>
           <div class="feat-item">
             <div class="feat-icon">💡</div>
-            <div><h4>Innovatsion muhit</h4><p>Zamonaviy darsxona va uskunalar bilan ta'minlangan o'quv muhiti</p></div>
+            <div><h4>Innovatsion muhit</h4><p>Zamonaviy darsxona, laboratoriya va raqamli resurslar</p></div>
           </div>
         </div>
         <div style="margin-top:2rem">
-          <a href="about.html" class="btn btn-primary">Batafsil ma'lumot →</a>
+          <a href="about.html" class="btn btn-primary">◈ Batafsil ma'lumot</a>
         </div>
       </div>
       <div class="about-img-wrap">
-        <img src="images/1.jpg" alt="Maktab" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,var(--brand-light),#dbeafe)'">
+        <img src="images/1.jpg" alt="Maktab" onerror="this.style.display='none'">
         <div class="about-float-badge">
           <div class="afb-num">46</div>
           <div class="afb-text">Malakali<br>o'qituvchi</div>
@@ -166,16 +210,16 @@
   </div>
 </section>
 
-<!-- ─── FOOTER ─────────────────────────────────────── -->
+<!-- ── FOOTER ── -->
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div>
         <div style="display:flex;align-items:center;gap:11px;margin-bottom:.4rem">
-          <img src="images/logo.jpg" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.15)" alt="logo">
-          <span style="color:#fff;font-weight:700;font-size:.95rem">Qamashi IM</span>
+          <img src="images/logo.jpg" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:1px solid var(--border2);box-shadow:0 0 10px rgba(0,212,255,.2)" alt="logo">
+          <span style="color:var(--cyan);font-weight:700;font-size:.9rem;font-family:var(--font-hud);letter-spacing:.06em">QAMASHI IM</span>
         </div>
-        <p class="footer-brand">Qamashi tumani ixtisoslashtirilgan maktabi — bilim va tarbiyaning manzili. Kelajak bu yerda boshlanadi.</p>
+        <p class="footer-brand">Qamashi tumani ixtisoslashtirilgan maktabi — bilim va tarbiyaning manzili.</p>
         <div class="footer-socials">
           <a href="https://t.me/AhrorAzamatovich" target="_blank" class="fsoc" title="Telegram">✈️</a>
           <a href="https://instagram.com/AhrorAzamatovich" target="_blank" class="fsoc" title="Instagram">📸</a>
@@ -183,39 +227,30 @@
           <a href="https://youtube.com/@Ahror_Azamatovich" target="_blank" class="fsoc" title="YouTube">▶️</a>
         </div>
       </div>
-      <div class="footer-col">
-        <h4>Sahifalar</h4>
-        <ul class="footer-links">
-          <li><a href="index.html">🏠 Bosh sahifa</a></li>
-          <li><a href="about.html">ℹ️ Haqimizda</a></li>
-          <li><a href="news.html">📰 Yangiliklar</a></li>
-          <li><a href="events.html">🎯 Tadbirlar</a></li>
-          <li><a href="contact.html">📞 Bog'lanish</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Yangiliklar</h4>
-        <ul class="footer-links">
-          <li><a href="news.html?cat=yangilik">📣 Yangiliklar</a></li>
-          <li><a href="news.html?cat=tadbir">🎉 Tadbirlar</a></li>
-          <li><a href="news.html?cat=sport">⚽ Sport</a></li>
-          <li><a href="news.html?cat=fan">🔬 Fan</a></li>
-          <li><a href="news.html?cat=madaniyat">🎭 Madaniyat</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Aloqa</h4>
-        <ul class="footer-links">
-          <li><a href="#">📍 Qamashi tumani, Qashqadaryo</a></li>
-          <li><a href="mailto:info@qamashiim.uz">📧 info@qamashiim.uz</a></li>
-          <li><a href="tel:+998901234567">📞 +998 90 123 45 67</a></li>
-          <li><a href="#">⏰ Dush–Juma: 08:00–17:00</a></li>
-        </ul>
-      </div>
+      <div class="footer-col"><h4>Sahifalar</h4><ul class="footer-links">
+        <li><a href="index.html">◈ Bosh sahifa</a></li>
+        <li><a href="about.html">◈ Haqimizda</a></li>
+        <li><a href="news.html">◈ Yangiliklar</a></li>
+        <li><a href="events.html">◈ Tadbirlar</a></li>
+        <li><a href="contact.html">◈ Bog'lanish</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Yangiliklar</h4><ul class="footer-links">
+        <li><a href="news.html?cat=yangilik">◈ Yangiliklar</a></li>
+        <li><a href="news.html?cat=tadbir">◈ Tadbirlar</a></li>
+        <li><a href="news.html?cat=sport">◈ Sport</a></li>
+        <li><a href="news.html?cat=fan">◈ Fan</a></li>
+        <li><a href="news.html?cat=madaniyat">◈ Madaniyat</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Aloqa</h4><ul class="footer-links">
+        <li><a href="#">◈ Qamashi, Qashqadaryo</a></li>
+        <li><a href="mailto:info@qamashiim.uz">◈ info@qamashiim.uz</a></li>
+        <li><a href="tel:+998901234567">◈ +998 90 123 45 67</a></li>
+        <li><a href="#">◈ Dush–Juma: 08:00–17:00</a></li>
+      </ul></div>
     </div>
     <div class="footer-bottom">
       <p>© 2025 Qamashi Ixtisoslashtirilgan Maktabi. Barcha huquqlar himoyalangan.</p>
-      <p>Bilim — eng buyuk boylik 💙</p>
+      <p>BILIM — ENG BUYUK BOYLIK ◈</p>
     </div>
   </div>
 </footer>
@@ -224,22 +259,23 @@
 <div id="toastRoot"></div>
 
 <script src="app.js"></script>
+<script src="jarvis.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // Render latest 3 posts
   const posts = getPosts();
+  document.getElementById('cntP').textContent = posts.length;
   const grid = document.getElementById('homeGrid');
-  document.getElementById('cntPosts').textContent = posts.length;
   if (!posts.length) {
-    grid.innerHTML = `<div class="empty-state"><div class="empty-icon">📭</div><h3>Hali yangilik yo'q</h3><p>Birinchi yangilikni siz joylashingiz mumkin!</p><button class="btn btn-primary" onclick="openAuth('register')">Qo'shilish</button></div>`;
+    grid.innerHTML = `<div class="empty-state"><div class="empty-icon">📭</div><h3>YANGILIK YO'Q</h3><p>Birinchi yangilikni siz joylashingiz mumkin!</p><button class="btn btn-primary" onclick="openAuth('register')">Qo'shilish</button></div>`;
   } else {
-    grid.innerHTML = posts.slice(0,3).map((p,i) => renderCard(p, i*0.08)).join('');
+    grid.innerHTML = posts.slice(0,3).map((p,i) => renderCard(p, i * 0.08)).join('');
   }
   // counter animation
-  [['cntStudents',264],['cntTeachers',46],['cntClasses',11]].forEach(([id,t]) => {
-    const el = document.getElementById(id); if(!el) return;
-    let n=0; const s=Math.ceil(t/50);
-    const tm=setInterval(()=>{ n=Math.min(n+s,t); el.textContent=n; if(n>=t)clearInterval(tm); },25);
+  [['cntS',264],['cntT',46],['cntC',11]].forEach(([id,target]) => {
+    const el = document.getElementById(id); if (!el) return;
+    let n = 0;
+    const step = Math.ceil(target / 50);
+    const tm = setInterval(() => { n = Math.min(n + step, target); el.textContent = n; if (n >= target) clearInterval(tm); }, 25);
   });
 });
 </script>
