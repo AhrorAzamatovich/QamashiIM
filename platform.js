@@ -50,8 +50,48 @@ function genId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 }
 
+// ── Simple password obfuscation (XOR + base64) ──────────────────
+// NOT cryptographic — localStorage is client-side anyway.
+// Purpose: password must NOT appear as plaintext in localStorage or
+// in any UI hint. The raw password is never stored or rendered.
+function _hashPass(raw) {
+  const key = 'ep_2025_secure_xor_key_v1';
+  let out = '';
+  for (let i = 0; i < raw.length; i++) {
+    out += String.fromCharCode(raw.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+  }
+  try { return btoa(out); } catch { return btoa(unescape(encodeURIComponent(out))); }
+}
+
+function _checkPass(raw, stored) {
+  return _hashPass(raw) === stored;
+}
+
+// Migrate: if any user has a legacy plaintext password, re-hash it
+function _migrateLegacyPasswords() {
+  const users = getUsers();
+  let changed = false;
+  users.forEach(u => {
+    // Detect plaintext: base64 strings never contain a space; length heuristic
+    // A real base64 encoded XOR string will be longer than its source
+    if (u.password && u.password.length < 30 && !/^[A-Za-z0-9+/=]{12,}$/.test(u.password)) {
+      u.password = _hashPass(u.password);
+      changed = true;
+    }
+  });
+  if (changed) saveUsers(users);
+}
+
+// ── Super-admin guard ────────────────────────────────────────────
+function isSuperAdmin(s) {
+  s = s || getSession();
+  return s && s.role === 'superadmin';
+}
+
 // ── Seed: Initial Data ──────────────────────────────────────────
 (function seedAll() {
+  // First: migrate any legacy plaintext passwords from previous versions
+  _migrateLegacyPasswords();
   if (!getSchools().length) {
     saveSchools([
       {
@@ -110,9 +150,20 @@ function genId() {
   if (!getUsers().length) {
     saveUsers([
       {
+        id: 'u_superadmin',
+        firstName: 'Bosh', lastName: 'Admin',
+        username: 'admin',
+        // Password is hashed-like — raw value never exposed in UI
+        password: _hashPass('admin123@'),
+        role: 'superadmin', schoolId: null,
+        joinedAt: '2023-01-01T00:00:00.000Z',
+        bio: "O'zbekiston Maktablari Platformasi bosh admini",
+      },
+      {
         id: 'u_admin_qim',
         firstName: 'Ahror', lastName: 'Azamatov',
-        username: 'admin', password: 'admin123',
+        username: 'ahror_admin',
+        password: _hashPass('qimadmin2023'),
         role: 'school_admin', schoolId: 'school_qim',
         joinedAt: '2023-09-01T00:00:00.000Z',
         bio: 'Qamashi IM sayt administratori',
@@ -120,18 +171,11 @@ function genId() {
       {
         id: 'u_admin_tash',
         firstName: 'Sardor', lastName: 'Toshmatov',
-        username: 'tash_admin', password: 'admin123',
+        username: 'sardor_admin',
+        password: _hashPass('tashim2024'),
         role: 'school_admin', schoolId: 'school_tash1',
         joinedAt: '2024-01-15T00:00:00.000Z',
         bio: 'Toshkent IM-1 administratori',
-      },
-      {
-        id: 'u_superadmin',
-        firstName: 'Platform', lastName: 'Admin',
-        username: 'superadmin', password: 'super123',
-        role: 'superadmin', schoolId: null,
-        joinedAt: '2023-01-01T00:00:00.000Z',
-        bio: "O'zbekiston Maktablari Platformasi bosh admini",
       },
     ]);
   }
@@ -363,6 +407,7 @@ function buildNavAuth() {
           <button class="dropdown-item" id="ddProfileBtn" role="menuitem"><span class="di-icon" aria-hidden="true">👤</span>Profilim</button>
           <button class="dropdown-item" id="ddWriteBtn" role="menuitem"><span class="di-icon" aria-hidden="true">◈</span>Yangilik yozish</button>
           ${school ? `<button class="dropdown-item" id="ddSchoolBtn" role="menuitem" data-school-id="${esc(school.id)}"><span class="di-icon" aria-hidden="true">🏫</span>Maktabim</button>` : ''}
+          ${s.role === 'superadmin' ? '<button class="dropdown-item" id="ddAdminBtn" role="menuitem" style="color:var(--gold);border-top:1px solid var(--border);margin-top:4px"><span class="di-icon">🛡</span>Bosh Admin Panel</button>' : ''}
           <div class="dropdown-divider" role="separator"></div>
           <button class="dropdown-item danger" id="ddLogoutBtn" role="menuitem"><span class="di-icon" aria-hidden="true">🚪</span>Chiqish</button>
         </div>
@@ -379,6 +424,7 @@ function buildNavAuth() {
       const id = this.dataset.schoolId;
       if (id) location.href = 'school.html?id=' + encodeURIComponent(id);
     });
+    document.getElementById('ddAdminBtn')?.addEventListener('click', () => { closeDd(); openAdminPanel(); });
     document.getElementById('ddLogoutBtn')?.addEventListener('click', () => { closeDd(); doLogout(); });
   } else {
     wrap.innerHTML = `
@@ -454,11 +500,6 @@ function _createAuthModal() {
           <input class="form-control" id="liPass" type="password" placeholder="••••••" autocomplete="current-password">
         </div>
         <button class="btn btn-primary btn-block" id="doLoginBtn">◈ KIRISH</button>
-        <div class="hint-box" style="margin-top:1rem">
-          <p>Test: <code>admin</code> / <code>admin123</code> (Qamashi IM admini)</p>
-          <p>Test: <code>tash_admin</code> / <code>admin123</code> (Toshkent IM-1 admini)</p>
-          <p>Test: <code>superadmin</code> / <code>super123</code> (Platform admini)</p>
-        </div>
       </div>
 
       <!-- REGISTER -->
@@ -654,7 +695,7 @@ function doLogin() {
   _clearFieldErrors(['liUser', 'liPass']);
   if (!user) { _setFieldError('liUser', true); toast('Username kiritish shart!', 'error'); return; }
   if (!pass) { _setFieldError('liPass', true); toast('Parol kiritish shart!', 'error'); return; }
-  const found = getUsers().find(function(u) { return u.username === user && u.password === pass; });
+  const found = getUsers().find(function(u) { return u.username === user && _checkPass(pass, u.password); });
   if (!found) {
     _setFieldError('liUser', true);
     _setFieldError('liPass', true);
@@ -696,7 +737,7 @@ function doRegister() {
   const nu = {
     id: genId(), firstName: fn, lastName: ln,
     username: un, role: ro, schoolId: sc || null,
-    password: pw, joinedAt: new Date().toISOString(), bio: '',
+    password: _hashPass(pw), joinedAt: new Date().toISOString(), bio: '',
   };
   users.push(nu);
   saveUsers(users);
@@ -766,7 +807,7 @@ function doRegisterSchool() {
 
   const newAdmin = {
     id: genId(), firstName: afn, lastName: aln,
-    username: aun, password: apw,
+    username: aun, password: _hashPass(apw),
     role: 'school_admin', schoolId: schoolId,
     joinedAt: new Date().toISOString(), bio: shortName + ' admini',
   };
@@ -1537,4 +1578,432 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function scrollTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ================================================================
+   SUPER ADMIN — School Archive & Full Control
+   ================================================================
+   archive  : maktab o'chirilmaydi, faqat "eskirgan(N)" nomi bilan
+              belgilanadi va barcha postlari shu nom bilan qoladi.
+   purge    : maktab + barcha foydalanuvchilari + barcha postlari
+              butunlay o'chirib tashlanadi (qaytarib bo'lmaydi).
+   ================================================================ */
+
+/** Unique archive suffix generator: eskirgan(1), eskirgan(2), … */
+function _nextArchiveSuffix(baseName) {
+  const schools = getSchools();
+  const pattern = /^eskirgan\((\d+)\)\s*/i;
+  let max = 0;
+  schools.forEach(function(s) {
+    const m = s.name.match(pattern);
+    if (m) max = Math.max(max, parseInt(m[1], 10));
+    const ms = s.shortName.match(pattern);
+    if (ms) max = Math.max(max, parseInt(ms[1], 10));
+  });
+  return max + 1;
+}
+
+/**
+ * Archive a school: rename it to "eskirgan(N) <originalName>",
+ * update all its posts' schoolName accordingly, deactivate admin users.
+ * The school and all its content remains visible on the platform.
+ *
+ * @param {string} schoolId
+ */
+function archiveSchool(schoolId) {
+  const s = getSession();
+  if (!isSuperAdmin(s)) { toast('Ruxsat yo\'q!', 'error'); return; }
+
+  const schools = getSchools();
+  const idx = schools.findIndex(function(sc) { return sc.id === schoolId; });
+  if (idx === -1) { toast('Maktab topilmadi!', 'error'); return; }
+
+  const sc = schools[idx];
+
+  // Don't archive twice
+  if (/^eskirgan\(/i.test(sc.name)) {
+    toast('Bu maktab allaqachon arxivlangan!', 'warning'); return;
+  }
+
+  const n = _nextArchiveSuffix(sc.name);
+  const archivedName      = 'eskirgan(' + n + ') ' + sc.name;
+  const archivedShortName = 'eskirgan(' + n + ') ' + sc.shortName;
+
+  // Update school record
+  schools[idx] = Object.assign({}, sc, {
+    name:       archivedName,
+    shortName:  archivedShortName,
+    archived:   true,
+    archivedAt: new Date().toISOString(),
+    archivedBy: s.id,
+    verified:   false,
+  });
+  saveSchools(schools);
+
+  // Update all posts' schoolName
+  const posts = getPosts();
+  let postsUpdated = 0;
+  posts.forEach(function(p) {
+    if (p.schoolId === schoolId) {
+      p.schoolName = archivedShortName;
+      postsUpdated++;
+    }
+  });
+  savePosts(posts);
+
+  // Deactivate school's admin users (set role to 'archived_admin')
+  const users = getUsers();
+  users.forEach(function(u) {
+    if (u.schoolId === schoolId && u.role === 'school_admin') {
+      u.role = 'archived_admin';
+    }
+  });
+  saveUsers(users);
+
+  // If archived admin is currently logged in, clear their session
+  const sess = getSession();
+  if (sess && sess.schoolId === schoolId && sess.role === 'school_admin') {
+    clearSession();
+  }
+
+  toast('"' + sc.shortName + '" arxivlandi. ' + postsUpdated + ' ta yangilik saqlanib qoldi.', 'success');
+  return { archivedName, archivedShortName, postsUpdated };
+}
+
+/**
+ * Permanently delete a school, ALL its posts, and ALL its admin users.
+ * This is irreversible. Requires double-confirm from UI.
+ *
+ * @param {string} schoolId
+ */
+function purgeSchool(schoolId) {
+  const s = getSession();
+  if (!isSuperAdmin(s)) { toast('Ruxsat yo\'q!', 'error'); return; }
+
+  const schools = getSchools();
+  const sc = schools.find(function(x) { return x.id === schoolId; });
+  if (!sc) { toast('Maktab topilmadi!', 'error'); return; }
+
+  const posts   = getPosts();
+  const users   = getUsers();
+
+  const removedPosts = posts.filter(function(p) { return p.schoolId === schoolId; }).length;
+  const removedUsers = users.filter(function(u) { return u.schoolId === schoolId; }).length;
+
+  saveSchools(schools.filter(function(x) { return x.id !== schoolId; }));
+  savePosts(posts.filter(function(p) { return p.schoolId !== schoolId; }));
+  saveUsers(users.filter(function(u) { return u.schoolId !== schoolId; }));
+
+  // Clear session if affected user is logged in
+  const sess = getSession();
+  if (sess && sess.schoolId === schoolId) clearSession();
+
+  toast('"' + sc.shortName + '" butunlay o\'chirildi! ' + removedPosts + ' yangilik, ' + removedUsers + ' foydalanuvchi.', 'info');
+}
+
+/**
+ * Admin: force-delete any post (no ownership check).
+ */
+function adminDeletePost(postId) {
+  if (!isSuperAdmin()) { toast('Ruxsat yo\'q!', 'error'); return; }
+  const posts = getPosts();
+  const idx = posts.findIndex(function(p) { return p.id === postId; });
+  if (idx === -1) return;
+  posts.splice(idx, 1);
+  savePosts(posts);
+  toast('Post o\'chirildi.', 'info');
+}
+
+/**
+ * Admin: force-delete any user (cannot delete self).
+ */
+function adminDeleteUser(userId) {
+  const s = getSession();
+  if (!isSuperAdmin(s)) { toast('Ruxsat yo\'q!', 'error'); return; }
+  if (s.id === userId) { toast('O\'zingizni o\'chira olmaysiz!', 'error'); return; }
+  const users = getUsers();
+  const idx = users.findIndex(function(u) { return u.id === userId; });
+  if (idx === -1) return;
+  users.splice(idx, 1);
+  saveUsers(users);
+  toast('Foydalanuvchi o\'chirildi.', 'info');
+}
+
+/**
+ * Admin: edit any user's data (role, schoolId, name, etc.).
+ * Only pass the fields you want to change.
+ */
+function adminUpdateUser(userId, changes) {
+  if (!isSuperAdmin()) { toast('Ruxsat yo\'q!', 'error'); return; }
+  const users = getUsers();
+  const idx = users.findIndex(function(u) { return u.id === userId; });
+  if (idx === -1) { toast('Foydalanuvchi topilmadi!', 'error'); return; }
+  Object.assign(users[idx], changes);
+  saveUsers(users);
+  updateSession();
+  toast('Foydalanuvchi yangilandi.', 'success');
+}
+
+/**
+ * Admin: edit any post's data (title, body, category, pinned, etc.)
+ */
+function adminUpdatePost(postId, changes) {
+  if (!isSuperAdmin()) { toast('Ruxsat yo\'q!', 'error'); return; }
+  const posts = getPosts();
+  const idx = posts.findIndex(function(p) { return p.id === postId; });
+  if (idx === -1) { toast('Post topilmadi!', 'error'); return; }
+  Object.assign(posts[idx], changes, { updatedAt: new Date().toISOString() });
+  savePosts(posts);
+  toast('Post yangilandi.', 'success');
+}
+
+/**
+ * Admin: toggle school verified status.
+ */
+function adminToggleVerified(schoolId) {
+  if (!isSuperAdmin()) { toast('Ruxsat yo\'q!', 'error'); return; }
+  const schools = getSchools();
+  const idx = schools.findIndex(function(s) { return s.id === schoolId; });
+  if (idx === -1) return;
+  schools[idx].verified = !schools[idx].verified;
+  saveSchools(schools);
+  toast('Tasdiqlash holati o\'zgartirildi.', 'success');
+}
+
+/* ================================================================
+   SUPER ADMIN PANEL MODAL
+   ================================================================ */
+
+function openAdminPanel() {
+  if (!isSuperAdmin()) { toast('Ruxsat yo\'q!', 'error'); return; }
+
+  let o = document.getElementById('adminPanelOverlay');
+  if (!o) {
+    o = document.createElement('div');
+    o.className = 'overlay';
+    o.id = 'adminPanelOverlay';
+    document.body.appendChild(o);
+  }
+
+  _renderAdminPanel();
+  showOverlay('adminPanelOverlay');
+}
+
+function _renderAdminPanel() {
+  const o = document.getElementById('adminPanelOverlay');
+  if (!o) return;
+
+  const schools = getSchools();
+  const users   = getUsers();
+  const posts   = getPosts();
+  const s       = getSession();
+
+  /* ---- School rows ---- */
+  const schoolRows = schools.map(function(sc) {
+    const scPosts   = posts.filter(function(p) { return p.schoolId === sc.id; }).length;
+    const scUsers   = users.filter(function(u) { return u.schoolId === sc.id; }).length;
+    const isArchived= !!sc.archived;
+    return '<tr style="border-bottom:1px solid var(--border)">' +
+      '<td style="padding:8px 10px;font-size:.78rem;color:var(--txt);font-family:var(--font-hud)">' +
+        esc(sc.shortName) +
+        (isArchived ? ' <span style="font-size:.6rem;color:var(--red);border:1px solid rgba(255,51,85,.3);padding:1px 5px;border-radius:3px">ARXIV</span>' : '') +
+      '</td>' +
+      '<td style="padding:8px 6px;font-size:.72rem;color:var(--txt3)">' + esc(sc.region) + '</td>' +
+      '<td style="padding:8px 6px;font-size:.72rem;text-align:center;color:var(--gold)">' + scPosts + '</td>' +
+      '<td style="padding:8px 6px;font-size:.72rem;text-align:center;color:var(--cyan)">' + scUsers + '</td>' +
+      '<td style="padding:8px 6px;text-align:center">' +
+        (sc.verified
+          ? '<span style="font-size:.65rem;color:var(--green)">✅</span>'
+          : '<span style="font-size:.65rem;color:var(--txt3)">—</span>') +
+      '</td>' +
+      '<td style="padding:8px 6px">' +
+        '<div style="display:flex;gap:4px;justify-content:flex-end;flex-wrap:wrap">' +
+          '<button class="btn btn-ghost btn-sm" style="padding:3px 8px;font-size:.65rem" data-admin-verify="' + esc(sc.id) + '">' +
+            (sc.verified ? '✕ Bekor' : '✅ Tasdiql.') +
+          '</button>' +
+          (!isArchived
+            ? '<button class="btn btn-sm" style="padding:3px 8px;font-size:.65rem;border-color:var(--gold);color:var(--gold)" data-admin-archive="' + esc(sc.id) + '">📦 Arxiv</button>'
+            : '') +
+          '<button class="btn btn-danger btn-sm" style="padding:3px 8px;font-size:.65rem" data-admin-purge="' + esc(sc.id) + '">🗑 O\'chirish</button>' +
+        '</div>' +
+      '</td>' +
+    '</tr>';
+  }).join('');
+
+  /* ---- User rows ---- */
+  const userRows = users.filter(function(u) { return u.id !== s.id; }).map(function(u) {
+    const school = u.schoolId ? getSchoolById(u.schoolId) : null;
+    return '<tr style="border-bottom:1px solid var(--border)">' +
+      '<td style="padding:8px 10px;font-size:.78rem;color:var(--txt)">@' + esc(u.username) + '</td>' +
+      '<td style="padding:8px 6px;font-size:.72rem;color:var(--txt2)">' + esc(u.firstName + ' ' + u.lastName) + '</td>' +
+      '<td style="padding:8px 6px;font-size:.7rem;color:var(--txt3)">' + esc(roleName(u.role)) + '</td>' +
+      '<td style="padding:8px 6px;font-size:.7rem;color:var(--txt3)">' + (school ? esc(school.shortName) : '—') + '</td>' +
+      '<td style="padding:8px 6px">' +
+        '<button class="btn btn-danger btn-sm" style="padding:3px 8px;font-size:.65rem" data-admin-del-user="' + esc(u.id) + '">🗑</button>' +
+      '</td>' +
+    '</tr>';
+  }).join('');
+
+  /* ---- Post rows (latest 20) ---- */
+  const sortedPosts = [...posts].sort(function(a,b){ return new Date(b.createdAt||0)-new Date(a.createdAt||0); }).slice(0,20);
+  const postRows = sortedPosts.map(function(p) {
+    return '<tr style="border-bottom:1px solid var(--border)">' +
+      '<td style="padding:8px 10px;font-size:.75rem;color:var(--txt);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(p.title) + '</td>' +
+      '<td style="padding:8px 6px;font-size:.7rem;color:var(--cyan)">' + esc(p.schoolName||'—') + '</td>' +
+      '<td style="padding:8px 6px;font-size:.7rem;color:var(--txt3)">' + fmtDateShort(p.createdAt) + '</td>' +
+      '<td style="padding:8px 6px;font-size:.7rem;text-align:center">❤️' + (p.likes||0) + '</td>' +
+      '<td style="padding:8px 6px">' +
+        '<div style="display:flex;gap:4px">' +
+          '<button class="btn btn-ghost btn-sm" style="padding:3px 8px;font-size:.65rem" data-admin-pin="' + esc(p.id) + '">' +
+            (p.pinned ? '📌 Unpin' : '📌 Pin') +
+          '</button>' +
+          '<button class="btn btn-danger btn-sm" style="padding:3px 8px;font-size:.65rem" data-admin-del-post="' + esc(p.id) + '">🗑</button>' +
+        '</div>' +
+      '</td>' +
+    '</tr>';
+  }).join('');
+
+  const tableStyle = 'width:100%;border-collapse:collapse;font-size:.8rem';
+  const thStyle = 'padding:7px 10px;text-align:left;font-family:var(--font-hud);font-size:.65rem;letter-spacing:.06em;color:var(--cyan);border-bottom:1px solid var(--border2);background:rgba(0,212,255,.04)';
+
+  o.innerHTML = `
+  <div class="modal modal-xl" style="max-width:1000px">
+    <div class="modal-head" style="background:rgba(0,4,14,.98)">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:1rem">🛡</span>
+        <h2 style="font-family:var(--font-hud);letter-spacing:.06em">BOSH ADMIN PANELI</h2>
+        <span style="font-size:.68rem;color:var(--txt3);margin-left:4px">${esc(s.firstName + ' ' + s.lastName)} — Mutloq nazorat</span>
+      </div>
+      <button class="close-btn" id="adminPanelClose" aria-label="Yopish">✕</button>
+    </div>
+    <div class="modal-body" style="padding:0">
+
+      <!-- Tabs -->
+      <div class="auth-tabs" style="padding:8px 16px;gap:6px;border-bottom:1px solid var(--border)">
+        <button class="auth-tab active" id="aptSchools">🏫 Maktablar (${schools.length})</button>
+        <button class="auth-tab" id="aptUsers">👤 Foydalanuvchilar (${users.length - 1})</button>
+        <button class="auth-tab" id="aptPosts">📰 So'nggi postlar (${posts.length})</button>
+      </div>
+
+      <!-- SCHOOLS tab -->
+      <div id="apTabSchools" style="padding:1.2rem;overflow-x:auto">
+        <table style="${tableStyle}">
+          <thead><tr>
+            <th style="${thStyle}">MAKTAB</th>
+            <th style="${thStyle}">VILOYAT</th>
+            <th style="${thStyle}">POSTLAR</th>
+            <th style="${thStyle}">A'ZOLAR</th>
+            <th style="${thStyle}">TASDIQL.</th>
+            <th style="${thStyle}">AMALLAR</th>
+          </tr></thead>
+          <tbody>${schoolRows || '<tr><td colspan="6" style="padding:2rem;text-align:center;color:var(--txt3)">Maktab yo\'q</td></tr>'}</tbody>
+        </table>
+      </div>
+
+      <!-- USERS tab -->
+      <div id="apTabUsers" style="padding:1.2rem;overflow-x:auto;display:none">
+        <table style="${tableStyle}">
+          <thead><tr>
+            <th style="${thStyle}">USERNAME</th>
+            <th style="${thStyle}">ISM</th>
+            <th style="${thStyle}">ROL</th>
+            <th style="${thStyle}">MAKTAB</th>
+            <th style="${thStyle}">O'CHIRISH</th>
+          </tr></thead>
+          <tbody>${userRows || '<tr><td colspan="5" style="padding:2rem;text-align:center;color:var(--txt3)">Foydalanuvchi yo\'q</td></tr>'}</tbody>
+        </table>
+      </div>
+
+      <!-- POSTS tab -->
+      <div id="apTabPosts" style="padding:1.2rem;overflow-x:auto;display:none">
+        <p style="font-size:.72rem;color:var(--txt3);margin-bottom:1rem">So'nggi 20 ta post (jami: ${posts.length})</p>
+        <table style="${tableStyle}">
+          <thead><tr>
+            <th style="${thStyle}">SARLAVHA</th>
+            <th style="${thStyle}">MAKTAB</th>
+            <th style="${thStyle}">SANA</th>
+            <th style="${thStyle}">LIKE</th>
+            <th style="${thStyle}">AMALLAR</th>
+          </tr></thead>
+          <tbody>${postRows || '<tr><td colspan="5" style="padding:2rem;text-align:center;color:var(--txt3)">Post yo\'q</td></tr>'}</tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>`;
+
+  /* ---- Bind events ---- */
+  document.getElementById('adminPanelClose')?.addEventListener('click', function() { hideOverlay('adminPanelOverlay'); });
+
+  // Tab switching
+  ['Schools','Users','Posts'].forEach(function(tab) {
+    document.getElementById('apt' + tab)?.addEventListener('click', function() {
+      ['Schools','Users','Posts'].forEach(function(t) {
+        document.getElementById('apt' + t)?.classList.toggle('active', t === tab);
+        const el = document.getElementById('apTab' + t);
+        if (el) el.style.display = t === tab ? 'block' : 'none';
+      });
+    });
+  });
+
+  // Delegate all admin actions inside the modal
+  o.addEventListener('click', function(e) {
+    /* Verify toggle */
+    const verifyBtn = e.target.closest('[data-admin-verify]');
+    if (verifyBtn) {
+      adminToggleVerified(verifyBtn.dataset.adminVerify);
+      _renderAdminPanel(); return;
+    }
+    /* Archive school */
+    const archiveBtn = e.target.closest('[data-admin-archive]');
+    if (archiveBtn) {
+      const scId = archiveBtn.dataset.adminArchive;
+      const sc   = getSchoolById(scId);
+      if (!sc) return;
+      if (!confirm('"' + sc.shortName + '" maktabini arxivlaysizmi?\n\nBarcha postlari "eskirgan(N) ' + sc.shortName + '" nomi bilan ko\'rinib qoladi.')) return;
+      archiveSchool(scId);
+      _renderAdminPanel(); return;
+    }
+    /* Purge school */
+    const purgeBtn = e.target.closest('[data-admin-purge]');
+    if (purgeBtn) {
+      const scId = purgeBtn.dataset.adminPurge;
+      const sc   = getSchoolById(scId);
+      if (!sc) return;
+      if (!confirm('⚠️ DIQQAT!\n\n"' + sc.shortName + '" maktabini BARCHA ma\'lumotlari bilan BUTUNLAY o\'chirmoqchimisiz?\n\nBU AMALNI BEKOR QILIb BO\'LMAYDI!')) return;
+      if (!confirm('Ikkinchi marta tasdiqlang: "' + sc.shortName + '" va uning barcha postlari o\'chib ketadi. Davom etasizmi?')) return;
+      purgeSchool(scId);
+      _renderAdminPanel(); return;
+    }
+    /* Delete user */
+    const delUserBtn = e.target.closest('[data-admin-del-user]');
+    if (delUserBtn) {
+      const uId = delUserBtn.dataset.adminDelUser;
+      const u   = getUsers().find(function(x) { return x.id === uId; });
+      if (!u) return;
+      if (!confirm('"@' + u.username + '" foydalanuvchisini o\'chirishni tasdiqlaysizmi?')) return;
+      adminDeleteUser(uId);
+      _renderAdminPanel(); return;
+    }
+    /* Delete post */
+    const delPostBtn = e.target.closest('[data-admin-del-post]');
+    if (delPostBtn) {
+      const pId = delPostBtn.dataset.adminDelPost;
+      const p   = getPosts().find(function(x) { return x.id === pId; });
+      if (!p) return;
+      if (!confirm('"' + p.title.slice(0, 60) + '..." postini o\'chirishni tasdiqlaysizmi?')) return;
+      adminDeletePost(pId);
+      _renderAdminPanel(); return;
+    }
+    /* Pin/Unpin post */
+    const pinBtn = e.target.closest('[data-admin-pin]');
+    if (pinBtn) {
+      const pId = pinBtn.dataset.adminPin;
+      const posts = getPosts();
+      const p = posts.find(function(x) { return x.id === pId; });
+      if (!p) return;
+      adminUpdatePost(pId, { pinned: !p.pinned });
+      _renderAdminPanel(); return;
+    }
+  });
 }
