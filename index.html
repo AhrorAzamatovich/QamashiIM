@@ -3,118 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Qamashi tumani ixtisoslashtirilgan maktabi — zamonaviy ta'lim, iqtidorli o'quvchilar">
-  <title>Qamashi Ixtisoslashtirilgan Maktabi</title>
+  <meta name="description" content="O'zbekiston Maktablari Platformasi — barcha maktablarning yangiliklari bir joyda">
+  <title>O'zbekiston Maktablari Platformasi</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<!-- JARVIS Canvas -->
 <canvas id="jarvisCanvas"></canvas>
 
 <!-- ── NAVBAR ── -->
 <nav class="navbar" id="mainNav">
   <a href="index.html" class="navbar-brand">
-    <img src="images/logo.jpg" alt="QIM" class="navbar-logo">
+    <div class="platform-logo">◈</div>
     <div class="navbar-title">
-      <span>QAMASHI IM</span>
-      <span>Ixtisoslashtirilgan Maktab</span>
+      <span>EDU PLATFORM</span>
+      <span>O'zbekiston Maktablari</span>
     </div>
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="index.html" class="active">◈ Bosh sahifa</a></li>
-    <li><a href="about.html">◈ Haqimizda</a></li>
     <li><a href="news.html">◈ Yangiliklar</a></li>
-    <li><a href="events.html">◈ Tadbirlar</a></li>
-    <li><a href="contact.html">◈ Bog'lanish</a></li>
+    <li><a href="schools.html">◈ Maktablar</a></li>
+    <li><a href="about.html">◈ Platforma haqida</a></li>
   </ul>
   <div class="nav-actions" id="navAuth">
     <button class="btn btn-ghost btn-sm" onclick="openAuth('login')">Kirish</button>
     <button class="btn btn-primary btn-sm" onclick="openAuth('register')">Ro'yxatdan o'tish</button>
   </div>
-  <button class="hamburger" id="hamburger" aria-label="Menyu"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- ── HERO ── -->
 <section class="hero">
   <div class="hero-glow"></div>
-  <div class="hero-content">
+  <div class="hero-content" style="grid-template-columns:1fr 1fr">
     <div class="hero-text">
-      <div class="hud-label">
-        <span class="dot"></span>
-        TIZIM FAOL · 2023 — HOZIR
-      </div>
+      <div class="hud-label"><span class="dot"></span>JONLI TIZIM · BARCHA MAKTABLAR</div>
       <h1 class="hero-title">
-        <span class="line-cyan">QAMASHI TUMANI</span>
-        <span>Ixtisoslashtirilgan</span>
-        <span class="line-gold">Maktabi</span>
+        <span class="line-cyan">O'ZBEKISTON</span>
+        <span>MAKTABLARI</span>
+        <span class="line-gold">PLATFORMASI</span>
       </h1>
       <p class="hero-desc">
-        Zamonaviy ta'lim tizimi, malakali pedagoglar va innovatsion yondashuv orqali
-        har bir o'quvchining salohiyatini to'liq ro'yobga chiqaruvchi maktab.
+        Barcha maktablarning yangiliklari, yutuqlari va tadbirlari — bir joyda.
+        Maktabingizni ro'yxatdan o'tkazing va o'z voqealaringizni butun O'zbekiston bilan ulashing.
       </p>
       <div class="hero-btns">
-        <a href="about.html" class="btn btn-primary btn-xl">◈ Maktab haqida</a>
-        <a href="news.html" class="btn btn-ghost btn-xl">◈ Yangiliklar</a>
+        <button class="btn btn-primary btn-xl" onclick="openAuth('school')">◈ Maktab qo'shish</button>
+        <a href="news.html" class="btn btn-xl" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#fff">◈ Yangiliklar</a>
       </div>
       <div class="hero-stats">
-        <div class="hs-item">
-          <div class="hs-num" id="cntS">0</div>
-          <div class="hs-label">O'quvchi</div>
-        </div>
-        <div class="hs-item">
-          <div class="hs-num" id="cntT">0</div>
-          <div class="hs-label">O'qituvchi</div>
-        </div>
-        <div class="hs-item">
-          <div class="hs-num" id="cntC">0</div>
-          <div class="hs-label">Sinf</div>
-        </div>
-        <div class="hs-item">
-          <div class="hs-num" id="cntP">0</div>
-          <div class="hs-label">Yangilik</div>
-        </div>
+        <div class="hs-item"><div class="hs-num" id="cntSchools">0</div><div class="hs-label">Maktab</div></div>
+        <div class="hs-item"><div class="hs-num" id="cntPosts">0</div><div class="hs-label">Yangilik</div></div>
+        <div class="hs-item"><div class="hs-num" id="cntUsers">0</div><div class="hs-label">Foydalanuvchi</div></div>
       </div>
     </div>
 
-    <!-- HUD Panel -->
     <div class="hero-panel">
       <div class="hud-panel">
         <div class="hud-scan"></div>
-        <div class="hud-head">
-          <img src="images/logo.jpg" alt="logo" class="hud-logo">
-          <div>
-            <h3>QAMASHI IM</h3>
-            <p>Ixtisoslashtirilgan Maktab · 2023</p>
-          </div>
-        </div>
-        <div class="hud-panel-title">TIZIM MA'LUMOTLARI</div>
-        <div class="hud-items">
-          <div class="hud-item">
-            <div class="hud-item-icon">📚</div>
-            <span class="hud-item-text">Chuqurlashtirilgan fanlar</span>
-            <div class="hud-item-indicator"></div>
-          </div>
-          <div class="hud-item">
-            <div class="hud-item-icon">🏆</div>
-            <span class="hud-item-text">Olimpiada g'oliblari</span>
-            <div class="hud-item-indicator"></div>
-          </div>
-          <div class="hud-item">
-            <div class="hud-item-icon">🔬</div>
-            <span class="hud-item-text">Zamonaviy laboratoriya</span>
-            <div class="hud-item-indicator"></div>
-          </div>
-          <div class="hud-item">
-            <div class="hud-item-icon">💻</div>
-            <span class="hud-item-text">Raqamli ta'lim muhiti</span>
-            <div class="hud-item-indicator"></div>
-          </div>
-          <div class="hud-item">
-            <div class="hud-item-icon">🌐</div>
-            <span class="hud-item-text">Xalqaro standartlar</span>
-            <div class="hud-item-indicator"></div>
-          </div>
+        <div class="hud-panel-title">TIZIM HOLATI</div>
+        <div class="hud-items" id="liveSchoolsPanel">
+          <div style="text-align:center;padding:1rem"><div class="spinner"></div></div>
         </div>
       </div>
     </div>
@@ -124,27 +73,11 @@
 <!-- ── STATS BAR ── -->
 <div class="stats-bar">
   <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-icon">👨‍🎓</div>
-        <div class="stat-num">264</div>
-        <div class="stat-label">Jami o'quvchilar</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-icon">👨‍🏫</div>
-        <div class="stat-num">46</div>
-        <div class="stat-label">Malakali hodimlar</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-icon">🏫</div>
-        <div class="stat-num">11</div>
-        <div class="stat-label">Ta'lim sinflari</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-icon">🏅</div>
-        <div class="stat-num">50+</div>
-        <div class="stat-label">Olimpiada sovrinlari</div>
-      </div>
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-item"><div class="stat-icon">🏫</div><div class="stat-num" id="st1">0</div><div class="stat-label">Ro'yxatdagi maktablar</div></div>
+      <div class="stat-item"><div class="stat-icon">📰</div><div class="stat-num" id="st2">0</div><div class="stat-label">Jami yangiliklar</div></div>
+      <div class="stat-item"><div class="stat-icon">👁</div><div class="stat-num" id="st3">0</div><div class="stat-label">Jami ko'rishlar</div></div>
+      <div class="stat-item"><div class="stat-icon">👨‍🎓</div><div class="stat-num" id="st4">0</div><div class="stat-label">Jami o'quvchilar</div></div>
     </div>
   </div>
 </div>
@@ -153,58 +86,76 @@
 <section class="section">
   <div class="container">
     <div class="sec-header">
-      <div class="sec-tag">◈ SO'NGGI YANGILIKLAR</div>
-      <h2 class="sec-title">Maktab hayotidan <span class="highlight">xabardor bo'ling</span></h2>
-      <p class="sec-desc">Yangiliklar, tadbirlar, yutuqlar — barcha muhim ma'lumotlar shu yerda.</p>
+      <div class="sec-tag">◈ BARCHA MAKTABLARDAN</div>
+      <h2 class="sec-title">So'nggi <span class="highlight">yangiliklar lenti</span></h2>
+      <p class="sec-desc">Barcha maktablarning yangiliklari real vaqtda — filtrlash va qidiruv imkoniyati bilan.</p>
     </div>
+
+    <!-- Quick filter -->
+    <div class="filter-row" style="margin-bottom:2rem">
+      <button class="filter-chip active" data-cat="all" onclick="homeFilter(this,'all')">◈ Hammasi</button>
+      <button class="filter-chip" data-cat="yangilik" onclick="homeFilter(this,'yangilik')">◈ Yangilik</button>
+      <button class="filter-chip" data-cat="tadbir" onclick="homeFilter(this,'tadbir')">◈ Tadbir</button>
+      <button class="filter-chip" data-cat="sport" onclick="homeFilter(this,'sport')">◈ Sport</button>
+      <button class="filter-chip" data-cat="fan" onclick="homeFilter(this,'fan')">◈ Fan</button>
+      <div class="search-wrap">
+        <i class="s-icon">◎</i>
+        <input type="text" class="search-input" id="homeSearch" placeholder="QIDIRISH..." oninput="homeSearch(this.value)">
+      </div>
+    </div>
+
     <div class="posts-grid" id="homeGrid">
       <div style="grid-column:1/-1;text-align:center;padding:3rem"><div class="spinner"></div></div>
     </div>
+
     <div style="text-align:center;margin-top:2.5rem">
-      <a href="news.html" class="btn btn-ghost btn-lg">Barcha yangiliklar →</a>
+      <a href="news.html" class="btn btn-ghost btn-lg">◈ Barcha yangiliklar</a>
     </div>
   </div>
 </section>
 
-<!-- ── ABOUT PREVIEW ── -->
-<section class="section" style="background:rgba(0,5,15,0.5);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<!-- ── SCHOOLS SECTION ── -->
+<section class="section" style="background:rgba(0,5,15,0.6);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
   <div class="container">
-    <div class="about-split">
-      <div>
-        <div class="sec-tag" style="margin-bottom:1rem">◈ BIZ HAQIMIZDA</div>
-        <h2 class="sec-title" style="text-align:left;margin-bottom:1.2rem">
-          Kelajak avlod uchun<br><span class="highlight">sifatli ta'lim</span>
-        </h2>
-        <p style="color:var(--txt2);line-height:1.8;margin-bottom:1rem;font-size:0.95rem">
-          Qamashi tumani ixtisoslashtirilgan maktabi 2023-yilda tashkil topgan. 11 sinfda 264 nafar iqtidorli o'quvchiga 46 nafar malakali pedagog ta'lim beradi.
-        </p>
-        <p style="color:var(--txt3);line-height:1.8;margin-bottom:2rem;font-size:0.9rem">
-          Chuqurlashtirilgan o'quv dasturlari, zamonaviy laboratoriya va to'garaklar orqali har bir o'quvchining salohiyati to'liq ro'yobga chiqariladi.
-        </p>
-        <div class="feat-list">
-          <div class="feat-item">
-            <div class="feat-icon">🔬</div>
-            <div><h4>Ilmiy-amaliy ta'lim</h4><p>Nazariya va amaliyot birlashtirilgan innovatsion yondashuv</p></div>
-          </div>
-          <div class="feat-item">
-            <div class="feat-icon">🌟</div>
-            <div><h4>Olimpiada g'oliblari</h4><p>Viloyat va respublika musobaqalarida muttasil yutuqlar</p></div>
-          </div>
-          <div class="feat-item">
-            <div class="feat-icon">💡</div>
-            <div><h4>Innovatsion muhit</h4><p>Zamonaviy darsxona, laboratoriya va raqamli resurslar</p></div>
-          </div>
-        </div>
-        <div style="margin-top:2rem">
-          <a href="about.html" class="btn btn-primary">◈ Batafsil ma'lumot</a>
-        </div>
+    <div class="sec-header">
+      <div class="sec-tag">◈ PLATFORMADAGI MAKTABLAR</div>
+      <h2 class="sec-title">Ro'yxatdagi <span class="highlight">maktablar</span></h2>
+    </div>
+    <div class="schools-grid" id="schoolsGrid">
+      <div style="grid-column:1/-1;text-align:center"><div class="spinner"></div></div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem">
+      <a href="schools.html" class="btn btn-ghost btn-lg">◈ Barcha maktablar</a>
+      <button class="btn btn-primary btn-lg" style="margin-left:1rem" onclick="openAuth('school')">◈ Maktabni qo'shish</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section">
+  <div class="container">
+    <div class="sec-header">
+      <div class="sec-tag">◈ QANDAY ISHLAYDI</div>
+      <h2 class="sec-title">3 qadam — <span class="highlight">hammasi tayyor</span></h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-icon">🏫</div>
+        <h3>MAKTABNI RO'YXATDAN O'TKAZING</h3>
+        <p>Maktab ma'lumotlarini kiriting va admin hisob yarating. Bu bepul va tez.</p>
       </div>
-      <div class="about-img-wrap">
-        <img src="images/1.jpg" alt="Maktab" onerror="this.style.display='none'">
-        <div class="about-float-badge">
-          <div class="afb-num">46</div>
-          <div class="afb-text">Malakali<br>o'qituvchi</div>
-        </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-icon">✏️</div>
+        <h3>YANGILIKLAR JOYLASHTIRING</h3>
+        <p>Maktab nomidan yangiliklar, tadbirlar va yutuqlarni chop eting.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-icon">🌐</div>
+        <h3>BUTUN O'ZBEKISTON KO'RADI</h3>
+        <p>Yangiliklar umumiy lentada barcha tashrif buyuruvchilarga ko'rinadi.</p>
       </div>
     </div>
   </div>
@@ -216,68 +167,146 @@
     <div class="footer-grid">
       <div>
         <div style="display:flex;align-items:center;gap:11px;margin-bottom:.4rem">
-          <img src="images/logo.jpg" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:1px solid var(--border2);box-shadow:0 0 10px rgba(0,212,255,.2)" alt="logo">
-          <span style="color:var(--cyan);font-weight:700;font-size:.9rem;font-family:var(--font-hud);letter-spacing:.06em">QAMASHI IM</span>
+          <div class="platform-logo" style="width:38px;height:38px;font-size:1.2rem">◈</div>
+          <span style="color:var(--cyan);font-weight:700;font-size:.9rem;font-family:var(--font-hud);letter-spacing:.06em">EDU PLATFORM</span>
         </div>
-        <p class="footer-brand">Qamashi tumani ixtisoslashtirilgan maktabi — bilim va tarbiyaning manzili.</p>
+        <p class="footer-brand">O'zbekiston maktablari uchun birlashgan axborot platformasi. Barcha yangiliklar — bir joyda.</p>
         <div class="footer-socials">
-          <a href="https://t.me/AhrorAzamatovich" target="_blank" class="fsoc" title="Telegram">✈️</a>
-          <a href="https://instagram.com/AhrorAzamatovich" target="_blank" class="fsoc" title="Instagram">📸</a>
-          <a href="https://facebook.com/AhrorAzamatovich" target="_blank" class="fsoc" title="Facebook">👤</a>
-          <a href="https://youtube.com/@Ahror_Azamatovich" target="_blank" class="fsoc" title="YouTube">▶️</a>
+          <a href="#" class="fsoc">✈️</a>
+          <a href="#" class="fsoc">📸</a>
+          <a href="#" class="fsoc">▶️</a>
         </div>
       </div>
-      <div class="footer-col"><h4>Sahifalar</h4><ul class="footer-links">
+      <div class="footer-col"><h4>Platforma</h4><ul class="footer-links">
         <li><a href="index.html">◈ Bosh sahifa</a></li>
-        <li><a href="about.html">◈ Haqimizda</a></li>
         <li><a href="news.html">◈ Yangiliklar</a></li>
-        <li><a href="events.html">◈ Tadbirlar</a></li>
-        <li><a href="contact.html">◈ Bog'lanish</a></li>
+        <li><a href="schools.html">◈ Maktablar</a></li>
+        <li><a href="about.html">◈ Haqida</a></li>
       </ul></div>
-      <div class="footer-col"><h4>Yangiliklar</h4><ul class="footer-links">
+      <div class="footer-col"><h4>Maktablar</h4><ul class="footer-links" id="footerSchools">
+        <li><a href="schools.html">◈ Barcha maktablar</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Kategoriyalar</h4><ul class="footer-links">
         <li><a href="news.html?cat=yangilik">◈ Yangiliklar</a></li>
         <li><a href="news.html?cat=tadbir">◈ Tadbirlar</a></li>
         <li><a href="news.html?cat=sport">◈ Sport</a></li>
         <li><a href="news.html?cat=fan">◈ Fan</a></li>
         <li><a href="news.html?cat=madaniyat">◈ Madaniyat</a></li>
       </ul></div>
-      <div class="footer-col"><h4>Aloqa</h4><ul class="footer-links">
-        <li><a href="#">◈ Qamashi, Qashqadaryo</a></li>
-        <li><a href="mailto:info@qamashiim.uz">◈ info@qamashiim.uz</a></li>
-        <li><a href="tel:+998901234567">◈ +998 90 123 45 67</a></li>
-        <li><a href="#">◈ Dush–Juma: 08:00–17:00</a></li>
-      </ul></div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 Qamashi Ixtisoslashtirilgan Maktabi. Barcha huquqlar himoyalangan.</p>
-      <p>BILIM — ENG BUYUK BOYLIK ◈</p>
+      <p>© 2025 O'zbekiston Maktablari Platformasi. Barcha huquqlar himoyalangan.</p>
+      <p>TA'LIM — KELAJAK POYDEVORI ◈</p>
     </div>
   </div>
 </footer>
 
-<button id="scrollTopBtn" onclick="scrollTop()" aria-label="Yuqoriga">↑</button>
+<button id="scrollTopBtn" onclick="scrollTop()">↑</button>
 <div id="toastRoot"></div>
-
-<script src="app.js"></script>
+<script src="platform.js"></script>
 <script src="jarvis.js"></script>
 <script>
+let homeCat = 'all', homeQ = '';
+
 document.addEventListener('DOMContentLoaded', () => {
-  const posts = getPosts();
-  document.getElementById('cntP').textContent = posts.length;
+  const schools = getSchools();
+  const posts   = getPosts();
+  const users   = getUsers();
+
+  // Hero stats counter
+  [['cntSchools', schools.length], ['cntPosts', posts.length], ['cntUsers', users.length]].forEach(([id, t]) => {
+    const el = document.getElementById(id); if (!el) return;
+    let n = 0; const step = Math.max(1, Math.ceil(t / 50));
+    const tm = setInterval(() => { n = Math.min(n + step, t); el.textContent = n; if (n >= t) clearInterval(tm); }, 25);
+  });
+
+  // Stats bar
+  const totalViews = posts.reduce((a, p) => a + (p.views||0), 0);
+  const totalStudents = schools.reduce((a, s) => a + (s.students||0), 0);
+  animNum('st1', schools.length);
+  animNum('st2', posts.length);
+  animNum('st3', totalViews);
+  animNum('st4', totalStudents);
+
+  // HUD panel — live schools
+  const panel = document.getElementById('liveSchoolsPanel');
+  if (panel) {
+    panel.innerHTML = schools.slice(0, 5).map(sc => {
+      const scPosts = posts.filter(p => p.schoolId === sc.id);
+      return `<div class="hud-item" onclick="location.href='school.html?id=${sc.id}'" style="cursor:pointer">
+        <div class="hud-item-icon">${sc.verified ? '✅' : '🏫'}</div>
+        <span class="hud-item-text">${esc(sc.shortName)}</span>
+        <div style="margin-left:auto;font-family:var(--font-hud);font-size:.68rem;color:var(--cyan)">${scPosts.length} yangilik</div>
+      </div>`;
+    }).join('');
+  }
+
+  // Schools grid
+  const sg = document.getElementById('schoolsGrid');
+  if (sg) {
+    sg.innerHTML = schools.map((sc, i) => renderSchoolCard(sc, i * 0.07)).join('');
+  }
+
+  // Footer schools
+  const fs = document.getElementById('footerSchools');
+  if (fs) fs.innerHTML = schools.map(sc => `<li><a href="school.html?id=${sc.id}">◈ ${esc(sc.shortName)}</a></li>`).join('');
+
+  renderHome();
+});
+
+function animNum(id, target) {
+  const el = document.getElementById(id); if (!el) return;
+  let n = 0; const step = Math.max(1, Math.ceil(target / 60));
+  const tm = setInterval(() => { n = Math.min(n + step, target); el.textContent = n.toLocaleString(); if (n >= target) clearInterval(tm); }, 20);
+}
+
+function homeFilter(btn, cat) {
+  homeCat = cat;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  renderHome();
+}
+function homeSearch(q) { homeQ = q.toLowerCase().trim(); renderHome(); }
+
+function renderHome() {
+  let posts = getPosts();
+  if (homeCat !== 'all') posts = posts.filter(p => p.category === homeCat);
+  if (homeQ) posts = posts.filter(p => p.title.toLowerCase().includes(homeQ) || p.schoolName?.toLowerCase().includes(homeQ));
   const grid = document.getElementById('homeGrid');
   if (!posts.length) {
-    grid.innerHTML = `<div class="empty-state"><div class="empty-icon">📭</div><h3>YANGILIK YO'Q</h3><p>Birinchi yangilikni siz joylashingiz mumkin!</p><button class="btn btn-primary" onclick="openAuth('register')">Qo'shilish</button></div>`;
+    grid.innerHTML = `<div class="empty-state"><div class="empty-icon">◈</div><h3>YANGILIK TOPILMADI</h3><p>Boshqa filtr yoki qidiruv sinab ko'ring</p></div>`;
   } else {
-    grid.innerHTML = posts.slice(0,3).map((p,i) => renderCard(p, i * 0.08)).join('');
+    grid.innerHTML = posts.slice(0, 6).map((p, i) => renderCard(p, i * 0.07)).join('');
   }
-  // counter animation
-  [['cntS',264],['cntT',46],['cntC',11]].forEach(([id,target]) => {
-    const el = document.getElementById(id); if (!el) return;
-    let n = 0;
-    const step = Math.ceil(target / 50);
-    const tm = setInterval(() => { n = Math.min(n + step, target); el.textContent = n; if (n >= target) clearInterval(tm); }, 25);
-  });
-});
+}
+
+function renderSchoolCard(sc, delay = 0) {
+  const posts = getPosts().filter(p => p.schoolId === sc.id);
+  const color = sc.coverColor || '#00d4ff';
+  return `
+  <div class="school-card" style="animation-delay:${delay}s;--sc-color:${color}" onclick="location.href='school.html?id=${sc.id}'">
+    <div class="sc-header">
+      <div class="sc-logo-wrap">
+        ${sc.logoUrl ? `<img src="${esc(sc.logoUrl)}" class="sc-logo" alt="${esc(sc.shortName)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="sc-logo-fallback" style="display:none">${sc.shortName.slice(0,2).toUpperCase()}</div>`
+        : `<div class="sc-logo-fallback">${sc.shortName.slice(0,2).toUpperCase()}</div>`}
+      </div>
+      <div>
+        <div class="sc-name">${esc(sc.shortName)}</div>
+        <div class="sc-region">${esc(sc.region)}</div>
+      </div>
+      ${sc.verified ? '<div class="sc-verified" title="Tasdiqlangan">✅</div>' : ''}
+    </div>
+    <div class="sc-type-badge">${schoolTypeName(sc.type)}</div>
+    <div class="sc-stats">
+      <div class="sc-stat"><div class="sc-stat-n">${sc.students||'—'}</div><div class="sc-stat-l">O'quvchi</div></div>
+      <div class="sc-stat"><div class="sc-stat-n">${sc.teachers||'—'}</div><div class="sc-stat-l">Hodim</div></div>
+      <div class="sc-stat"><div class="sc-stat-n">${posts.length}</div><div class="sc-stat-l">Yangilik</div></div>
+    </div>
+  </div>`;
+}
+
+function schoolTypeName(t) { return {umumiy:"Umumta'lim",ixtisoslashtirilgan:'Ixtisoslashtirilgan',prezident:'Prezident',innovatsion:'Innovatsion'}[t]||t; }
 </script>
 </body>
 </html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Maktab profili — Edu Platform</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas id="jarvisCanvas"></canvas>
+<nav class="navbar" id="mainNav">
+  <a href="index.html" class="navbar-brand">
+    <div class="platform-logo">◈</div>
+    <div class="navbar-title"><span>EDU PLATFORM</span><span>O'zbekiston Maktablari</span></div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">◈ Bosh sahifa</a></li>
+    <li><a href="news.html">◈ Yangiliklar</a></li>
+    <li><a href="schools.html">◈ Maktablar</a></li>
+    <li><a href="about.html">◈ Platforma haqida</a></li>
+  </ul>
+  <div class="nav-actions" id="navAuth">
+    <button class="btn btn-ghost btn-sm" onclick="openAuth('login')">Kirish</button>
+    <button class="btn btn-primary btn-sm" onclick="openAuth('register')">Ro'yxatdan o'tish</button>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- School Hero -->
+<div id="schoolHero" class="school-hero">
+  <div class="container">
+    <div class="sh-content" id="shContent">
+      <div style="text-align:center;padding:3rem"><div class="spinner"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-bar" id="schoolStatsBar" style="display:none">
+  <div class="container">
+    <div class="stats-grid" id="schoolStatsGrid"></div>
+  </div>
+</div>
+
+<!-- Posts -->
+<section class="section">
+  <div class="container">
+
+    <!-- Write banner -->
+    <div class="write-banner" id="writeBanner" style="display:none">
+      <div>
+        <h4>◈ MAKTAB NOMIDAN YANGILIK JOYLASHTIRISH</h4>
+        <p>Siz bu maktabning admini sifatida yangiliklar yoza olasiz</p>
+      </div>
+      <button class="btn btn-primary" onclick="openPostEditor()">◈ Yangilik yozish</button>
+    </div>
+
+    <div class="sec-header" style="text-align:left;margin-bottom:2rem">
+      <div class="sec-tag" id="schoolPostsLabel">◈ MAKTAB YANGILIKLARI</div>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-row" style="margin-bottom:2rem">
+      <button class="filter-chip active" data-cat="all" onclick="scFilter(this,'all')">◈ Hammasi</button>
+      <button class="filter-chip" data-cat="yangilik" onclick="scFilter(this,'yangilik')">◈ Yangilik</button>
+      <button class="filter-chip" data-cat="tadbir" onclick="scFilter(this,'tadbir')">◈ Tadbir</button>
+      <button class="filter-chip" data-cat="sport" onclick="scFilter(this,'sport')">◈ Sport</button>
+      <button class="filter-chip" data-cat="fan" onclick="scFilter(this,'fan')">◈ Fan</button>
+      <button class="filter-chip" data-cat="madaniyat" onclick="scFilter(this,'madaniyat')">◈ Madaniyat</button>
+    </div>
+
+    <div class="posts-grid" id="schoolPostsGrid">
+      <div style="grid-column:1/-1;text-align:center"><div class="spinner"></div></div>
+    </div>
+
+    <div style="text-align:center;margin-top:2rem">
+      <button class="btn btn-ghost btn-lg" id="scLoadMore" onclick="scLoadMore()" style="display:none">◈ Ko'proq ko'rsatish</button>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:.4rem">
+          <div class="platform-logo" style="width:38px;height:38px;font-size:1.2rem">◈</div>
+          <span style="color:var(--cyan);font-weight:700;font-size:.9rem;font-family:var(--font-hud);letter-spacing:.06em">EDU PLATFORM</span>
+        </div>
+        <p class="footer-brand">O'zbekiston maktablari uchun birlashgan axborot platformasi.</p>
+      </div>
+      <div class="footer-col"><h4>Platforma</h4><ul class="footer-links">
+        <li><a href="index.html">◈ Bosh sahifa</a></li>
+        <li><a href="news.html">◈ Barcha yangiliklar</a></li>
+        <li><a href="schools.html">◈ Barcha maktablar</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 O'zbekiston Maktablari Platformasi.</p><p>TA'LIM — KELAJAK POYDEVORI ◈</p></div>
+  </div>
+</footer>
+
+<button id="scrollTopBtn" onclick="scrollTop()">↑</button>
+<div id="toastRoot"></div>
+<script src="platform.js"></script>
+<script src="jarvis.js"></script>
+<script>
+const schoolId = new URLSearchParams(location.search).get('id');
+let scCat = 'all', scPage = 1;
+const SC_PAGE = 9;
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (!schoolId) { location.href = 'schools.html'; return; }
+  const sc = getSchoolById(schoolId);
+  if (!sc) { location.href = 'schools.html'; return; }
+
+  document.title = sc.name + ' — Edu Platform';
+
+  // Render hero
+  const hero = document.getElementById('shContent');
+  const color = sc.coverColor || '#00d4ff';
+  hero.innerHTML = `
+    <div class="school-profile-header" style="--sc-color:${color}">
+      <div class="sph-logo-wrap">
+        ${sc.logoUrl ? `<img src="${esc(sc.logoUrl)}" class="sph-logo" alt="${esc(sc.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="sph-logo-fb" style="display:none">${sc.shortName.slice(0,2).toUpperCase()}</div>`
+        : `<div class="sph-logo-fb">${sc.shortName.slice(0,2).toUpperCase()}</div>`}
+      </div>
+      <div class="sph-info">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:.4rem">
+          <div class="sec-tag" style="margin-bottom:0;font-size:.68rem">${schoolTypeName(sc.type)}</div>
+          ${sc.verified ? '<span style="font-size:.72rem;background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.3);color:var(--green);padding:2px 9px;border-radius:var(--r-xs);font-family:var(--font-hud);font-weight:700;letter-spacing:.05em">✅ TASDIQLANGAN</span>' : ''}
+        </div>
+        <h1 style="font-family:var(--font-hud);font-size:clamp(1.2rem,3vw,2rem);font-weight:800;color:#fff;margin-bottom:.4rem;line-height:1.2">${esc(sc.name)}</h1>
+        <p style="color:rgba(255,255,255,.6);font-size:.88rem;margin-bottom:.6rem">📍 ${esc(sc.region)}, ${esc(sc.district)}</p>
+        ${sc.about ? `<p style="color:rgba(255,255,255,.7);font-size:.88rem;line-height:1.7;max-width:600px">${esc(sc.about)}</p>` : ''}
+        <div style="display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.2rem">
+          ${sc.phone ? `<a href="tel:${esc(sc.phone)}" style="display:flex;align-items:center;gap:5px;font-size:.78rem;color:rgba(255,255,255,.6);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);padding:5px 12px;border-radius:var(--r-xs);text-decoration:none">📞 ${esc(sc.phone)}</a>` : ''}
+          ${sc.email ? `<a href="mailto:${esc(sc.email)}" style="display:flex;align-items:center;gap:5px;font-size:.78rem;color:rgba(255,255,255,.6);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);padding:5px 12px;border-radius:var(--r-xs);text-decoration:none">📧 ${esc(sc.email)}</a>` : ''}
+          <span style="display:flex;align-items:center;gap:5px;font-size:.78rem;color:rgba(255,255,255,.6);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);padding:5px 12px;border-radius:var(--r-xs)">📅 ${sc.founded || '—'}-yil tashkil etilgan</span>
+        </div>
+      </div>
+    </div>`;
+
+  // Stats bar
+  const sbar = document.getElementById('schoolStatsBar');
+  const sgrid = document.getElementById('schoolStatsGrid');
+  const posts = getPosts().filter(p => p.schoolId === schoolId);
+  if (sbar && sgrid) {
+    sbar.style.display = 'block';
+    sgrid.innerHTML = `
+      <div class="stat-item"><div class="stat-icon">👨‍🎓</div><div class="stat-num">${sc.students||'—'}</div><div class="stat-label">O'quvchilar</div></div>
+      <div class="stat-item"><div class="stat-icon">👨‍🏫</div><div class="stat-num">${sc.teachers||'—'}</div><div class="stat-label">Hodimlar</div></div>
+      <div class="stat-item"><div class="stat-icon">🏫</div><div class="stat-num">${sc.classes||'—'}</div><div class="stat-label">Sinflar</div></div>
+      <div class="stat-item"><div class="stat-icon">📰</div><div class="stat-num">${posts.length}</div><div class="stat-label">Yangiliklar</div></div>`;
+  }
+
+  // Label
+  const lbl = document.getElementById('schoolPostsLabel');
+  if (lbl) lbl.textContent = `◈ ${sc.shortName.toUpperCase()} YANGILIKLARI`;
+
+  // Write banner
+  const s = getSession();
+  const wb = document.getElementById('writeBanner');
+  if (wb && s && (s.role === 'superadmin' || (s.role === 'school_admin' && s.schoolId === schoolId))) {
+    wb.style.display = 'flex';
+  }
+
+  renderScPosts();
+});
+
+function scFilter(btn, cat) {
+  scCat = cat; scPage = 1;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  renderScPosts();
+}
+
+function renderScPosts() {
+  let posts = getPosts().filter(p => p.schoolId === schoolId);
+  if (scCat !== 'all') posts = posts.filter(p => p.category === scCat);
+  const grid = document.getElementById('schoolPostsGrid');
+  const btn = document.getElementById('scLoadMore');
+  const shown = posts.slice(0, scPage * SC_PAGE);
+  if (!posts.length) {
+    grid.innerHTML = `<div class="empty-state"><div class="empty-icon">📭</div><h3>YANGILIK YO'Q</h3><p>Bu maktab hali yangilik joylashtirmagan.</p></div>`;
+    if (btn) btn.style.display = 'none'; return;
+  }
+  grid.innerHTML = shown.map((p, i) => renderCard(p, (i % SC_PAGE) * 0.05)).join('');
+  if (btn) btn.style.display = posts.length > shown.length ? 'inline-flex' : 'none';
+}
+
+function scLoadMore() {
+  scPage++;
+  renderScPosts();
+}
+
+function schoolTypeName(t) { return {umumiy:"Umumta'lim",ixtisoslashtirilgan:'Ixtisoslashtirilgan',prezident:'Prezident',innovatsion:'Innovatsion'}[t]||t; }
+</script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Maktablar — Edu Platform</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas id="jarvisCanvas"></canvas>
+<nav class="navbar" id="mainNav">
+  <a href="index.html" class="navbar-brand">
+    <div class="platform-logo">◈</div>
+    <div class="navbar-title"><span>EDU PLATFORM</span><span>O'zbekiston Maktablari</span></div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">◈ Bosh sahifa</a></li>
+    <li><a href="news.html">◈ Yangiliklar</a></li>
+    <li><a href="schools.html" class="active">◈ Maktablar</a></li>
+    <li><a href="about.html">◈ Platforma haqida</a></li>
+  </ul>
+  <div class="nav-actions" id="navAuth">
+    <button class="btn btn-ghost btn-sm" onclick="openAuth('login')">Kirish</button>
+    <button class="btn btn-primary btn-sm" onclick="openAuth('register')">Ro'yxatdan o'tish</button>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-banner">
+  <div class="container">
+    <h1>◈ MAKTABLAR</h1>
+    <p>Platformaga qo'shilgan barcha maktablar va ularning yangiliklari</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Add school banner -->
+    <div class="write-banner" style="margin-bottom:2.5rem">
+      <div>
+        <h4>◈ MAKTABINGIZNI QO'SHISH</h4>
+        <p>Maktabingizni ro'yxatdan o'tkazing va yangiliklar joylashtirishni boshlang — bepul va tez!</p>
+      </div>
+      <button class="btn btn-gold" onclick="openAuth('school')">◈ Maktab qo'shish</button>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-row" style="margin-bottom:2rem">
+      <button class="filter-chip active" data-ft="all" onclick="filterSchools(this,'all')">◈ Barchasi</button>
+      <button class="filter-chip" data-ft="umumiy" onclick="filterSchools(this,'umumiy')">◈ Umumta'lim</button>
+      <button class="filter-chip" data-ft="ixtisoslashtirilgan" onclick="filterSchools(this,'ixtisoslashtirilgan')">◈ Ixtisoslashtirilgan</button>
+      <button class="filter-chip" data-ft="prezident" onclick="filterSchools(this,'prezident')">◈ Prezident</button>
+      <button class="filter-chip" data-ft="innovatsion" onclick="filterSchools(this,'innovatsion')">◈ Innovatsion</button>
+      <div class="search-wrap">
+        <i class="s-icon">◎</i>
+        <input type="text" class="search-input" id="schoolSearch" placeholder="MAKTAB QIDIRISH..." oninput="searchSchools(this.value)">
+      </div>
+    </div>
+
+    <div class="schools-grid" id="schoolsGrid">
+      <div style="grid-column:1/-1;text-align:center"><div class="spinner"></div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:.4rem">
+          <div class="platform-logo" style="width:38px;height:38px;font-size:1.2rem">◈</div>
+          <span style="color:var(--cyan);font-weight:700;font-size:.9rem;font-family:var(--font-hud);letter-spacing:.06em">EDU PLATFORM</span>
+        </div>
+        <p class="footer-brand">O'zbekiston maktablari uchun birlashgan axborot platformasi.</p>
+      </div>
+      <div class="footer-col"><h4>Platforma</h4><ul class="footer-links">
+        <li><a href="index.html">◈ Bosh sahifa</a></li>
+        <li><a href="news.html">◈ Yangiliklar</a></li>
+        <li><a href="schools.html">◈ Maktablar</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 O'zbekiston Maktablari Platformasi.</p><p>TA'LIM — KELAJAK POYDEVORI ◈</p></div>
+  </div>
+</footer>
+
+<button id="scrollTopBtn" onclick="scrollTop()">↑</button>
+<div id="toastRoot"></div>
+<script src="platform.js"></script>
+<script src="jarvis.js"></script>
+<script>
+let curType = 'all', curQ = '';
+
+document.addEventListener('DOMContentLoaded', renderSchoolsList);
+
+function filterSchools(btn, type) {
+  curType = type;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  renderSchoolsList();
+}
+function searchSchools(q) { curQ = q.toLowerCase(); renderSchoolsList(); }
+
+function renderSchoolsList() {
+  let schools = getSchools();
+  if (curType !== 'all') schools = schools.filter(s => s.type === curType);
+  if (curQ) schools = schools.filter(s => s.name.toLowerCase().includes(curQ) || s.region.toLowerCase().includes(curQ) || s.district.toLowerCase().includes(curQ));
+  const grid = document.getElementById('schoolsGrid');
+  if (!schools.length) {
+    grid.innerHTML = `<div class="empty-state"><div class="empty-icon">🏫</div><h3>MAKTAB TOPILMADI</h3><p>Boshqa filtr sinab ko'ring</p><button class="btn btn-gold" onclick="openAuth('school')">◈ Maktab qo'shish</button></div>`;
+    return;
+  }
+  grid.innerHTML = schools.map((sc, i) => renderSchoolCard(sc, i * 0.06)).join('');
+}
+
+function renderSchoolCard(sc, delay = 0) {
+  const posts = getPosts().filter(p => p.schoolId === sc.id);
+  const color = sc.coverColor || '#00d4ff';
+  return `
+  <div class="school-card" style="animation-delay:${delay}s;--sc-color:${color}" onclick="location.href='school.html?id=${sc.id}'">
+    <div class="sc-header">
+      <div class="sc-logo-wrap">
+        ${sc.logoUrl ? `<img src="${esc(sc.logoUrl)}" class="sc-logo" alt="${esc(sc.shortName)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="sc-logo-fallback" style="display:none">${sc.shortName.slice(0,2).toUpperCase()}</div>`
+        : `<div class="sc-logo-fallback">${sc.shortName.slice(0,2).toUpperCase()}</div>`}
+      </div>
+      <div style="flex:1;min-width:0">
+        <div class="sc-name">${esc(sc.shortName)}</div>
+        <div class="sc-region">${esc(sc.region)} · ${esc(sc.district)}</div>
+      </div>
+      ${sc.verified ? '<div class="sc-verified" title="Tasdiqlangan">✅</div>' : ''}
+    </div>
+    <div class="sc-type-badge">${schoolTypeName(sc.type)}</div>
+    ${sc.about ? `<p style="font-size:.8rem;color:var(--txt3);line-height:1.6;margin-bottom:1rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${esc(sc.about)}</p>` : ''}
+    <div class="sc-stats">
+      <div class="sc-stat"><div class="sc-stat-n">${sc.students||'—'}</div><div class="sc-stat-l">O'quvchi</div></div>
+      <div class="sc-stat"><div class="sc-stat-n">${sc.teachers||'—'}</div><div class="sc-stat-l">Hodim</div></div>
+      <div class="sc-stat"><div class="sc-stat-n">${sc.classes||'—'}</div><div class="sc-stat-l">Sinf</div></div>
+      <div class="sc-stat"><div class="sc-stat-n">${posts.length}</div><div class="sc-stat-l">Yangilik</div></div>
+    </div>
+    <div style="display:flex;gap:6px;margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--border)">
+      <span onclick="event.stopPropagation();location.href='school.html?id=${sc.id}'" class="btn btn-ghost btn-sm" style="flex:1;justify-content:center">◈ Profil</span>
+      <span onclick="event.stopPropagation();location.href='news.html?school=${sc.id}'" class="btn btn-ghost btn-sm" style="flex:1;justify-content:center">◈ Yangiliklar</span>
+    </div>
+  </div>`;
+}
+function schoolTypeName(t) { return {umumiy:"Umumta'lim",ixtisoslashtirilgan:'Ixtisoslashtirilgan',prezident:'Prezident',innovatsion:'Innovatsion'}[t]||t; }
+</script>
+</body>
+</html>
