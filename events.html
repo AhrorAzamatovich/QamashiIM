@@ -2,229 +2,131 @@
 <html lang="uz">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Tadbirlar — Qamashi IM</title>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<nav class="navbar" id="navbar">
+<nav class="navbar" id="mainNav">
   <a href="index.html" class="navbar-brand">
-    <img src="images/logo.jpg" alt="Logo" class="navbar-logo">
-    <div class="navbar-title">
-      <span>Qamashi IM</span>
-      <span>Ixtisoslashtirilgan Maktab</span>
-    </div>
+    <img src="images/logo.jpg" alt="QamashiIM" class="navbar-logo">
+    <div class="navbar-title"><span>Qamashi IM</span><span>Ixtisoslashtirilgan Maktab</span></div>
   </a>
-  <ul class="navbar-links" id="navLinks">
+  <ul class="nav-links" id="navLinks">
     <li><a href="index.html">🏠 Bosh sahifa</a></li>
     <li><a href="about.html">ℹ️ Haqimizda</a></li>
     <li><a href="news.html">📰 Yangiliklar</a></li>
     <li><a href="events.html" class="active">🎯 Tadbirlar</a></li>
     <li><a href="contact.html">📞 Bog'lanish</a></li>
   </ul>
-  <div class="navbar-auth" id="navAuth">
-    <button class="btn btn-outline btn-sm" onclick="openAuthModal('login')">Kirish</button>
-    <button class="btn btn-primary btn-sm" onclick="openAuthModal('register')">Ro'yxatdan o'tish</button>
-  </div>
+  <div class="nav-actions" id="navAuth"></div>
   <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="page-hero">
+<div class="page-banner">
   <div class="container">
     <h1>🎯 Tadbirlar</h1>
-    <p>Maktabimizdagi kelgusi va o'tgan tadbirlar</p>
+    <p>Rejalashtirilgan va o'tkazilgan tadbirlar haqida</p>
   </div>
 </div>
 
 <section class="section">
   <div class="container">
-    <!-- Upcoming events -->
-    <div class="section-header" style="text-align:left;margin-bottom:2rem">
-      <div class="section-tag">📅 Kelgusi tadbirlar</div>
-      <h2 class="section-title">Rejalashtirilgan tadbirlar</h2>
-    </div>
 
-    <div class="events-list" style="margin-bottom:4rem">
-      <div class="event-card">
-        <div class="event-date-box">
-          <div class="day">15</div>
-          <div class="month">Nov</div>
-        </div>
-        <div class="event-content">
-          <h3>Matematika olimpiadasi</h3>
-          <p>Maktab ichki matematika olimpiadasi 7–11-sinf o'quvchilari uchun o'tkaziladi. G'oliblar viloyat bosqichiga tavsiya etiladi.</p>
-          <div class="event-badges">
-            <span class="news-tag fan">🔬 Fan</span>
-            <span class="news-tag" style="background:#ffe4e6;color:#9f1239">🕐 Soat 9:00</span>
+    <!-- Upcoming -->
+    <div style="margin-bottom:3.5rem">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.5rem">
+        <div class="sec-tag" style="margin-bottom:0">📅 Kelgusi tadbirlar</div>
+        <div style="height:1px;flex:1;background:var(--border)"></div>
+      </div>
+      <div class="events-stack">
+        <div class="event-row">
+          <div class="ev-date"><div class="day">15</div><div class="mon">Nov</div></div>
+          <div class="ev-body">
+            <h3>Matematika olimpiadasi</h3>
+            <p>Maktab ichki matematika olimpiadasi 7–11-sinf o'quvchilari uchun. G'oliblar viloyat bosqichiga tavsiya etiladi.</p>
+            <div class="ev-chips"><span class="tag tag-fan">🔬 Fan</span><span style="font-size:.72rem;background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:99px;font-weight:700">🕐 09:00</span></div>
           </div>
         </div>
-      </div>
-
-      <div class="event-card">
-        <div class="event-date-box">
-          <div class="day">20</div>
-          <div class="month">Nov</div>
-        </div>
-        <div class="event-content">
-          <h3>Ona tili va adabiyot kechasi</h3>
-          <p>O'zbek tili va adabiyotiga bag'ishlangan adabiy-badiiy kecha. Barcha sinf o'quvchilari ishtirok etadi.</p>
-          <div class="event-badges">
-            <span class="news-tag madaniyat">🎭 Madaniyat</span>
-            <span class="news-tag" style="background:#ffe4e6;color:#9f1239">🕐 Soat 15:00</span>
+        <div class="event-row">
+          <div class="ev-date"><div class="day">20</div><div class="mon">Nov</div></div>
+          <div class="ev-body">
+            <h3>Ona tili va adabiyot kechasi</h3>
+            <p>O'zbek tili va adabiyotiga bag'ishlangan adabiy-badiiy kecha. Barcha sinf o'quvchilari ishtirok etadi.</p>
+            <div class="ev-chips"><span class="tag tag-madaniyat">🎭 Madaniyat</span><span style="font-size:.72rem;background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:99px;font-weight:700">🕐 15:00</span></div>
           </div>
         </div>
-      </div>
-
-      <div class="event-card">
-        <div class="event-date-box">
-          <div class="day">01</div>
-          <div class="month">Dec</div>
-        </div>
-        <div class="event-content">
-          <h3>Futbol turniri</h3>
-          <p>Sinf jamoalari o'rtasida futbol musobaqasi. Har sinfdan 7 nafar o'yinchi ishtirok etadi.</p>
-          <div class="event-badges">
-            <span class="news-tag sport">⚽ Sport</span>
-            <span class="news-tag" style="background:#ffe4e6;color:#9f1239">🕐 Soat 10:00</span>
+        <div class="event-row">
+          <div class="ev-date"><div class="day">01</div><div class="mon">Dec</div></div>
+          <div class="ev-body">
+            <h3>Maktablar oʼrtasida futbol turniri</h3>
+            <p>Sinf jamoalari o'rtasida futbol musobaqasi — har sinfdan 7 nafar o'yinchi qatnashadi.</p>
+            <div class="ev-chips"><span class="tag tag-sport">⚽ Sport</span><span style="font-size:.72rem;background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:99px;font-weight:700">🕐 10:00</span></div>
           </div>
         </div>
-      </div>
-
-      <div class="event-card">
-        <div class="event-date-box">
-          <div class="day">08</div>
-          <div class="month">Dec</div>
-        </div>
-        <div class="event-content">
-          <h3>Ota-onalar majlisi</h3>
-          <p>Birinchi chorak yakunlari bo'yicha umumiy ota-onalar majlisi. Barcha ota-onalar taklif etiladi.</p>
-          <div class="event-badges">
-            <span class="news-tag yangilik">📣 Yangilik</span>
-            <span class="news-tag" style="background:#ffe4e6;color:#9f1239">🕐 Soat 17:00</span>
+        <div class="event-row">
+          <div class="ev-date"><div class="day">08</div><div class="mon">Dec</div></div>
+          <div class="ev-body">
+            <h3>Umumiy ota-onalar majlisi</h3>
+            <p>I-chorak natijalari va II-chorak rejalari bo'yicha umumiy ota-onalar majlisi.</p>
+            <div class="ev-chips"><span class="tag tag-yangilik">📣 Yangilik</span><span style="font-size:.72rem;background:#fee2e2;color:#991b1b;padding:3px 10px;border-radius:99px;font-weight:700">🕐 17:00</span></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Past events -->
-    <div class="section-header" style="text-align:left;margin-bottom:2rem">
-      <div class="section-tag">✅ O'tgan tadbirlar</div>
-      <h2 class="section-title">Amalga oshirilgan tadbirlar</h2>
-    </div>
-
-    <div id="eventNewsGrid" class="news-grid">
-      <div style="grid-column:1/-1; text-align:center; padding:3rem">
-        <div class="spinner"></div>
+    <!-- Past events from posts -->
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.5rem">
+        <div class="sec-tag" style="margin-bottom:0">✅ O'tgan tadbirlar</div>
+        <div style="height:1px;flex:1;background:var(--border)"></div>
+        <a href="news.html?cat=tadbir" class="btn btn-ghost btn-sm">Barchasini ko'rish →</a>
+      </div>
+      <div class="posts-grid" id="evGrid">
+        <div style="grid-column:1/-1;text-align:center"><div class="spinner"></div></div>
       </div>
     </div>
 
-    <div style="text-align:center;margin-top:2rem">
-      <a href="news.html?cat=tadbir" class="btn btn-outline">Barcha tadbirlarni ko'rish →</a>
-    </div>
   </div>
 </section>
 
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:0.5rem">
-          <img src="images/logo.jpg" alt="logo" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.2)">
-          <span style="color:white;font-weight:700;font-size:1rem">Qamashi IM</span>
+      <div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:.4rem">
+          <img src="images/logo.jpg" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.15)" alt="logo">
+          <span style="color:#fff;font-weight:700;font-size:.95rem">Qamashi IM</span>
         </div>
-        <p>Qamashi tumani ixtisoslashtirilgan maktabi — bilim va tarbiyaning manzili.</p>
-        <div class="footer-social">
-          <a href="https://t.me/AhrorAzamatovich" target="_blank" class="social-btn">✈️</a>
-          <a href="https://instagram.com/AhrorAzamatovich" target="_blank" class="social-btn">📸</a>
-          <a href="https://facebook.com/AhrorAzamatovich" target="_blank" class="social-btn">👤</a>
-          <a href="https://youtube.com/@Ahror_Azamatovich" target="_blank" class="social-btn">▶️</a>
+        <p class="footer-brand">Qamashi tumani ixtisoslashtirilgan maktabi.</p>
+        <div class="footer-socials">
+          <a href="https://t.me/AhrorAzamatovich" target="_blank" class="fsoc">✈️</a>
+          <a href="https://instagram.com/AhrorAzamatovich" target="_blank" class="fsoc">📸</a>
         </div>
       </div>
-      <div class="footer-col">
-        <h4>Sahifalar</h4>
-        <ul class="footer-links">
-          <li><a href="index.html">🏠 Bosh sahifa</a></li>
-          <li><a href="about.html">ℹ️ Haqimizda</a></li>
-          <li><a href="news.html">📰 Yangiliklar</a></li>
-          <li><a href="events.html">🎯 Tadbirlar</a></li>
-          <li><a href="contact.html">📞 Bog'lanish</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Kategoriyalar</h4>
-        <ul class="footer-links">
-          <li><a href="news.html?cat=yangilik">📣 Yangiliklar</a></li>
-          <li><a href="news.html?cat=tadbir">🎉 Tadbirlar</a></li>
-          <li><a href="news.html?cat=sport">⚽ Sport</a></li>
-          <li><a href="news.html?cat=fan">🔬 Fan</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Bog'lanish</h4>
-        <ul class="footer-links">
-          <li><a href="#">📍 Qamashi tumani, Qashqadaryo</a></li>
-          <li><a href="mailto:info@qamashiim.uz">📧 info@qamashiim.uz</a></li>
-          <li><a href="tel:+998901234567">📞 +998 90 123 45 67</a></li>
-        </ul>
-      </div>
+      <div class="footer-col"><h4>Sahifalar</h4><ul class="footer-links">
+        <li><a href="index.html">🏠 Bosh sahifa</a></li><li><a href="news.html">📰 Yangiliklar</a></li>
+        <li><a href="events.html">🎯 Tadbirlar</a></li><li><a href="contact.html">📞 Bog'lanish</a></li>
+      </ul></div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2025 Qamashi Ixtisoslashtirilgan Maktabi. Barcha huquqlar himoyalangan.</p>
-    </div>
+    <div class="footer-bottom"><p>© 2025 Qamashi Ixtisoslashtirilgan Maktabi.</p></div>
   </div>
 </footer>
 
-<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
-<div class="modal-overlay" id="authModal">
-  <div class="modal">
-    <div class="modal-header">
-      <h2 id="authModalTitle">Kirish</h2>
-      <button class="modal-close" onclick="closeModal('authModal')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-tabs">
-        <button class="form-tab active" id="loginTab" onclick="switchAuthTab('login')">Kirish</button>
-        <button class="form-tab" id="registerTab" onclick="switchAuthTab('register')">Ro'yxatdan o'tish</button>
-      </div>
-      <div class="tab-content active" id="loginContent">
-        <div class="form-group"><label class="form-label">Username</label><input type="text" class="form-control" id="loginUsername" placeholder="username"></div>
-        <div class="form-group"><label class="form-label">Parol</label><input type="password" class="form-control" id="loginPassword" placeholder="Parol"></div>
-        <button class="btn btn-primary btn-block" onclick="handleLogin()">🔐 Kirish</button>
-      </div>
-      <div class="tab-content" id="registerContent">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-          <div class="form-group"><label class="form-label">Ism</label><input type="text" class="form-control" id="regFirstName" placeholder="Ism"></div>
-          <div class="form-group"><label class="form-label">Familiya</label><input type="text" class="form-control" id="regLastName" placeholder="Familiya"></div>
-        </div>
-        <div class="form-group"><label class="form-label">Username</label><input type="text" class="form-control" id="regUsername" placeholder="username"></div>
-        <div class="form-group"><label class="form-label">Rol</label><select class="form-control" id="regRole"><option value="student">O'quvchi</option><option value="teacher">O'qituvchi</option><option value="parent">Ota-ona</option><option value="staff">Xodim</option></select></div>
-        <div class="form-group"><label class="form-label">Parol</label><input type="password" class="form-control" id="regPassword" placeholder="Kamida 6 belgi"></div>
-        <button class="btn btn-success btn-block" onclick="handleRegister()">✅ Ro'yxatdan o'tish</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="toast-container" id="toastContainer"></div>
+<button id="scrollTopBtn" onclick="scrollTop()">↑</button>
+<div id="toastRoot"></div>
 <script src="app.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const posts = getPosts().filter(p => p.category === 'tadbir');
-    const grid = document.getElementById('eventNewsGrid');
-    if (posts.length === 0) {
-      grid.innerHTML = `<div style="grid-column:1/-1" class="empty-state">
-        <div class="empty-icon">🎉</div>
-        <h3>Hali tadbir yangiliklari yo'q</h3>
-        <p>Ro'yxatdan o'tib birinchi tadbir yangiligini joylashtiring!</p>
-        <button class="btn btn-primary" onclick="openAuthModal('register')">Ro'yxatdan o'tish</button>
-      </div>`;
-    } else {
-      grid.innerHTML = posts.slice(0,6).map((p,i) => renderNewsCard(p, i)).join('');
-    }
-  });
+document.addEventListener('DOMContentLoaded', () => {
+  const posts = getPosts().filter(p => p.category === 'tadbir');
+  const g = document.getElementById('evGrid');
+  if (!posts.length) {
+    g.innerHTML = `<div class="empty-state"><div class="empty-icon">🎉</div><h3>Hali tadbir yangiliklari yo'q</h3><p>Birinchi tadbir yangiligini siz yozing!</p><button class="btn btn-primary" onclick="openAuth('register')">Ro'yxatdan o'tish</button></div>`;
+  } else {
+    g.innerHTML = posts.slice(0, 6).map((p, i) => renderCard(p, i * 0.07)).join('');
+  }
+});
 </script>
 </body>
 </html>
