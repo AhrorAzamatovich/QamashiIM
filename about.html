@@ -2,140 +2,257 @@
 <html lang="uz">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Haqimizda — Qamashi IM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="O'zbekiston Maktablari Platformasi haqida — maqsad, imkoniyatlar va qanday qo'shilish mumkin.">
+  <meta property="og:title" content="Platforma haqida — Edu Platform">
+  <meta property="og:description" content="O'zbekiston Maktablari Platformasi — maktablar uchun bepul axborot va kommunikatsiya platformasi.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/logo.jpg">
+  <title>Platforma haqida — O'zbekiston Maktablari Platformasi</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<canvas id="jarvisCanvas"></canvas>
-<nav class="navbar" id="mainNav">
-  <a href="index.html" class="navbar-brand">
-    <img src="images/logo.jpg" alt="QIM" class="navbar-logo">
-    <div class="navbar-title"><span>QAMASHI IM</span><span>Ixtisoslashtirilgan Maktab</span></div>
+<canvas id="jarvisCanvas" aria-hidden="true"></canvas>
+
+<nav class="navbar" id="mainNav" role="navigation" aria-label="Asosiy navigatsiya">
+  <a href="index.html" class="navbar-brand" aria-label="Edu Platform — Bosh sahifa">
+    <div class="platform-logo" aria-hidden="true">◈</div>
+    <div class="navbar-title"><span>EDU PLATFORM</span><span>O'zbekiston Maktablari</span></div>
   </a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="index.html">◈ Bosh sahifa</a></li>
-    <li><a href="about.html" class="active">◈ Haqimizda</a></li>
-    <li><a href="news.html">◈ Yangiliklar</a></li>
-    <li><a href="events.html">◈ Tadbirlar</a></li>
-    <li><a href="contact.html">◈ Bog'lanish</a></li>
+  <ul class="nav-links" id="navLinks" role="list">
+    <li role="listitem"><a href="index.html">◈ Bosh sahifa</a></li>
+    <li role="listitem"><a href="news.html">◈ Yangiliklar</a></li>
+    <li role="listitem"><a href="schools.html">◈ Maktablar</a></li>
+    <li role="listitem"><a href="about.html" class="active" aria-current="page">◈ Platforma haqida</a></li>
   </ul>
   <div class="nav-actions" id="navAuth"></div>
-  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburger" aria-label="Menyuni ochish/yopish" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<div class="page-banner">
+<header class="page-banner">
   <div class="container">
-    <h1>◈ BIZ HAQIMIZDA</h1>
-    <p>Qamashi tumani ixtisoslashtirilgan maktabi — sifatli ta'lim va yorqin kelajak</p>
+    <h1>◈ PLATFORMA HAQIDA</h1>
+    <p>O'zbekiston Maktablari Platformasi — maqsad, imkoniyatlar va kelajak</p>
   </div>
-</div>
+</header>
 
+<!-- ── What is it ── -->
 <section class="section">
   <div class="container">
     <div class="about-split">
       <div>
-        <div class="sec-tag" style="margin-bottom:1rem">◈ 2023-YILDAN BERI</div>
-        <h2 class="sec-title" style="text-align:left;margin-bottom:1.3rem">Bilim va tarbiyaning<br><span class="highlight">zamonaviy markazi</span></h2>
-        <p style="color:var(--txt2);line-height:1.8;margin-bottom:1rem;font-size:.94rem">Qamashi tumani ixtisoslashtirilgan maktabi 2023-yilda tashkil topgan. 11 sinfda 264 nafar iqtidorli o'quvchiga 46 nafar malakali pedagog ta'lim beradi.</p>
-        <p style="color:var(--txt3);line-height:1.8;margin-bottom:2rem;font-size:.88rem">Har bir o'quvchining intellektual salohiyatini to'liq ro'yobga chiqarish, ularga mustaqil fikrlash ko'nikmalarini shakllantirish — asosiy maqsadimiz.</p>
+        <div class="sec-tag" style="margin-bottom:1rem">◈ EDU PLATFORM NIMA?</div>
+        <h2 class="sec-title" style="text-align:left;margin-bottom:1.3rem">
+          Barcha maktablar<br>uchun <span class="highlight">birlashgan platforma</span>
+        </h2>
+        <p style="color:var(--txt2);line-height:1.85;margin-bottom:1rem;font-size:.96rem">
+          <strong style="color:var(--cyan)">O'zbekiston Maktablari Platformasi</strong> — mamlakatimizning barcha maktablariga
+          o'z yangiliklari, yutuqlari va tadbirlarini butun O'zbekiston bilan ulashish imkonini beruvchi
+          bepul raqamli platforma.
+        </p>
+        <p style="color:var(--txt3);line-height:1.85;margin-bottom:2rem;font-size:.88rem">
+          Platforma maktablar o'rtasidagi axborot almashuvini osonlashtiradi, ota-onalar va
+          jamoatchilik maktab hayotidan xabardor bo'ladi, o'quvchilar o'z yutuqlarini namoyish qila oladi.
+        </p>
         <div class="feat-list">
-          <div class="feat-item"><div class="feat-icon">📚</div><div><h4>IXTISOSLASHTIRILGAN DASTUR</h4><p>Matematika, fizika, kimyo, biologiya chuqurlashtirilib o'qitiladi</p></div></div>
-          <div class="feat-item"><div class="feat-icon">🏆</div><div><h4>OLIMPIADA TAYYORGARLIGI</h4><p>Viloyat va respublika olimpiadalariga maqsadli tayyorgarlik</p></div></div>
-          <div class="feat-item"><div class="feat-icon">💡</div><div><h4>INNOVATSION MUHIT</h4><p>Zamonaviy darsxonalar, laboratoriya va raqamli resurslar</p></div></div>
-          <div class="feat-item"><div class="feat-icon">🌐</div><div><h4>XALQARO STANDARTLAR</h4><p>Xalqaro ta'lim talablariga javob beradigan sifat darajasi</p></div></div>
+          <div class="feat-item">
+            <div class="feat-icon" aria-hidden="true">🏫</div>
+            <div>
+              <h4>BARCHA MAKTABLAR UCHUN</h4>
+              <p>Umumta'lim, ixtisoslashtirilgan, prezident va innovatsion maktablar uchun yagona maydon.</p>
+            </div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon" aria-hidden="true">📣</div>
+            <div>
+              <h4>YANGILIKLAR VA TADBIRLAR</h4>
+              <p>Maktab nomidan yangilik, tadbir, sport va fan sohasidagi yutuqlarni chop eting.</p>
+            </div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon" aria-hidden="true">💬</div>
+            <div>
+              <h4>INTERAKTIV MUHIT</h4>
+              <p>Like va izohlar orqali jamoatchilik bilan to'g'ridan-to'g'ri muloqot.</p>
+            </div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon" aria-hidden="true">🔒</div>
+            <div>
+              <h4>BEPUL VA XAVFSIZ</h4>
+              <p>Platforma mutlaqo bepul. Ma'lumotlar faqat siz kiritgan maktab admini tomonidan boshqariladi.</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="about-img-wrap">
-        <img src="images/1.jpg" alt="Maktab" onerror="this.style.display='none'">
+        <img src="images/1.jpg" alt="Edu Platform vizuali" onerror="this.style.display='none'">
         <div class="about-float-badge">
-          <div class="afb-num">264</div>
-          <div class="afb-text">O'quvchi<br>jamoasi</div>
+          <div class="afb-num" id="schoolCount">0</div>
+          <div class="afb-text">Maktab<br>qo'shilgan</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="stats-bar">
+<!-- ── Stats ── -->
+<div class="stats-bar" aria-label="Platforma statistikasi">
   <div class="container">
     <div class="stats-grid">
-      <div class="stat-item"><div class="stat-icon">👨‍🎓</div><div class="stat-num">264</div><div class="stat-label">O'quvchilar</div></div>
-      <div class="stat-item"><div class="stat-icon">👨‍🏫</div><div class="stat-num">46</div><div class="stat-label">Hodimlar</div></div>
-      <div class="stat-item"><div class="stat-icon">🏫</div><div class="stat-num">11</div><div class="stat-label">Sinflar</div></div>
-      <div class="stat-item"><div class="stat-icon">🏅</div><div class="stat-num">50+</div><div class="stat-label">Yutuqlar</div></div>
+      <div class="stat-item"><div class="stat-icon" aria-hidden="true">🏫</div><div class="stat-num" id="stSchools">0</div><div class="stat-label">Maktablar</div></div>
+      <div class="stat-item"><div class="stat-icon" aria-hidden="true">📰</div><div class="stat-num" id="stPosts">0</div><div class="stat-label">Yangiliklar</div></div>
+      <div class="stat-item"><div class="stat-icon" aria-hidden="true">👁</div><div class="stat-num" id="stViews">0</div><div class="stat-label">Ko'rishlar</div></div>
+      <div class="stat-item"><div class="stat-icon" aria-hidden="true">👨‍🎓</div><div class="stat-num" id="stStudents">0</div><div class="stat-label">O'quvchilar</div></div>
     </div>
   </div>
 </div>
 
+<!-- ── How to join ── -->
 <section class="section">
   <div class="container">
     <div class="sec-header">
-      <div class="sec-tag">◈ MISSIYA VA QADRIYATLAR</div>
-      <h2 class="sec-title">Nima uchun <span class="highlight">biz?</span></h2>
+      <div class="sec-tag" aria-hidden="true">◈ QANDAY QO'SHILISH MUMKIN</div>
+      <h2 class="sec-title">3 oddiy qadam — <span class="highlight">tez va bepul</span></h2>
     </div>
-    <div class="values-grid">
-      <div class="value-card"><div class="vc-icon">🎯</div><h3>MISSIYA</h3><p>Har bir o'quvchiga sifatli ta'lim berish, iqtidorlarini kashf etib, kelajak avlodni yetishtirib chiqarish.</p></div>
-      <div class="value-card"><div class="vc-icon">👁️</div><h3>VIZYON</h3><p>O'zbekistonning eng nufuzli maktablaridan biriga aylanib, o'quvchilarni xalqaro raqobatbardosh kadrlarga tayyorlash.</p></div>
-      <div class="value-card"><div class="vc-icon">💎</div><h3>QADRIYATLAR</h3><p>Halollik, mehnatsevarlik, bilimga ishtiyoq, o'zaro hurmat va jamoaviy ruh — asosiy tamoyillarimiz.</p></div>
-      <div class="value-card"><div class="vc-icon">🌟</div><h3>MAQSAD</h3><p>Olimpiada g'oliblarini tayyorlash, o'quvchilarni respublika va xalqaro bosqichlarga olib chiqish.</p></div>
+    <div class="steps-grid">
+      <article class="step-card">
+        <div class="step-num" aria-hidden="true">01</div>
+        <div class="step-icon" aria-hidden="true">📝</div>
+        <h3>RO'YXATDAN O'TING</h3>
+        <p>Maktab nomi, manzili va aloqa ma'lumotlarini kiriting. Admin uchun username va parol yarating.</p>
+      </article>
+      <article class="step-card">
+        <div class="step-num" aria-hidden="true">02</div>
+        <div class="step-icon" aria-hidden="true">🔐</div>
+        <h3>ADMIN SIFATIDA KIRING</h3>
+        <p>Yaratilgan username va parol orqali tizimga kiring va maktab profilingizni to'ldiring.</p>
+      </article>
+      <article class="step-card">
+        <div class="step-num" aria-hidden="true">03</div>
+        <div class="step-icon" aria-hidden="true">🚀</div>
+        <h3>YANGILIKLAR JOYLASHTIRING</h3>
+        <p>Maktab nomidan yangiliklar, tadbirlar va yutuqlarni chop etishni boshlang.</p>
+      </article>
+    </div>
+    <div style="text-align:center;margin-top:3rem">
+      <button class="btn btn-primary btn-xl" id="joinCta">◈ Hoziroq Maktab Qo'shish</button>
     </div>
   </div>
 </section>
 
-<section class="section" style="padding-top:0">
+<!-- ── Features ── -->
+<section class="section" style="background:rgba(0,5,15,0.6);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
   <div class="container">
     <div class="sec-header">
-      <div class="sec-tag">◈ GALEREYA</div>
-      <h2 class="sec-title">Maktab hayotidan <span class="highlight">lavhalar</span></h2>
+      <div class="sec-tag" aria-hidden="true">◈ IMKONIYATLAR</div>
+      <h2 class="sec-title">Platform <span class="highlight">afzalliklari</span></h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem">
-      <div style="border-radius:var(--r);overflow:hidden;aspect-ratio:1;border:1px solid var(--border)"><img src="images/1.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.parentElement.style.background='rgba(0,212,255,0.05)'"></div>
-      <div style="border-radius:var(--r);overflow:hidden;aspect-ratio:1;border:1px solid var(--border)"><img src="images/2.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.parentElement.style.background='rgba(0,255,136,0.05)'"></div>
-      <div style="border-radius:var(--r);aspect-ratio:1;background:rgba(0,212,255,0.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:3rem">🏫</div>
-      <div style="border-radius:var(--r);aspect-ratio:1;background:rgba(255,165,0,0.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:3rem">🎓</div>
-      <div style="border-radius:var(--r);aspect-ratio:1;background:rgba(0,255,136,0.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:3rem">⚽</div>
-      <div style="border-radius:var(--r);aspect-ratio:1;background:rgba(180,142,255,0.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:3rem">🔬</div>
+    <div class="values-grid">
+      <article class="value-card">
+        <div class="vc-icon" aria-hidden="true">📣</div>
+        <h3>YANGILIKLAR LENTI</h3>
+        <p>Barcha maktablarning yangiliklari umumiy lentada ko'rinadi. Kategoriya, maktab va qidiruv filtrlari mavjud.</p>
+      </article>
+      <article class="value-card">
+        <div class="vc-icon" aria-hidden="true">🏆</div>
+        <h3>YUTUQLARNI ULASHING</h3>
+        <p>Olimpiadalar, sport musobaqalari, madaniy tadbirlar — barcha yutuqlarni platforma orqali e'lon qiling.</p>
+      </article>
+      <article class="value-card">
+        <div class="vc-icon" aria-hidden="true">💬</div>
+        <h3>IZOH VA MUHOKAMA</h3>
+        <p>O'quvchilar, o'qituvchilar va ota-onalar yangiliklarga izoh qoldirib, fikrlarini bildira oladi.</p>
+      </article>
+      <article class="value-card">
+        <div class="vc-icon" aria-hidden="true">📊</div>
+        <h3>STATISTIKA</h3>
+        <p>Ko'rishlar, like'lar va izohlar statistikasi orqali eng ko'p muloqot bo'layotgan yangiliklar ko'rinadi.</p>
+      </article>
+      <article class="value-card">
+        <div class="vc-icon" aria-hidden="true">🔍</div>
+        <h3>QIDIRUV VA FILTR</h3>
+        <p>Kategoriya, maktab va kalit so'z bo'yicha filtrlash — kerakli yangilikni topish oson.</p>
+      </article>
+      <article class="value-card">
+        <div class="vc-icon" aria-hidden="true">📱</div>
+        <h3>MOBIL QURILMALAR</h3>
+        <p>Platforma har qanday qurilmada — telefon, planshet va kompyuterda mukammal ishlaydi.</p>
+      </article>
     </div>
   </div>
 </section>
 
+<!-- ── Footer ── -->
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div>
         <div style="display:flex;align-items:center;gap:11px;margin-bottom:.4rem">
-          <img src="images/logo.jpg" style="width:38px;height:38px;border-radius:50%;object-fit:cover;border:1px solid var(--border2)" alt="logo">
-          <span style="color:var(--cyan);font-weight:700;font-size:.9rem;font-family:var(--font-hud);letter-spacing:.06em">QAMASHI IM</span>
+          <div class="platform-logo" style="width:38px;height:38px;font-size:1.2rem" aria-hidden="true">◈</div>
+          <span style="color:var(--cyan);font-weight:700;font-size:.9rem;font-family:var(--font-hud);letter-spacing:.06em">EDU PLATFORM</span>
         </div>
-        <p class="footer-brand">Qamashi tumani ixtisoslashtirilgan maktabi — bilim va tarbiyaning manzili.</p>
+        <p class="footer-brand">O'zbekiston maktablari uchun birlashgan axborot platformasi.</p>
         <div class="footer-socials">
-          <a href="https://t.me/AhrorAzamatovich" target="_blank" class="fsoc">✈️</a>
-          <a href="https://instagram.com/AhrorAzamatovich" target="_blank" class="fsoc">📸</a>
-          <a href="https://youtube.com/@Ahror_Azamatovich" target="_blank" class="fsoc">▶️</a>
+          <a href="https://t.me/" target="_blank" rel="noopener noreferrer" class="fsoc" aria-label="Telegram">✈️</a>
+          <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="fsoc" aria-label="Instagram">📸</a>
+          <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer" class="fsoc" aria-label="YouTube">▶️</a>
         </div>
       </div>
-      <div class="footer-col"><h4>Sahifalar</h4><ul class="footer-links">
-        <li><a href="index.html">◈ Bosh sahifa</a></li><li><a href="about.html">◈ Haqimizda</a></li>
-        <li><a href="news.html">◈ Yangiliklar</a></li><li><a href="events.html">◈ Tadbirlar</a></li>
+      <div class="footer-col"><h4>Platforma</h4><ul class="footer-links">
+        <li><a href="index.html">◈ Bosh sahifa</a></li>
+        <li><a href="news.html">◈ Yangiliklar</a></li>
+        <li><a href="schools.html">◈ Maktablar</a></li>
+        <li><a href="about.html">◈ Haqida</a></li>
         <li><a href="contact.html">◈ Bog'lanish</a></li>
       </ul></div>
-      <div class="footer-col"><h4>Raqamlar</h4><ul class="footer-links">
-        <li><a href="#">◈ 264 o'quvchi</a></li><li><a href="#">◈ 46 hodim</a></li>
-        <li><a href="#">◈ 11 sinf</a></li><li><a href="#">◈ 2023-yil</a></li>
-      </ul></div>
       <div class="footer-col"><h4>Aloqa</h4><ul class="footer-links">
-        <li><a href="#">◈ Qamashi, Qashqadaryo</a></li>
-        <li><a href="mailto:info@qamashiim.uz">◈ info@qamashiim.uz</a></li>
-        <li><a href="tel:+998901234567">◈ +998 90 123 45 67</a></li>
+        <li><a href="mailto:info@eduplatform.uz">◈ info@eduplatform.uz</a></li>
+        <li><a href="tel:+998712345678">◈ +998 71 234 56 78</a></li>
       </ul></div>
     </div>
-    <div class="footer-bottom"><p>© 2025 Qamashi Ixtisoslashtirilgan Maktabi.</p><p>BILIM — ENG BUYUK BOYLIK ◈</p></div>
+    <div class="footer-bottom">
+      <p>© 2025 O'zbekiston Maktablari Platformasi. Barcha huquqlar himoyalangan.</p>
+      <p>TA'LIM — KELAJAK POYDEVORI ◈</p>
+    </div>
   </div>
 </footer>
-<button id="scrollTopBtn" onclick="scrollTop()">↑</button>
-<div id="toastRoot"></div>
-<script src="app.js"></script>
+
+<button id="scrollTopBtn" onclick="scrollTop()" aria-label="Yuqoriga qaytish">↑</button>
+<div id="toastRoot" role="region" aria-live="polite" aria-label="Bildirishnomalar"></div>
+
+<script src="platform.js"></script>
 <script src="jarvis.js"></script>
+<script>
+'use strict';
+document.addEventListener('DOMContentLoaded', function() {
+  var schools = getSchools();
+  var posts   = getPosts();
+
+  // Animated counters
+  function animNum(id, n) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var cur = 0, step = Math.max(1, Math.ceil(n/60));
+    var t = setInterval(function() {
+      cur = Math.min(cur + step, n); el.textContent = cur.toLocaleString('uz');
+      if (cur >= n) clearInterval(t);
+    }, 20);
+  }
+
+  var totalViews    = posts.reduce(function(a, p) { return a + (p.views||0); }, 0);
+  var totalStudents = schools.reduce(function(a, s) { return a + (s.students||0); }, 0);
+  animNum('schoolCount', schools.length);
+  animNum('stSchools',   schools.length);
+  animNum('stPosts',     posts.length);
+  animNum('stViews',     totalViews);
+  animNum('stStudents',  totalStudents);
+
+  // CTA
+  document.getElementById('joinCta')?.addEventListener('click', function() { openAuth('school'); });
+});
+</script>
 </body>
 </html>

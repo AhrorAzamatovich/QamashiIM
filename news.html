@@ -2,81 +2,96 @@
 <html lang="uz">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Yangiliklar — Edu Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="O'zbekiston maktablaridan so'nggi yangiliklar, tadbirlar va yutuqlar — barcha bir joyda.">
+  <meta property="og:title" content="Yangiliklar — Edu Platform">
+  <meta property="og:description" content="O'zbekiston maktablaridan so'nggi yangiliklar, tadbirlar va yutuqlar.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/logo.jpg">
+  <title>Yangiliklar — O'zbekiston Maktablari Platformasi</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<canvas id="jarvisCanvas"></canvas>
-<nav class="navbar" id="mainNav">
-  <a href="index.html" class="navbar-brand">
-    <div class="platform-logo">◈</div>
+<canvas id="jarvisCanvas" aria-hidden="true"></canvas>
+
+<nav class="navbar" id="mainNav" role="navigation" aria-label="Asosiy navigatsiya">
+  <a href="index.html" class="navbar-brand" aria-label="Edu Platform — Bosh sahifa">
+    <div class="platform-logo" aria-hidden="true">◈</div>
     <div class="navbar-title"><span>EDU PLATFORM</span><span>O'zbekiston Maktablari</span></div>
   </a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="index.html">◈ Bosh sahifa</a></li>
-    <li><a href="news.html" class="active">◈ Yangiliklar</a></li>
-    <li><a href="schools.html">◈ Maktablar</a></li>
-    <li><a href="about.html">◈ Platforma haqida</a></li>
+  <ul class="nav-links" id="navLinks" role="list">
+    <li role="listitem"><a href="index.html">◈ Bosh sahifa</a></li>
+    <li role="listitem"><a href="news.html" class="active" aria-current="page">◈ Yangiliklar</a></li>
+    <li role="listitem"><a href="schools.html">◈ Maktablar</a></li>
+    <li role="listitem"><a href="about.html">◈ Platforma haqida</a></li>
   </ul>
-  <div class="nav-actions" id="navAuth">
-    <button class="btn btn-ghost btn-sm" onclick="openAuth('login')">Kirish</button>
-    <button class="btn btn-primary btn-sm" onclick="openAuth('register')">Ro'yxatdan o'tish</button>
-  </div>
-  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  <div class="nav-actions" id="navAuth"></div>
+  <button class="hamburger" id="hamburger" aria-label="Menyuni ochish/yopish" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<div class="page-banner">
+<header class="page-banner" role="banner">
   <div class="container">
     <h1>◈ BARCHA YANGILIKLAR</h1>
     <p>O'zbekiston maktablaridan so'nggi yangiliklar, tadbirlar va yutuqlar</p>
   </div>
-</div>
+</header>
 
-<section class="section">
+<main class="section">
   <div class="container">
 
-    <div class="write-banner" id="writeBanner" style="display:none">
+    <!-- Write banner -->
+    <div class="write-banner" id="writeBanner" style="display:none" role="complementary">
       <div>
         <h4>◈ YANGILIK JOYLASHTIRISH</h4>
         <p>Maktabingiz nomidan yangiliklar yozing va barcha bilan ulashing</p>
       </div>
-      <button class="btn btn-primary" onclick="openPostEditor()">◈ Yangilik yozish</button>
+      <button class="btn btn-primary" id="writeBannerBtn">◈ Yangilik yozish</button>
     </div>
 
-    <!-- Filters -->
-    <div class="filter-row">
-      <button class="filter-chip active" data-cat="all" onclick="setFilter(this,'all')">◈ Hammasi</button>
-      <button class="filter-chip" data-cat="yangilik" onclick="setFilter(this,'yangilik')">◈ Yangilik</button>
-      <button class="filter-chip" data-cat="tadbir" onclick="setFilter(this,'tadbir')">◈ Tadbir</button>
-      <button class="filter-chip" data-cat="sport" onclick="setFilter(this,'sport')">◈ Sport</button>
-      <button class="filter-chip" data-cat="fan" onclick="setFilter(this,'fan')">◈ Fan</button>
-      <button class="filter-chip" data-cat="madaniyat" onclick="setFilter(this,'madaniyat')">◈ Madaniyat</button>
+    <!-- Category filter -->
+    <div class="filter-row" role="group" aria-label="Kategoriya va qidiruv filtri">
+      <button class="filter-chip active" data-cat="all">◈ Hammasi</button>
+      <button class="filter-chip" data-cat="yangilik">◈ Yangilik</button>
+      <button class="filter-chip" data-cat="tadbir">◈ Tadbir</button>
+      <button class="filter-chip" data-cat="sport">◈ Sport</button>
+      <button class="filter-chip" data-cat="fan">◈ Fan</button>
+      <button class="filter-chip" data-cat="madaniyat">◈ Madaniyat</button>
       <div class="search-wrap">
-        <i class="s-icon">◎</i>
-        <input type="text" class="search-input" id="searchBox" placeholder="QIDIRISH..." oninput="onSearch(this.value)">
+        <i class="s-icon" aria-hidden="true">◎</i>
+        <label for="searchBox" class="sr-only">Yangilik qidirish</label>
+        <input type="search" class="search-input" id="searchBox" placeholder="QIDIRISH..." autocomplete="off">
       </div>
     </div>
 
     <!-- School filter chips -->
-    <div id="schoolChips" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem"></div>
+    <div id="schoolChips" role="group" aria-label="Maktab filtri" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem"></div>
 
-    <div class="posts-grid" id="newsGrid">
-      <div style="grid-column:1/-1;text-align:center"><div class="spinner"></div></div>
+    <!-- Sort -->
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:1.5rem;flex-wrap:wrap">
+      <span style="font-family:var(--font-hud);font-size:.68rem;color:var(--txt3);letter-spacing:.06em">SARALASH:</span>
+      <button class="filter-chip active" data-sort="newest">◈ Yangi</button>
+      <button class="filter-chip" data-sort="liked">◈ Eng ko'p like</button>
+      <button class="filter-chip" data-sort="viewed">◈ Eng ko'p ko'rilgan</button>
+    </div>
+
+    <div class="posts-grid" id="newsGrid" aria-live="polite" aria-label="Yangiliklar ro'yxati">
+      <div style="grid-column:1/-1;text-align:center"><div class="spinner" role="status" aria-label="Yuklanmoqda"></div></div>
     </div>
 
     <div style="text-align:center;margin-top:2.5rem">
-      <button class="btn btn-ghost btn-lg" id="loadMoreBtn" onclick="loadMore()" style="display:none">◈ Ko'proq ko'rsatish</button>
+      <button class="btn btn-ghost btn-lg" id="loadMoreBtn" style="display:none">◈ Ko'proq ko'rsatish</button>
     </div>
   </div>
-</section>
+</main>
 
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div>
         <div style="display:flex;align-items:center;gap:11px;margin-bottom:.4rem">
-          <div class="platform-logo" style="width:38px;height:38px;font-size:1.2rem">◈</div>
+          <div class="platform-logo" style="width:38px;height:38px;font-size:1.2rem" aria-hidden="true">◈</div>
           <span style="color:var(--cyan);font-weight:700;font-size:.9rem;font-family:var(--font-hud);letter-spacing:.06em">EDU PLATFORM</span>
         </div>
         <p class="footer-brand">O'zbekiston maktablari uchun birlashgan axborot platformasi.</p>
@@ -85,6 +100,7 @@
         <li><a href="index.html">◈ Bosh sahifa</a></li>
         <li><a href="news.html">◈ Yangiliklar</a></li>
         <li><a href="schools.html">◈ Maktablar</a></li>
+        <li><a href="about.html">◈ Haqida</a></li>
       </ul></div>
       <div class="footer-col"><h4>Kategoriyalar</h4><ul class="footer-links">
         <li><a href="news.html?cat=yangilik">◈ Yangiliklar</a></li>
@@ -94,58 +110,136 @@
         <li><a href="news.html?cat=madaniyat">◈ Madaniyat</a></li>
       </ul></div>
     </div>
-    <div class="footer-bottom"><p>© 2025 O'zbekiston Maktablari Platformasi.</p></div>
+    <div class="footer-bottom">
+      <p>© 2025 O'zbekiston Maktablari Platformasi.</p>
+      <p>TA'LIM — KELAJAK POYDEVORI ◈</p>
+    </div>
   </div>
 </footer>
 
-<button id="scrollTopBtn" onclick="scrollTop()">↑</button>
-<div id="toastRoot"></div>
+<button id="scrollTopBtn" onclick="scrollTop()" aria-label="Yuqoriga qaytish">↑</button>
+<div id="toastRoot" role="region" aria-live="polite" aria-label="Bildirishnomalar"></div>
+
 <script src="platform.js"></script>
 <script src="jarvis.js"></script>
 <script>
-let curCat = 'all', curQ = '', curSchool = null, curPage = 1;
-const PAGE = 9;
+'use strict';
 
-document.addEventListener('DOMContentLoaded', () => {
-  const params = new URLSearchParams(location.search);
-  const cat = params.get('cat'); if (cat) { curCat = cat; document.querySelectorAll('.filter-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === cat)); }
-  const sc = params.get('school'); if (sc) { curSchool = sc; }
+var curCat    = 'all';
+var curQ      = '';
+var curSchool = null;
+var curSort   = 'newest';
+var curPage   = 1;
+var PAGE_SIZE = 9;
 
-  // School chips
-  const chips = document.getElementById('schoolChips');
-  const schools = getSchools();
+document.addEventListener('DOMContentLoaded', function() {
+  // URL params
+  var params = new URLSearchParams(location.search);
+  var catParam    = params.get('cat');
+  var schoolParam = params.get('school');
+  if (catParam) {
+    curCat = catParam;
+    document.querySelectorAll('.filter-chip[data-cat]').forEach(function(c) {
+      c.classList.toggle('active', c.dataset.cat === catParam);
+    });
+  }
+  if (schoolParam) curSchool = schoolParam;
+
+  // Write banner btn
+  document.getElementById('writeBannerBtn')?.addEventListener('click', function() { openPostEditor(); });
+
+  // Category chips
+  document.querySelectorAll('.filter-chip[data-cat]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      curCat = this.dataset.cat; curPage = 1;
+      document.querySelectorAll('.filter-chip[data-cat]').forEach(function(c) { c.classList.remove('active'); });
+      this.classList.add('active');
+      renderNews();
+    });
+  });
+
+  // Sort chips
+  document.querySelectorAll('.filter-chip[data-sort]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      curSort = this.dataset.sort; curPage = 1;
+      document.querySelectorAll('.filter-chip[data-sort]').forEach(function(c) { c.classList.remove('active'); });
+      this.classList.add('active');
+      renderNews();
+    });
+  });
+
+  // Search
+  var searchEl = document.getElementById('searchBox');
+  if (searchEl) {
+    searchEl.addEventListener('input', function() {
+      curQ = this.value.toLowerCase().trim(); curPage = 1; renderNews();
+    });
+  }
+
+  // Load more
+  document.getElementById('loadMoreBtn')?.addEventListener('click', function() {
+    curPage++;
+    renderNews();
+  });
+
+  // School filter chips
+  var chips   = document.getElementById('schoolChips');
+  var schools = getSchools();
   if (chips && schools.length > 1) {
-    chips.innerHTML = `<button class="filter-chip ${!curSchool?'active':''}" onclick="setSchool(this,null)">◈ Barcha maktablar</button>` +
-      schools.map(s => `<button class="filter-chip ${curSchool===s.id?'active':''}" onclick="setSchool(this,'${s.id}')">🏫 ${esc(s.shortName)}</button>`).join('');
+    var allBtn = document.createElement('button');
+    allBtn.className = 'filter-chip' + (!curSchool ? ' active' : '');
+    allBtn.textContent = '◈ Barcha maktablar';
+    allBtn.dataset.schoolId = '';
+    chips.appendChild(allBtn);
+    schools.forEach(function(s) {
+      var btn = document.createElement('button');
+      btn.className = 'filter-chip' + (curSchool === s.id ? ' active' : '');
+      btn.textContent = '🏫 ' + s.shortName;
+      btn.dataset.schoolId = s.id;
+      chips.appendChild(btn);
+    });
+    chips.addEventListener('click', function(e) {
+      var btn = e.target.closest('.filter-chip');
+      if (!btn) return;
+      curSchool = btn.dataset.schoolId || null; curPage = 1;
+      chips.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+      btn.classList.add('active');
+      renderNews();
+    });
   }
 
   renderNews();
 });
 
-function setFilter(btn, cat) { curCat = cat; curPage = 1; document.querySelectorAll('[data-cat]').forEach(c => c.classList.remove('active')); btn.classList.add('active'); renderNews(); }
-function onSearch(q) { curQ = q.toLowerCase().trim(); curPage = 1; renderNews(); }
-function setSchool(btn, id) {
-  curSchool = id; curPage = 1;
-  document.querySelectorAll('#schoolChips .filter-chip').forEach(c => c.classList.remove('active'));
-  btn.classList.add('active'); renderNews();
+function getFiltered() {
+  var posts = getPosts();
+  if (curCat !== 'all') posts = posts.filter(function(p) { return p.category === curCat; });
+  if (curSchool)        posts = posts.filter(function(p) { return p.schoolId === curSchool; });
+  if (curQ)             posts = posts.filter(function(p) {
+    return p.title.toLowerCase().includes(curQ) ||
+      (p.schoolName||'').toLowerCase().includes(curQ) ||
+      (p.body||'').toLowerCase().includes(curQ);
+  });
+  if (curSort === 'liked')  posts.sort(function(a,b) { return (b.likes||0) - (a.likes||0); });
+  if (curSort === 'viewed') posts.sort(function(a,b) { return (b.views||0) - (a.views||0); });
+  return posts;
 }
 
-function filtered() {
-  let p = getPosts();
-  if (curCat !== 'all') p = p.filter(x => x.category === curCat);
-  if (curSchool) p = p.filter(x => x.schoolId === curSchool);
-  if (curQ) p = p.filter(x => x.title.toLowerCase().includes(curQ) || x.schoolName?.toLowerCase().includes(curQ) || x.body.toLowerCase().includes(curQ));
-  return p;
-}
 function renderNews() {
-  const all = filtered(); const btn = document.getElementById('loadMoreBtn');
-  const shown = all.slice(0, curPage * PAGE);
-  const grid = document.getElementById('newsGrid');
-  if (!all.length) { grid.innerHTML = `<div class="empty-state"><div class="empty-icon">◎</div><h3>HECH NARSA TOPILMADI</h3><p>Boshqa filtr sinab ko'ring</p></div>`; if(btn)btn.style.display='none'; return; }
-  grid.innerHTML = shown.map((p, i) => renderCard(p, (i % PAGE) * 0.05)).join('');
+  var all  = getFiltered();
+  var btn  = document.getElementById('loadMoreBtn');
+  var grid = document.getElementById('newsGrid');
+  var shown = all.slice(0, curPage * PAGE_SIZE);
+  if (!grid) return;
+  if (!all.length) {
+    grid.innerHTML = '<div class="empty-state"><div class="empty-icon">◎</div><h3>HECH NARSA TOPILMADI</h3><p>Boshqa filtr sinab ko\'ring</p></div>';
+    if (btn) btn.style.display = 'none';
+    return;
+  }
+  grid.innerHTML = shown.map(function(p, i) { return renderCard(p, (i % PAGE_SIZE) * 0.05); }).join('');
+  setupCardDelegation(grid);
   if (btn) btn.style.display = all.length > shown.length ? 'inline-flex' : 'none';
 }
-function loadMore() { curPage++; renderNews(); }
 </script>
 </body>
 </html>
