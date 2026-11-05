@@ -2,12 +2,11 @@
 <html lang="uz">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="O'zbekiston Maktablari Platformasi — barcha maktablarning yangiliklari, tadbirlari va yutuqlari bir joyda. Maktabingizni ro'yxatdan o'tkazing.">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="O'zbekiston Maktablari Platformasi — barcha maktablarning yangiliklari bir joyda. Maktabingizni qo'shing va o'z voqealaringizni ulashing.">
   <meta property="og:title" content="O'zbekiston Maktablari Platformasi">
-  <meta property="og:description" content="Barcha maktablarning yangiliklari bir joyda. Maktabingizni qo'shing va o'z voqealaringizni ulashing.">
+  <meta property="og:description" content="Barcha maktablarning yangiliklari bir joyda.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://eduplatform.uz/">
   <meta property="og:image" content="images/logo.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <title>O'zbekiston Maktablari Platformasi — Edu Platform</title>
@@ -16,67 +15,48 @@
 <body>
 <canvas id="jarvisCanvas" aria-hidden="true"></canvas>
 
-<!-- ── NAVBAR ── -->
 <nav class="navbar" id="mainNav" role="navigation" aria-label="Asosiy navigatsiya">
-  <a href="index.html" class="navbar-brand" aria-label="Edu Platform — Bosh sahifa">
+  <a href="index.html" class="navbar-brand" aria-label="Edu Platform">
     <div class="platform-logo" aria-hidden="true">◈</div>
-    <div class="navbar-title">
-      <span>EDU PLATFORM</span>
-      <span>O'zbekiston Maktablari</span>
-    </div>
+    <div class="navbar-title"><span>EDU PLATFORM</span><span>O'zbekiston Maktablari</span></div>
   </a>
   <ul class="nav-links" id="navLinks" role="list">
-    <li role="listitem"><a href="index.html" class="active" aria-current="page">◈ Bosh sahifa</a></li>
-    <li role="listitem"><a href="news.html">◈ Yangiliklar</a></li>
-    <li role="listitem"><a href="schools.html">◈ Maktablar</a></li>
-    <li role="listitem"><a href="about.html">◈ Platforma haqida</a></li>
+    <li><a href="index.html" class="active" aria-current="page">◈ Bosh sahifa</a></li>
+    <li><a href="news.html">◈ Yangiliklar</a></li>
+    <li><a href="schools.html">◈ Maktablar</a></li>
+    <li><a href="about.html">◈ Platforma haqida</a></li>
   </ul>
   <div class="nav-actions" id="navAuth"></div>
-  <button class="hamburger" id="hamburger" aria-label="Menyuni ochish/yopish" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="hamburger" id="hamburger" aria-label="Menyuni ochish/yopish" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <section class="hero" aria-label="Asosiy qism">
   <div class="hero-glow" aria-hidden="true"></div>
   <div class="hero-content">
     <div class="hero-text">
-      <div class="hud-label"><span class="dot" aria-hidden="true"></span>JONLI TIZIM · BARCHA MAKTABLAR</div>
+      <div class="hud-label"><span class="dot" aria-hidden="true"></span>JONLI TIZIM · TRENDING FEED</div>
       <h1 class="hero-title">
         <span class="line-cyan">O'ZBEKISTON</span>
         <span>MAKTABLARI</span>
         <span class="line-gold">PLATFORMASI</span>
       </h1>
-      <p class="hero-desc">
-        Barcha maktablarning yangiliklari, yutuqlari va tadbirlari — bir joyda.
-        Maktabingizni ro'yxatdan o'tkazing va o'z voqealaringizni butun O'zbekiston bilan ulashing.
-      </p>
+      <p class="hero-desc">Barcha maktablarning yangiliklari, yutuqlari va tadbirlari — real vaqt trending algoritmi bilan birgalikda bir joyda.</p>
       <div class="hero-btns">
         <button class="btn btn-primary btn-xl" id="heroCta">◈ Maktab qo'shish</button>
         <a href="news.html" class="btn btn-xl" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#fff">◈ Yangiliklar</a>
       </div>
-      <div class="hero-stats" aria-label="Platform statistikasi">
-        <div class="hs-item">
-          <div class="hs-num" id="cntSchools" aria-label="Maktablar soni">0</div>
-          <div class="hs-label">Maktab</div>
-        </div>
-        <div class="hs-item">
-          <div class="hs-num" id="cntPosts" aria-label="Yangiliklar soni">0</div>
-          <div class="hs-label">Yangilik</div>
-        </div>
-        <div class="hs-item">
-          <div class="hs-num" id="cntUsers" aria-label="Foydalanuvchilar soni">0</div>
-          <div class="hs-label">Foydalanuvchi</div>
-        </div>
+      <div class="hero-stats" aria-label="Platforma statistikasi">
+        <div class="hs-item"><div class="hs-num" id="cntSchools">0</div><div class="hs-label">Maktab</div></div>
+        <div class="hs-item"><div class="hs-num" id="cntPosts">0</div><div class="hs-label">Yangilik</div></div>
+        <div class="hs-item"><div class="hs-num" id="cntUsers">0</div><div class="hs-label">Foydalanuvchi</div></div>
       </div>
     </div>
-
     <div class="hero-panel" aria-hidden="true">
       <div class="hud-panel">
         <div class="hud-scan"></div>
         <div class="hud-panel-title">TIZIM HOLATI</div>
-        <div class="hud-items" id="liveSchoolsPanel">
+        <div class="hud-items" id="livePanel">
           <div style="text-align:center;padding:1rem"><div class="spinner"></div></div>
         </div>
       </div>
@@ -84,7 +64,7 @@
   </div>
 </section>
 
-<!-- ── STATS BAR ── -->
+<!-- STATS BAR -->
 <section class="stats-bar" aria-label="Statistika">
   <div class="container">
     <div class="stats-grid">
@@ -96,44 +76,86 @@
   </div>
 </section>
 
-<!-- ── LATEST NEWS ── -->
-<section class="section" aria-label="So'nggi yangiliklar">
+<!-- TRENDING FEED + LEADERBOARD -->
+<section class="section" aria-label="Trending yangiliklar">
   <div class="container">
-    <div class="sec-header">
-      <div class="sec-tag" aria-hidden="true">◈ BARCHA MAKTABLARDAN</div>
-      <h2 class="sec-title">So'nggi <span class="highlight">yangiliklar lenti</span></h2>
-      <p class="sec-desc">Barcha maktablarning yangiliklari real vaqtda — filtrlash va qidiruv imkoniyati bilan.</p>
-    </div>
+    <div class="feed-layout">
 
-    <div class="filter-row" role="group" aria-label="Kategoriya filtri">
-      <button class="filter-chip active" data-cat="all">◈ Hammasi</button>
-      <button class="filter-chip" data-cat="yangilik">◈ Yangilik</button>
-      <button class="filter-chip" data-cat="tadbir">◈ Tadbir</button>
-      <button class="filter-chip" data-cat="sport">◈ Sport</button>
-      <button class="filter-chip" data-cat="fan">◈ Fan</button>
-      <div class="search-wrap">
-        <i class="s-icon" aria-hidden="true">◎</i>
-        <label for="homeSearch" class="sr-only">Yangilik qidirish</label>
-        <input type="search" class="search-input" id="homeSearch" placeholder="QIDIRISH..." autocomplete="off">
+      <!-- LEFT: Feed -->
+      <div class="feed-main">
+        <div class="sec-header" style="text-align:left;margin-bottom:2rem">
+          <div class="sec-tag">◈ TRENDING FEED</div>
+          <h2 class="sec-title">Eng <span class="highlight">mashhur yangiliklar</span></h2>
+          <p class="sec-desc" style="margin:0">Algoritmik reytingda birinchi o'rinlar — like, ko'rish, izoh va yangilik.</p>
+        </div>
+
+        <!-- Sort bar -->
+        <div class="sort-bar">
+          <span class="sort-label">SARALASH:</span>
+          <button class="filter-chip active" data-sort="trending">🔥 Trending</button>
+          <button class="filter-chip" data-sort="newest">🆕 Yangi</button>
+          <button class="filter-chip" data-sort="liked">❤️ Like</button>
+          <button class="filter-chip" data-sort="viewed">👁 Ko'rilgan</button>
+          <button class="filter-chip" data-sort="commented">💬 Izohli</button>
+        </div>
+
+        <div class="posts-grid" id="homeGrid" aria-live="polite">
+          <div style="grid-column:1/-1;text-align:center;padding:3rem"><div class="spinner"></div></div>
+        </div>
+
+        <div style="text-align:center;margin-top:2.5rem">
+          <a href="news.html" class="btn btn-ghost btn-lg">◈ Barcha yangiliklar</a>
+        </div>
       </div>
-    </div>
 
-    <div class="posts-grid" id="homeGrid" aria-live="polite" aria-label="Yangiliklar">
-      <div style="grid-column:1/-1;text-align:center;padding:3rem"><div class="spinner"></div></div>
-    </div>
+      <!-- RIGHT: Sidebar leaderboard -->
+      <aside class="feed-sidebar">
+        <div id="leaderboardWidget">
+          <div style="text-align:center;padding:2rem"><div class="spinner"></div></div>
+        </div>
 
-    <div style="text-align:center;margin-top:2.5rem">
-      <a href="news.html" class="btn btn-ghost btn-lg">◈ Barcha yangiliklar</a>
+        <!-- Algorithm explainer -->
+        <div class="algo-explainer">
+          <div class="algo-title">◈ ALGORITM QANDAY ISHLAYDI?</div>
+          <div class="algo-items">
+            <div class="algo-item">
+              <div class="algo-icon">❤️</div>
+              <div><div class="algo-label">Like (+3)</div><div class="algo-sub">Har bir like ball beradi</div></div>
+            </div>
+            <div class="algo-item">
+              <div class="algo-icon">💬</div>
+              <div><div class="algo-label">Izoh (+5)</div><div class="algo-sub">Muloqot yuqori baholanadi</div></div>
+            </div>
+            <div class="algo-item">
+              <div class="algo-icon">👁</div>
+              <div><div class="algo-label">Ko'rish (+0.5)</div><div class="algo-sub">Organik qiziqish</div></div>
+            </div>
+            <div class="algo-item">
+              <div class="algo-icon">⚡</div>
+              <div><div class="algo-label">Tezlik × 12</div><div class="algo-sub">Tez o'sayotgan post</div></div>
+            </div>
+            <div class="algo-item">
+              <div class="algo-icon">🆕</div>
+              <div><div class="algo-label">Yangilik (+25)</div><div class="algo-sub">1 soat ichidagi post</div></div>
+            </div>
+            <div class="algo-item">
+              <div class="algo-icon">🏫</div>
+              <div><div class="algo-label">Profil dolzarbligi</div><div class="algo-sub">To'liq profil = yuqori obro'</div></div>
+            </div>
+          </div>
+        </div>
+      </aside>
     </div>
   </div>
 </section>
 
-<!-- ── SCHOOLS ── -->
-<section class="section" style="background:rgba(0,5,15,0.6);border-top:1px solid var(--border);border-bottom:1px solid var(--border)" aria-label="Maktablar">
+<!-- SCHOOLS SECTION -->
+<section class="section" style="background:rgba(0,5,15,.6);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
   <div class="container">
     <div class="sec-header">
-      <div class="sec-tag" aria-hidden="true">◈ PLATFORMADAGI MAKTABLAR</div>
-      <h2 class="sec-title">Ro'yxatdagi <span class="highlight">maktablar</span></h2>
+      <div class="sec-tag">◈ MAKTAB REYTINGI</div>
+      <h2 class="sec-title">Eng <span class="highlight">obro'li maktablar</span></h2>
+      <p class="sec-desc">Profil to'ldirilganlik darajasi, faollik va engagement asosida avtomatik reyting.</p>
     </div>
     <div class="schools-grid" id="schoolsGrid" aria-live="polite">
       <div style="grid-column:1/-1;text-align:center"><div class="spinner"></div></div>
@@ -145,11 +167,11 @@
   </div>
 </section>
 
-<!-- ── HOW IT WORKS ── -->
-<section class="section" aria-label="Qanday ishlaydi">
+<!-- HOW IT WORKS -->
+<section class="section">
   <div class="container">
     <div class="sec-header">
-      <div class="sec-tag" aria-hidden="true">◈ QANDAY ISHLAYDI</div>
+      <div class="sec-tag">◈ QANDAY ISHLAYDI</div>
       <h2 class="sec-title">3 qadam — <span class="highlight">hammasi tayyor</span></h2>
     </div>
     <div class="steps-grid">
@@ -157,25 +179,24 @@
         <div class="step-num" aria-hidden="true">01</div>
         <div class="step-icon" aria-hidden="true">🏫</div>
         <h3>MAKTABNI RO'YXATDAN O'TKAZING</h3>
-        <p>Maktab ma'lumotlarini kiriting va admin hisob yarating. Bu bepul va tez.</p>
+        <p>Maktab ma'lumotlarini kiriting va admin hisob yarating. Bepul va 2 daqiqada tayyor.</p>
       </article>
       <article class="step-card">
         <div class="step-num" aria-hidden="true">02</div>
-        <div class="step-icon" aria-hidden="true">✏️</div>
-        <h3>YANGILIKLAR JOYLASHTIRING</h3>
-        <p>Maktab nomidan yangiliklar, tadbirlar va yutuqlarni chop eting.</p>
+        <div class="step-icon" aria-hidden="true">📊</div>
+        <h3>PROFILNI TO'LDIRING</h3>
+        <p>Logo, haqida matn, aloqa — har maydon to'ldirilishi sizni yuqoriga olib chiqadi.</p>
       </article>
       <article class="step-card">
         <div class="step-num" aria-hidden="true">03</div>
-        <div class="step-icon" aria-hidden="true">🌐</div>
-        <h3>BUTUN O'ZBEKISTON KO'RADI</h3>
-        <p>Yangiliklar umumiy lentada barcha tashrif buyuruvchilarga ko'rinadi.</p>
+        <div class="step-icon" aria-hidden="true">🔥</div>
+        <h3>TRENDING GA CHIQING</h3>
+        <p>Yangilik joylashtiring — like, izoh va ko'rishlar bilan trending reytingga ko'tariling.</p>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -184,39 +205,30 @@
           <div class="platform-logo" style="width:38px;height:38px;font-size:1.2rem" aria-hidden="true">◈</div>
           <span style="color:var(--cyan);font-weight:700;font-size:.9rem;font-family:var(--font-hud);letter-spacing:.06em">EDU PLATFORM</span>
         </div>
-        <p class="footer-brand">O'zbekiston maktablari uchun birlashgan axborot platformasi. Barcha yangiliklar — bir joyda.</p>
+        <p class="footer-brand">O'zbekiston maktablari uchun birlashgan axborot platformasi.</p>
         <div class="footer-socials">
           <a href="https://t.me/" target="_blank" rel="noopener noreferrer" class="fsoc" aria-label="Telegram">✈️</a>
           <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="fsoc" aria-label="Instagram">📸</a>
           <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer" class="fsoc" aria-label="YouTube">▶️</a>
         </div>
       </div>
-      <div class="footer-col">
-        <h4>Platforma</h4>
-        <ul class="footer-links">
-          <li><a href="index.html">◈ Bosh sahifa</a></li>
-          <li><a href="news.html">◈ Yangiliklar</a></li>
-          <li><a href="schools.html">◈ Maktablar</a></li>
-          <li><a href="about.html">◈ Haqida</a></li>
-          <li><a href="contact.html">◈ Bog'lanish</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Maktablar</h4>
-        <ul class="footer-links" id="footerSchools">
-          <li><a href="schools.html">◈ Barcha maktablar</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Kategoriyalar</h4>
-        <ul class="footer-links">
-          <li><a href="news.html?cat=yangilik">◈ Yangiliklar</a></li>
-          <li><a href="news.html?cat=tadbir">◈ Tadbirlar</a></li>
-          <li><a href="news.html?cat=sport">◈ Sport</a></li>
-          <li><a href="news.html?cat=fan">◈ Fan</a></li>
-          <li><a href="news.html?cat=madaniyat">◈ Madaniyat</a></li>
-        </ul>
-      </div>
+      <div class="footer-col"><h4>Platforma</h4><ul class="footer-links">
+        <li><a href="index.html">◈ Bosh sahifa</a></li>
+        <li><a href="news.html">◈ Yangiliklar</a></li>
+        <li><a href="schools.html">◈ Maktablar</a></li>
+        <li><a href="about.html">◈ Haqida</a></li>
+        <li><a href="contact.html">◈ Bog'lanish</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Maktablar</h4><ul class="footer-links" id="footerSchools">
+        <li><a href="schools.html">◈ Barcha maktablar</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Kategoriyalar</h4><ul class="footer-links">
+        <li><a href="news.html?cat=yangilik">◈ Yangiliklar</a></li>
+        <li><a href="news.html?cat=tadbir">◈ Tadbirlar</a></li>
+        <li><a href="news.html?cat=sport">◈ Sport</a></li>
+        <li><a href="news.html?cat=fan">◈ Fan</a></li>
+        <li><a href="news.html?cat=madaniyat">◈ Madaniyat</a></li>
+      </ul></div>
     </div>
     <div class="footer-bottom">
       <p>© 2025 O'zbekiston Maktablari Platformasi. Barcha huquqlar himoyalangan.</p>
@@ -226,162 +238,132 @@
 </footer>
 
 <button id="scrollTopBtn" onclick="scrollTop()" aria-label="Yuqoriga qaytish">↑</button>
-<div id="toastRoot" role="region" aria-live="polite" aria-label="Bildirishnomalar"></div>
+<div id="toastRoot" role="region" aria-live="polite"></div>
 
 <script src="platform.js"></script>
+<script src="ranking.js"></script>
 <script src="jarvis.js"></script>
 <script>
 'use strict';
-
-let homeCat = 'all';
-let homeQ   = '';
+let homeSort = 'trending';
 
 document.addEventListener('DOMContentLoaded', function() {
   const schools = getSchools();
   const posts   = getPosts();
   const users   = getUsers();
 
-  // Hero CTA
-  document.getElementById('heroCta')?.addEventListener('click', function() { openAuth('school'); });
-  document.getElementById('addSchoolBtn')?.addEventListener('click', function() { openAuth('school'); });
+  document.getElementById('heroCta')?.addEventListener('click', () => openAuth('school'));
+  document.getElementById('addSchoolBtn')?.addEventListener('click', () => openAuth('school'));
 
-  // Hero counter animation
+  // Counter animations
   animNum('cntSchools', schools.length);
   animNum('cntPosts',   posts.length);
   animNum('cntUsers',   users.length);
+  const totalViews    = posts.reduce((s,p) => s+(p.views||0), 0);
+  const totalStudents = schools.reduce((s,sc) => s+(sc.students||0), 0);
+  animNum('st1', schools.length); animNum('st2', posts.length);
+  animNum('st3', totalViews);     animNum('st4', totalStudents);
 
-  // Stats bar
-  var totalViews    = posts.reduce(function(a, p) { return a + (p.views || 0); }, 0);
-  var totalStudents = schools.reduce(function(a, s) { return a + (s.students || 0); }, 0);
-  animNum('st1', schools.length);
-  animNum('st2', posts.length);
-  animNum('st3', totalViews);
-  animNum('st4', totalStudents);
-
-  // HUD panel — live schools
-  var panel = document.getElementById('liveSchoolsPanel');
+  // HUD Panel — live school data with completeness
+  const panel = document.getElementById('livePanel');
   if (panel) {
     if (!schools.length) {
-      panel.innerHTML = '<div class="empty-state" style="padding:1rem"><p style="color:var(--txt3);font-size:.8rem">Hali maktab yo\'q</p></div>';
+      panel.innerHTML = '<div style="text-align:center;padding:1rem;color:var(--txt3);font-size:.8rem">Hali maktab yo\'q</div>';
     } else {
-      panel.innerHTML = schools.slice(0, 5).map(function(sc) {
-        var scPosts = posts.filter(function(p) { return p.schoolId === sc.id; });
-        return '<div class="hud-item" data-school-id="' + esc(sc.id) + '" role="button" tabindex="0" style="cursor:pointer" aria-label="' + esc(sc.shortName) + ' maktabi sahifasi">' +
-          '<div class="hud-item-icon" aria-hidden="true">' + (sc.verified ? '✅' : '🏫') + '</div>' +
-          '<span class="hud-item-text">' + esc(sc.shortName) + '</span>' +
-          '<div style="margin-left:auto;font-family:var(--font-hud);font-size:.68rem;color:var(--cyan)">' + scPosts.length + ' yangilik</div>' +
-          '</div>';
+      const ranked = sortSchools(schools, 'reputation');
+      panel.innerHTML = ranked.slice(0, 5).map(sc => {
+        const scPosts      = posts.filter(p => p.schoolId === sc.id);
+        const completeness = schoolCompleteness(sc);
+        const repColor     = completeness >= 80 ? 'var(--green)' : completeness >= 50 ? 'var(--gold)' : 'var(--red)';
+        return `<div class="hud-item" data-school-id="${esc(sc.id)}" role="button" tabindex="0" aria-label="${esc(sc.shortName)}">
+          <div class="hud-item-icon">${sc.verified ? '✅' : '🏫'}</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:.8rem;color:var(--txt);font-weight:600">${esc(sc.shortName)}</div>
+            <div style="height:3px;background:rgba(255,255,255,.07);border-radius:99px;margin-top:4px;overflow:hidden">
+              <div style="height:100%;width:${completeness}%;background:${repColor};border-radius:99px"></div>
+            </div>
+          </div>
+          <div style="font-family:var(--font-hud);font-size:.65rem;color:${repColor};flex-shrink:0">${completeness}%</div>
+        </div>`;
       }).join('');
-      // Navigate on click via delegation (no inline onclick)
-      panel.addEventListener('click', function(e) {
-        var item = e.target.closest('[data-school-id]');
+      panel.addEventListener('click', e => {
+        const item = e.target.closest('[data-school-id]');
         if (item) location.href = 'school.html?id=' + encodeURIComponent(item.dataset.schoolId);
       });
-      panel.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          var item = e.target.closest('[data-school-id]');
-          if (item) { e.preventDefault(); location.href = 'school.html?id=' + encodeURIComponent(item.dataset.schoolId); }
-        }
+      panel.addEventListener('keydown', e => {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        const item = e.target.closest('[data-school-id]');
+        if (item) { e.preventDefault(); location.href = 'school.html?id=' + encodeURIComponent(item.dataset.schoolId); }
       });
     }
   }
 
-  // Schools grid
-  var sg = document.getElementById('schoolsGrid');
-  if (sg) {
-    if (!schools.length) {
-      sg.innerHTML = '<div class="empty-state"><div class="empty-icon">🏫</div><h3>MAKTAB YO\'Q</h3><p>Birinchi maktabni qo\'shing!</p></div>';
-    } else {
-      sg.innerHTML = schools.slice(0, 6).map(function(sc, i) { return renderSchoolCard(sc, i * 0.07); }).join('');
-      sg.addEventListener('click', function(e) {
-        var card = e.target.closest('.school-card');
-        if (card && card.dataset.schoolId) location.href = 'school.html?id=' + encodeURIComponent(card.dataset.schoolId);
-      });
-    }
-  }
-
-  // Footer schools
-  var fs = document.getElementById('footerSchools');
-  if (fs) {
-    fs.innerHTML = schools.map(function(sc) {
-      return '<li><a href="school.html?id=' + encodeURIComponent(sc.id) + '">◈ ' + esc(sc.shortName) + '</a></li>';
-    }).join('');
-  }
-
-  // Category filter
-  document.querySelectorAll('.filter-chip').forEach(function(btn) {
+  // Sort chips
+  document.querySelectorAll('.filter-chip[data-sort]').forEach(btn => {
     btn.addEventListener('click', function() {
-      homeCat = this.dataset.cat || 'all';
-      document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+      homeSort = this.dataset.sort;
+      document.querySelectorAll('.filter-chip[data-sort]').forEach(c => c.classList.remove('active'));
       this.classList.add('active');
       renderHome();
     });
   });
 
-  // Search
-  var searchBox = document.getElementById('homeSearch');
-  if (searchBox) {
-    searchBox.addEventListener('input', function() {
-      homeQ = this.value.toLowerCase().trim();
-      renderHome();
-    });
+  // Schools grid — ranked
+  const sg = document.getElementById('schoolsGrid');
+  if (sg) {
+    const rankedSchools = sortSchools(schools, 'reputation');
+    if (!rankedSchools.length) {
+      sg.innerHTML = '<div class="empty-state"><div class="empty-icon">🏫</div><h3>MAKTAB YO\'Q</h3><p>Birinchi maktabni qo\'shing!</p></div>';
+    } else {
+      sg.innerHTML = rankedSchools.slice(0, 6).map((sc, i) => renderSchoolCardRanked(sc, i, i * 0.07)).join('');
+      sg.addEventListener('click', e => {
+        const card = e.target.closest('.school-card');
+        if (card?.dataset.schoolId && !e.target.closest('button')) {
+          location.href = 'school.html?id=' + encodeURIComponent(card.dataset.schoolId);
+        }
+        const gp = e.target.closest('[data-goto-profile]');
+        if (gp) { e.stopPropagation(); location.href = 'school.html?id=' + encodeURIComponent(gp.dataset.gotoProfile); }
+        const gn = e.target.closest('[data-goto-news]');
+        if (gn) { e.stopPropagation(); location.href = 'news.html?school=' + encodeURIComponent(gn.dataset.gotoNews); }
+      });
+    }
   }
+
+  // Footer schools
+  const fs = document.getElementById('footerSchools');
+  if (fs) fs.innerHTML = schools.map(sc =>
+    `<li><a href="school.html?id=${encodeURIComponent(sc.id)}">◈ ${esc(sc.shortName)}</a></li>`
+  ).join('');
+
+  // Leaderboard widget
+  const lb = document.getElementById('leaderboardWidget');
+  if (lb) lb.innerHTML = renderMiniLeaderboard();
+  lb?.addEventListener('click', e => {
+    const row = e.target.closest('[data-school-id]');
+    if (row) location.href = 'school.html?id=' + encodeURIComponent(row.dataset.schoolId);
+  });
 
   renderHome();
 });
 
 function animNum(id, target) {
-  var el = document.getElementById(id);
-  if (!el) return;
-  var n = 0, step = Math.max(1, Math.ceil(target / 60));
-  var tm = setInterval(function() {
-    n = Math.min(n + step, target);
-    el.textContent = n.toLocaleString('uz');
+  const el = document.getElementById(id); if (!el) return;
+  let n = 0; const step = Math.max(1, Math.ceil(target/60));
+  const tm = setInterval(() => {
+    n = Math.min(n+step, target); el.textContent = n.toLocaleString('uz');
     if (n >= target) clearInterval(tm);
   }, 20);
 }
 
 function renderHome() {
-  var posts = getPosts();
-  if (homeCat !== 'all') posts = posts.filter(function(p) { return p.category === homeCat; });
-  if (homeQ) posts = posts.filter(function(p) {
-    return p.title.toLowerCase().includes(homeQ) || (p.schoolName || '').toLowerCase().includes(homeQ);
-  });
-  var grid = document.getElementById('homeGrid');
-  if (!grid) return;
+  const grid = document.getElementById('homeGrid'); if (!grid) return;
+  const posts = sortPosts(getPosts(), homeSort).slice(0, 6);
   if (!posts.length) {
-    grid.innerHTML = '<div class="empty-state"><div class="empty-icon">◈</div><h3>YANGILIK TOPILMADI</h3><p>Boshqa filtr yoki qidiruv sinab ko\'ring</p></div>';
-  } else {
-    grid.innerHTML = posts.slice(0, 6).map(function(p, i) { return renderCard(p, i * 0.07); }).join('');
-    setupCardDelegation(grid);
+    grid.innerHTML = '<div class="empty-state"><div class="empty-icon">◈</div><h3>YANGILIK YO\'Q</h3><p>Birinchi yangilikni siz yozing!</p></div>';
+    return;
   }
-}
-
-function renderSchoolCard(sc, delay) {
-  var color = sc.coverColor || '#00d4ff';
-  var posts  = getPosts().filter(function(p) { return p.schoolId === sc.id; });
-  var logoHtml = sc.logoUrl
-    ? '<img src="' + esc(sc.logoUrl) + '" class="sc-logo" alt="' + esc(sc.shortName) + ' logotipi" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">' +
-      '<div class="sc-logo-fallback" style="display:none" aria-hidden="true">' + esc(sc.shortName.slice(0,2).toUpperCase()) + '</div>'
-    : '<div class="sc-logo-fallback" aria-hidden="true">' + esc(sc.shortName.slice(0,2).toUpperCase()) + '</div>';
-  return '<div class="school-card" data-school-id="' + esc(sc.id) + '" style="animation-delay:' + (delay||0) + 's;--sc-color:' + esc(color) + '" role="button" tabindex="0" aria-label="' + esc(sc.shortName) + ' — profil sahifasi">' +
-    '<div class="sc-header">' +
-      '<div class="sc-logo-wrap">' + logoHtml + '</div>' +
-      '<div><div class="sc-name">' + esc(sc.shortName) + '</div><div class="sc-region">' + esc(sc.region) + '</div></div>' +
-      (sc.verified ? '<div class="sc-verified" title="Tasdiqlangan" aria-label="Tasdiqlangan">✅</div>' : '') +
-    '</div>' +
-    '<div class="sc-type-badge">' + esc(schoolTypeName(sc.type)) + '</div>' +
-    '<div class="sc-stats">' +
-      '<div class="sc-stat"><div class="sc-stat-n">' + (sc.students||'—') + '</div><div class="sc-stat-l">O\'quvchi</div></div>' +
-      '<div class="sc-stat"><div class="sc-stat-n">' + (sc.teachers||'—') + '</div><div class="sc-stat-l">Hodim</div></div>' +
-      '<div class="sc-stat"><div class="sc-stat-n">' + posts.length + '</div><div class="sc-stat-l">Yangilik</div></div>' +
-    '</div>' +
-  '</div>';
-}
-
-function schoolTypeName(t) {
-  var m = {umumiy:"Umumta'lim",ixtisoslashtirilgan:'Ixtisoslashtirilgan',prezident:'Prezident',innovatsion:'Innovatsion'};
-  return m[t] || t;
+  grid.innerHTML = posts.map((p, i) => renderCardWithBadge(p, i*0.07, trendBadge(p, i))).join('');
+  setupCardDelegation(grid);
 }
 </script>
 </body>

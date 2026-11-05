@@ -51,7 +51,7 @@
 <main class="section">
   <div class="container">
 
-    <!-- Write banner -->
+    <!-- Write banner (only for school admin) -->
     <div class="write-banner" id="writeBanner" style="display:none">
       <div>
         <h4>◈ MAKTAB NOMIDAN YANGILIK JOYLASHTIRISH</h4>
@@ -59,6 +59,12 @@
       </div>
       <button class="btn btn-primary" id="writeBannerBtn">◈ Yangilik yozish</button>
     </div>
+
+    <!-- Completeness bar (only for school admin) -->
+    <div id="completenessSection" style="display:none"></div>
+
+    <!-- Boost tips (only for school admin) -->
+    <div id="boostTipsSection" style="display:none"></div>
 
     <div class="sec-header" style="text-align:left;margin-bottom:2rem">
       <div class="sec-tag" id="schoolPostsLabel">◈ MAKTAB YANGILIKLARI</div>
@@ -111,6 +117,7 @@
 <div id="toastRoot" role="region" aria-live="polite" aria-label="Bildirishnomalar"></div>
 
 <script src="platform.js"></script>
+<script src="ranking.js"></script>
 <script src="jarvis.js"></script>
 <script>
 'use strict';
@@ -191,6 +198,30 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   document.getElementById('writeBannerBtn')?.addEventListener('click', function() { openPostEditor(); });
+
+  // Completeness bar & boost tips (only for this school's admin or superadmin)
+  const sess = getSession();
+  const isAdmin = sess && (sess.role === 'superadmin' || (sess.role === 'school_admin' && sess.schoolId === schoolId));
+  if (isAdmin) {
+    const cSection = document.getElementById('completenessSection');
+    if (cSection) {
+      cSection.style.display = 'block';
+      cSection.innerHTML = renderCompletenessBar(sc, false);
+    }
+    const bSection = document.getElementById('boostTipsSection');
+    const schoolPosts = getPosts().filter(p => p.schoolId === schoolId);
+    const tips = getBoostTips(sc, schoolPosts);
+    if (bSection && tips.length) {
+      bSection.style.display = 'block';
+      bSection.innerHTML = `
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem 1.4rem;margin-bottom:1.5rem">
+          <div style="font-family:var(--font-hud);font-size:.72rem;color:var(--gold);letter-spacing:.08em;margin-bottom:.8rem">◈ YUQORIGA CHIQISH UCHUN MASLAHATLAR</div>
+          <div class="boost-tips">
+            ${tips.map(t => `<div class="boost-tip ${t.priority}"><div class="boost-tip-icon">${t.icon}</div><div class="boost-tip-text">${t.text}</div></div>`).join('')}
+          </div>
+        </div>`;
+    }
+  }
 
   // Category filter
   document.querySelectorAll('.filter-chip[data-cat]').forEach(function(btn) {

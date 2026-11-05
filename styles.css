@@ -1093,3 +1093,61 @@ select.form-control option { background: #001428; color: var(--txt); }
   .hero-stats  { flex-wrap: wrap; justify-content: center; gap: 1.2rem; }
   .auth-tab    { font-size: 0.66rem; padding: 7px 3px; }
 }
+
+/* ================================================================
+   FEED LAYOUT + SIDEBAR + ALGO EXPLAINER — Ranking UI
+   ================================================================ */
+
+/* Feed layout: main content + sidebar */
+.feed-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2rem;
+  align-items: start;
+}
+.feed-main  { min-width: 0; }
+.feed-sidebar {
+  position: sticky;
+  top: 86px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Algorithm explainer card */
+.algo-explainer {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.algo-title {
+  padding: .9rem 1.1rem;
+  font-family: var(--font-hud); font-size: .7rem; font-weight: 700;
+  color: var(--cyan); letter-spacing: .1em;
+  background: rgba(0,212,255,.04); border-bottom: 1px solid var(--border);
+}
+.algo-items { padding: .6rem .8rem; display: flex; flex-direction: column; gap: 2px; }
+.algo-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: .55rem .5rem;
+  border-radius: var(--r-xs);
+  transition: background var(--t);
+}
+.algo-item:hover { background: var(--bg-glass); }
+.algo-icon { font-size: 1.05rem; width: 26px; text-align: center; flex-shrink: 0; }
+.algo-label { font-size: .8rem; font-weight: 700; color: var(--txt); font-family: var(--font-hud); letter-spacing: .03em; }
+.algo-sub   { font-size: .7rem; color: var(--txt3); margin-top: 1px; }
+
+/* Responsive feed layout */
+@media (max-width: 1100px) {
+  .feed-layout { grid-template-columns: 1fr; }
+  .feed-sidebar { position: static; flex-direction: row; flex-wrap: wrap; }
+  .leaderboard-widget,
+  .algo-explainer { flex: 1; min-width: 280px; }
+}
+@media (max-width: 640px) {
+  .feed-sidebar { flex-direction: column; }
+  .leaderboard-widget,
+  .algo-explainer { min-width: 0; }
+}
